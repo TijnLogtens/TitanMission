@@ -16,7 +16,8 @@ public class Star {
 	}
 	
 	public void drawPlanet(Graphics g){
-		g.fillOval((int) (x /1E11), (int) (y/1E11), (int) (size/5E2), (int) (size/5E2)); 
+		
+		g.fillOval((int) (x /1E6) + 500, (int) (y/1E6) + 500, (int) (size/1E6), (int) (size/1E6)); 
 	}
 	
 	public double getMass() {

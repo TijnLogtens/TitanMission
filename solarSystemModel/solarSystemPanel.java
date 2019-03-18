@@ -28,7 +28,7 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	//Moons
 	
 	//Variables
-	private float dt = 0.02f;
+	private float dt = 0.2f;
 	public static final int HEIGHT = 800;
 	public static final int WIDTH = 800;
 	
@@ -84,6 +84,14 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		sun.drawPlanet(g);
+		mercury.drawPlanet(g);
+		venus.drawPlanet(g);
+		earth.drawPlanet(g);
+		mars.drawPlanet(g);
+		jupiter.drawPlanet(g);
+		saturn.drawPlanet(g);
+		uranus.drawPlanet(g);
+		neptune.drawPlanet(g);
 		
 	}
 	
