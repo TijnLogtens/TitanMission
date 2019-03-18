@@ -1,15 +1,17 @@
 package solarSystemModel;
 
+import javax.swing.JFrame;
+
 public class Main {
 
 	public static void main(String[] args) {
-		solarSystemPanel ree = new solarSystemPanel();
-		for(int i = 0; i < 50; i++) {
-			ree.update();
-			System.out.println("Pos Sun: " + ree.sun.getX());
-			System.out.println("Pos Neptune: " + ree.neptune.getX());
-		}
-		
+		JFrame frame = new JFrame();
+		frame.setContentPane(new solarSystemPanel());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setSize(500, 500);
+        frame.setVisible(true);
 	}
 
 }

@@ -1,5 +1,7 @@
 package solarSystemModel;
 
+import java.awt.Graphics;
+
 public class CelestialBody {
 	public double mass;
 	public double x;
@@ -8,9 +10,10 @@ public class CelestialBody {
 	public double vy;
 	public double rSOI;
 	public double a;
+	public double size;
 	public double bigG = 0.000000000066740831;
 	
-	CelestialBody(double mass, double x, double y, double vx, double vy, double a){
+	CelestialBody(double mass, double x, double y, double vx, double vy, double a, double size){
 		this.mass = mass;
 		this.x = x;
 		this.y = y;
@@ -18,6 +21,7 @@ public class CelestialBody {
 		this.vy = vy;
 		this.a = a;
 		this.rSOI = rSOIcalc();
+		this.size = size;
 	}
 
 	public double rSOIcalc() {
@@ -57,6 +61,10 @@ public class CelestialBody {
 		return bigG * ((Masses.getmSun()*(-this.x))/(Math.pow(Math.pow(this.x, 2) + Math.pow(this.y, 2),(3/2))));
 	}
 
+	public void drawPlanet(Graphics g){
+		g.fillOval((int) (x /1E11), (int) (y/1E11), (int) (size/5E2), (int) (size/5E2)); 
+	}
+	
 	public double getMass() {
 		return mass;
 	}
