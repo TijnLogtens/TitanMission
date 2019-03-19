@@ -36,22 +36,24 @@ public class CelestialBody {
 
 	private void calculateX(double dt) {
 		calculateVx(dt);
-		this.x += (this.vx*dt*1000);
+		this.x += (this.vx*dt);
 	}
 
 	private void calculateY(double dt) {
 		calculateVy(dt);
-		this.y += (this.vy*dt*1000);
+		this.y += (this.vy*dt);
 	}
 
 	private void calculateVx(double dt) {
 		double accX = calculateAx();
-		this.vx += (accX*dt*1000);
+		//System.out.print("X acc = " + accX);
+		this.vx += (accX*dt);
 	}
 
 	private void calculateVy(double dt) {
 		double accY = calculateAy();
-		this.vy += (accY*dt*1000);
+		//System.out.print("	Y acc = " + accY + "\n");
+		this.vy += (accY*dt);
 	}
 
 	private double calculateAx() {

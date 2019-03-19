@@ -28,7 +28,7 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	//Moons
 	
 	//Variables
-	private double dt = 0.2;
+	private double dt = 5;
 	public static final int HEIGHT = 800;
 	public static final int WIDTH = 800;
 	
@@ -41,14 +41,14 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	public void init() {
 		//TODO initialise planets and sun
 		sun = new Star(Masses.getmSun(), 0, 0, Diameters.getdSun());
-		mercury = new CelestialBody(Masses.getmMercury(), -5.843237462283994E10, -2.1437816633496216E10, 5.78318224099864E8, -3.769380003987555E9, semiMajorAxis.getaMercury(), Diameters.getdMercury());
+		mercury = new CelestialBody(Masses.getmMercury(), -5.843237462283994E10, -2.1437816633496216E10, 6.693497964118796E+03, -4.362708337948559E+04, semiMajorAxis.getaMercury(), Diameters.getdMercury());
 		venus = new CelestialBody(Masses.getmVenus(), -2580494883.0, -108702671108.0, 3004800124.0, -83049933.0, semiMajorAxis.getaVenus(), Diameters.getdVenus());
 		earth = new CelestialBody(Masses.getmEarth(), -149012983094.0, -2126426567.0, -5418387.0, -2582093185.0, semiMajorAxis.getaEarth(), Diameters.getdEarth());
 		mars = new CelestialBody(Masses.getmMars(), 23243203038.0, 231502807159.0, -2003886166.0, 387018894.0, semiMajorAxis.getaMars(), Diameters.getdMars());
 		jupiter = new CelestialBody(Masses.getmJupiter(), -235676200292.0, -761012101163.0, 1065639299.0, -281044438.0, semiMajorAxis.getaJupiter(), Diameters.getdJupiter());
 		saturn = new CelestialBody(Masses.getmSaturn(), 354764402704.0, -1461969639484.0, 766191189.0, 194147400.0, semiMajorAxis.getaSaturn(), Diameters.getdSaturn());
 		uranus = new CelestialBody(Masses.getmUranus(), 2520757503949.0, 1570287681289.0, -314379999.0, 471704779.0, semiMajorAxis.getaUranus(), Diameters.getdUranus());
-		neptune = new CelestialBody(Masses.getmNeptune(), 434484939286.0, -1083680143147.0, 111685071.0, 458360609.0, semiMajorAxis.getaNeptune(), Diameters.getdNeptune());
+		neptune = new CelestialBody(Masses.getmNeptune(), 4.3447875513657446E12, -1.0836647188150178E12, 1.1168348149336927E8, 4.583540857382406E8, semiMajorAxis.getaNeptune(), Diameters.getdNeptune());
 	}
 	
 	@Override
@@ -70,7 +70,7 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	}
 	
 	public void render() {
-		Timer timer = new Timer(20, new ActionListener(){
+		Timer timer = new Timer(1, new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				update();
 				repaint();
@@ -100,7 +100,7 @@ public class solarSystemPanel extends JPanel implements Runnable{
 		uranus.drawPlanet(g);
 		g.setColor(Color.BLUE);
 		neptune.drawPlanet(g);
-		
+
 	}
 	
 }
