@@ -30,29 +30,31 @@ public class CelestialBody {
 	}
 	
 	public void update(double dt) {
-		calculateX(dt);
-		calculateY(dt);
+		double dx = calculateX(dt);
+		double dy = calculateY(dt);
+		this.x += dx;
+		this.y += dy;
 	}
 
-	private void calculateX(double dt) {
+	private double calculateX(double dt) {
 		calculateVx(dt);
-		this.x += (this.vx*dt);
+		return (this.vx*dt);
 	}
 
-	private void calculateY(double dt) {
+	private double calculateY(double dt) {
 		calculateVy(dt);
-		this.y += (this.vy*dt);
+		return (this.vy*dt);
 	}
 
 	private void calculateVx(double dt) {
 		double accX = calculateAx();
-		System.out.print("X acc = " + accX);
+		//System.out.println(/*"X acc = " + */accX);
 		this.vx += (accX*dt);
 	}
 
 	private void calculateVy(double dt) {
 		double accY = calculateAy();
-		System.out.print("	Y acc = " + accY + "\n");
+		//System.out.print("	Y acc = " + accY + "\n");
 		this.vy += (accY*dt);
 	}
 
@@ -64,7 +66,7 @@ public class CelestialBody {
 
 	private double calculateAy() {
 		//return bigG * ((Masses.getmSun())/Math.pow(this.y, 2));
-
+		//System.out.println(Math.pow((this.x*this.x + this.y*this.y),1.5));
 		return (bigG * Masses.getmSun()*(-this.y))/Math.pow((this.x*this.x + this.y*this.y),1.5);
 	}
 
@@ -72,7 +74,7 @@ public class CelestialBody {
 
 		//System.out.println("X pos = " + x + "	Y pos = " + y);
 
-		g.fillOval((int) (x /1E10) + 500-(int)((size/1E6)/2), (int) (y/1E10) + 500-(int)((size/1E6)/2), (int) (size/1E6), (int) (size/1E6));
+		g.fillOval((int) (x /1E9) + 500-(int)((size/1E6)/2), (int) (y/1E9) + 500-(int)((size/1E6)/2), (int) (size/1E6), (int) (size/1E6));
 	}
 
 	public double getMass() {
