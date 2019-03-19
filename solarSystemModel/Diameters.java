@@ -1,15 +1,15 @@
 package solarSystemModel;
 
 public abstract class Diameters {
-	public final static double dSun = 139100000;
-	public final static double dMercury = 48790000;
-	public final static double dVenus = 12104000;
-	public final static double dEarth = 12756000;
-	public final static double dMars = 6792000;
-	public final static double dJupiter = 142984000;
-	public final static double dSaturn = 120536000;
-	public final static double dUranus = 51118000;
-	public final static double dNeptune = 49528000;
+	public final static double dSun = 1391400000;
+	public final static double dMercury = 4880000;
+	public final static double dVenus = 12103680;
+	public final static double dEarth = 12742020;
+	public final static double dMars = 6779840;
+	public final static double dJupiter = 139822000;
+	public final static double dSaturn = 116464000;
+	public final static double dUranus = 50724000;
+	public final static double dNeptune = 49248000;
 	
 	public static double getdSun() {
 		return dSun;
