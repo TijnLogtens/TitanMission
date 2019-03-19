@@ -65,7 +65,7 @@ public class CelestialBody {
 	private double calculateAy() {
 		//return bigG * ((Masses.getmSun())/Math.pow(this.y, 2));
 
-		return (bigG * Masses.getmSun()*(-this.x))/Math.pow((this.x*this.x + this.y*this.y),1.5);
+		return (bigG * Masses.getmSun()*(-this.y))/Math.pow((this.x*this.x + this.y*this.y),1.5);
 	}
 
 	public void drawPlanet(Graphics g){
