@@ -72,7 +72,7 @@ public class CelestialBody {
 
 		//System.out.println("X pos = " + x + "	Y pos = " + y);
 
-		g.fillOval((int) (x /1E10) + 500-(int)((size)/2), (int) (y/1E10) + 500-(int)((size)/2), (int) (size), (int) (size));
+		g.fillOval((int) (x /1E10) + 500-(int)((size/1E6)/2), (int) (y/1E10) + 500-(int)((size/1E6)/2), (int) (size/1E6), (int) (size/1E6));
 	}
 
 	public double getMass() {
