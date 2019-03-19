@@ -29,43 +29,48 @@ public class CelestialBody {
 		return this.a * (this.mass/Masses.getmSun());
 	}
 	
-	public void update(float dt) {
+	public void update(double dt) {
 		calculateX(dt);
 		calculateY(dt);
 	}
 
-	private void calculateY(float dt) {
-		calculateVy(dt);
-		this.y = this.vy*dt;
-	}
-
-	private void calculateX(float dt) {
+	private void calculateX(double dt) {
 		calculateVx(dt);
-		this.x = this.vx*dt;
+		this.x += (this.vx*dt*1000);
 	}
 
-	private void calculateVy(float dt) {
-		double accY = calculateAy();
-		this.vy += accY*dt;
+	private void calculateY(double dt) {
+		calculateVy(dt);
+		this.y += (this.vy*dt*1000);
 	}
 
-	private void calculateVx(float dt) {
+	private void calculateVx(double dt) {
 		double accX = calculateAx();
-		this.vx += accX*dt;
+		this.vx += (accX*dt*1000);
 	}
 
-	private double calculateAy() {
-		return bigG * ((Masses.getmSun()*(-this.y))/(Math.pow(Math.pow(this.x, 2) + Math.pow(this.y, 2),(3/2))));
+	private void calculateVy(double dt) {
+		double accY = calculateAy();
+		this.vy += (accY*dt*1000);
 	}
 
 	private double calculateAx() {
+		//return bigG * ((Masses.getmSun())/Math.pow(this.x, 2));
 		return bigG * ((Masses.getmSun()*(-this.x))/(Math.pow(Math.pow(this.x, 2) + Math.pow(this.y, 2),(3/2))));
 	}
 
-	public void drawPlanet(Graphics g){
-		g.fillOval((int) (x /1E6) + 500, (int) (y/1E6) + 500, (int) (size/1E6), (int) (size/1E6)); 
+	private double calculateAy() {
+		//return bigG * ((Masses.getmSun())/Math.pow(this.y, 2));
+		return bigG * ((Masses.getmSun()*(-this.y))/(Math.pow(Math.pow(this.x, 2) + Math.pow(this.y, 2),(3/2))));
 	}
-	
+
+	public void drawPlanet(Graphics g){
+
+		System.out.println("X pos = " + x + "	Y pos = " + y);
+
+		g.fillOval((int) (x /3E10) + 500-(int)((size/1E6)/2), (int) (y/3E10) + 500-(int)((size/1E6)/2), (int) (size/1E6), (int) (size/1E6));
+	}
+
 	public double getMass() {
 		return mass;
 	}
