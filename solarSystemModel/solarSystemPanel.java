@@ -28,7 +28,7 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	//Moons
 	
 	//Variables
-	private double dt = 1;
+	private double dt = 24*60*60;
 	public static final int HEIGHT = 800;
 	public static final int WIDTH = 800;
 	
@@ -41,7 +41,7 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	public void init() {
 		//TODO initialise planets and sun
 		sun = new Star(Masses.getmSun(), 0, 0, Diameters.getdSun());
-		mercury = new CelestialBody(Masses.getmMercury(), -5.843237462283994E10, -2.143781663349622E+07, 6.693497964118796E+03, -4.362708337948559E+04, semiMajorAxis.getaMercury(), 50);
+		mercury = new CelestialBody(Masses.getmMercury(), -5.843237462283994E10, -2.143781663349622E10, 6.693497964118796E+03, -4.362708337948559E+04, semiMajorAxis.getaMercury(), 50);
 		venus = new CelestialBody(Masses.getmVenus(), -2580494883.0, -108702671108.0, 3004800124.0, -83049933.0, semiMajorAxis.getaVenus(),50);
 		earth = new CelestialBody(Masses.getmEarth(), -149012983094.0, -2126426567.0, -5418387.0, -2582093185.0, semiMajorAxis.getaEarth(),50);
 		mars = new CelestialBody(Masses.getmMars(), 23243203038.0, 231502807159.0, -2003886166.0, 387018894.0, semiMajorAxis.getaMars(), 50);
