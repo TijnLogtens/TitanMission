@@ -11,7 +11,7 @@ public class CelestialBody {
 	public double rSOI;
 	public double a;
 	public double size;
-	public double bigG = 0.000000000066740831;
+	public double bigG = 6.674E-11;
 	
 	
 	CelestialBody(double mass, double x, double y, double vx, double vy, double a, double size){
@@ -70,7 +70,7 @@ public class CelestialBody {
 
 		System.out.println("X pos = " + x + "	Y pos = " + y);
 
-		g.fillOval((int) (x /3E10) + 500-(int)((size/1E6)/2), (int) (y/3E10) + 500-(int)((size/1E6)/2), (int) (size/1E6), (int) (size/1E6));
+		g.fillOval((int) (x /1E10) + 500-(int)((size)/2), (int) (y/1E10) + 500-(int)((size)/2), (int) (size), (int) (size));
 	}
 
 	public double getMass() {
