@@ -25,6 +25,7 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	public CelestialBody saturn;
 	public CelestialBody uranus;
 	public CelestialBody neptune;
+	public double[][] points; 
 
 
 	//Moons
@@ -92,15 +93,15 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	}
 
 	public void update() {
-		mercury.update(dt);
-		venus.update(dt);
-		earth.update(dt);
-		mars.update(dt);
-		jupiter.update(dt);
-		saturn.update(dt);
-		uranus.update(dt);
-		neptune.update(dt);
-		moon.update(dt);
+		double[] merc_points = mercury.update(dt);
+		double[] venus_points= venus.update(dt);
+		double[] earth_points=earth.update(dt);
+		double[] mars_points=mars.update(dt);
+		double[] jupiter_points=jupiter.update(dt);
+		double[] saturn_points=saturn.update(dt);
+		double[] uranus_points=uranus.update(dt);
+		double[] neptune_points=neptune.update(dt);
+		double[] moon_points=moon.update(dt);
 		/*phobos.update(dt);
 		deimos.update(dt);
 		io.update(dt);
@@ -108,7 +109,9 @@ public class solarSystemPanel extends JPanel implements Runnable{
 		europa.update(dt);
 		ganymede.update(dt);
 		callisto.update(dt);*/
+		points = new double[][]{merc_points, venus_points, earth_points,mars_points,jupiter_points,saturn_points,uranus_points,neptune_points,moon_points};
 		titan.update(dt);
+
 	}
 
 
