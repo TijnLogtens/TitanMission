@@ -19,7 +19,7 @@ public abstract class semiMajorAxis {
 	private final static double aCallisto = 0;
 	private final static double aMimas = 0;
 	private final static double aEnceladus = 0;
-	private final static double aThethys = 0;
+	private final static double aTethys = 0;
 	private final static double aDione = 0;
 	private final static double aRhea = 0;
 	private final static double aTitan = 0;
@@ -76,8 +76,8 @@ public abstract class semiMajorAxis {
 	public static double getaEnceladus() {
 		return aEnceladus;
 	}
-	public static double getaThethys() {
-		return aThethys;
+	public static double getaTethys() {
+		return aTethys;
 	}
 	public static double getaDione() {
 		return aDione;

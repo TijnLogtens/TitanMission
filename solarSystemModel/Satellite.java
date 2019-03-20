@@ -11,11 +11,12 @@ public class Satellite extends CelestialBody {
         this.parent = parent;
     }
 
-    public void update(double dt){
+    public double[] update(double dt){
         double dx = calculateX(dt);
         double dy = calculateY(dt);
         this.x += dx;
         this.y += dy;
+        return new double[]{this.x,this.y};
         //System.out.println("X pos = " + x + "   Y pos = " + y);
     }
 

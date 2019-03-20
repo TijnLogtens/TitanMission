@@ -19,7 +19,7 @@ public abstract class Diameters {
 	private final static double dCallisto = 4820600;
 	private final static double dMimas = 396400;
 	private final static double dEnceladus = 504200;
-	private final static double dThethys = 1062000;
+	private final static double dTethys = 1062000;
 	private final static double dDione = 1122800;
 	private final static double dRhea = 1527600;
 	private final static double dTitan = 2574700;
@@ -79,8 +79,8 @@ public abstract class Diameters {
 	public static double getdEnceladus() {
 		return dEnceladus;
 	}
-	public static double getdThethys() {
-		return dThethys;
+	public static double getdTethys() {
+		return dTethys;
 	}
 	public static double getdDione() {
 		return dDione;

@@ -22,24 +22,28 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	public CelestialBody saturn;
 	public CelestialBody uranus;
 	public CelestialBody neptune;
-	public CelestialBody moon;
-	public CelestialBody titan;
 
-	public Satellite[] marsMoons = new Satellite[2];
-	public Satellite[] jupiterMoons = new Satellite[4];
-	public Satellite[] saturnMoons = new Satellite[7];
-	
+
+
+
 	//Moons
-	
+	public CelestialBody moon;
+	public CelestialBody phobos, deimos;
+	public CelestialBody io, europa, ganymede, callisto;
+	public CelestialBody mimas, enceladus, thetys, dione, rhea, titan, iapetus;
+//	public CelestialBody[] marsMoons = new Satellite[2]{phobos, deimos};
+//	public CelestialBody[] jupiterMoons = new Satellite[4]{io, europa, ganymede, callisto};
+//	public CelestialBody[] saturnMoons = new Satellite[7]{mimas, enceladus, thethys, dione, rhea, titan, iapetus};
+
 	//Variables
-	private double dt = 24*60*60;
+	private double dt = 0.001;
 	public static final int HEIGHT = 800;
 	public static final int WIDTH = 800;
 	
 	public solarSystemPanel() {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		init();
-		render();
+		//render();
 	}
 	
 	public void init() {
@@ -54,7 +58,19 @@ public class solarSystemPanel extends JPanel implements Runnable{
 		uranus = new CelestialBody(Masses.getmUranus(), 2.520721625280142E+12, 1.570265330931762E+12, -3.638605615637463E+03, 5.459468350572506E+03, semiMajorAxis.getaUranus(), Diameters.getdUranus(), sun);
 		neptune = new CelestialBody(Masses.getmNeptune(), 4.344787551365745E+12, -1.083664718815018E+12, 1.292632887654737E+03, 5.305024140488896E+03, semiMajorAxis.getaNeptune(), Diameters.getdNeptune(), sun);
 		moon = new Satellite(Masses.getmMoon(), -3.518238400980993E+08, -8.598213408503399E+07, 2.167615778151889E+01, -1.061706350429193E+03, semiMajorAxis.getaMoon(), Diameters.getdMoon(), earth);
+		/*phobos = new Satellite(mass, x, y, vx, vy, sma, d, mars);
+		deimos = new Satellite(mass, x, y, vx, vy, sma, d, mars);
+		io = new Satellite(mass, x, y, vx, vy, sma, d, jupiter);
+		europa = new Satellite(mass, x, y, vx, vy, sma, d, jupiter);
+		ganymede = new Satellite(mass, x, y, vx, vy, sma, d, jupiter);
+		callisto = new Satellite(mass, x, y, vx, vy, sma, d, jupiter);
+		mimas = new Satellite(mass, x, y, vx, vy, sma, d, saturn);
+		enceladus = new Satellite(mass, x, y, vx, vy, sma, d, saturn);
+		thetys = new Satellite(mass, x, y, vx, vy, sma, d, saturn);
+		dione = new Satellite(mass, x, y, vx, vy, sma, d, saturn);
+		rhea = new Satellite(mass, x, y, vx, vy, sma, d, saturn);*/
 		titan = new Satellite(Masses.getmTitan(), -1.016860465751689E+09, -5.901972769593473E+08, 3.214103533464870E+03, -4.060883992202967E+03, semiMajorAxis.getaTitan(), Diameters.getdTitan(), saturn);
+		//iapetus = new Satellite(mass, x, y, vx, vy, sma, d, saturn);
 	}
 	
 	@Override
@@ -62,9 +78,18 @@ public class solarSystemPanel extends JPanel implements Runnable{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public void update() {
 
+	public void render() {
+		Timer timer = new Timer(20, new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				update();
+				repaint();
+			}
+		});
+		timer.start();
+	}
+
+	public void update() {
 		mercury.update(dt);
 		venus.update(dt);
 		earth.update(dt);
@@ -74,19 +99,10 @@ public class solarSystemPanel extends JPanel implements Runnable{
 		uranus.update(dt);
 		neptune.update(dt);
 		moon.update(dt);
-		titan.update(dt);
 
+		titan.update(dt);
 	}
-	
-	public void render() {
-		Timer timer = new Timer(20, new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				update();
-				repaint();
-			}
-		});
-		timer.start();	
-	}
+
 
 	@Override 
 	public void paintComponent(Graphics g){

@@ -48,11 +48,12 @@ public class CelestialBody {
 		return this.semiMajorAxis * (this.mass/Masses.getmSun());
 	}
 	
-	public void update(double dt) {
+	public double[] update(double dt) {
 		double dx = calculateX(dt);
 		double dy = calculateY(dt);
 		this.x += dx;
 		this.y += dy;
+		return new double[]{this.x,this.y};
 	}
 
 	private double calculateX(double dt) {

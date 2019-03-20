@@ -12,6 +12,18 @@ public abstract class Masses {
 	private final static double mNeptune = 102.413E24;
 	private final static double mUranus = 86.813E24;
 	private final static double mMoon = 7.34767309E22;
+	private final static double mPhobos = 1.0659E16;
+	private final static double mDeimos = 1.4762E15;
+	private final static double mIo = 8.931938E22;
+	private final static double mEuropa = 4.797E22;
+	private final static double mGanymede = 1.4819E23;
+	private final static double mCallisto = 1.075938E23;
+	private final static double mMimas = 3.7493E19;
+	private final static double mEnceladus = 1.08022E20;
+	private final static double mTethys = 6.17449E20;
+	private final static double mDione = 0;
+	private final static double mRhea = 0;
+	private final static double mIapetus = 0;
 	private final static double mTitan = 1.3452E23;
 	
 	public static double getmSun() {
