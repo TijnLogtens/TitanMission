@@ -3,30 +3,30 @@ package solarSystemModel;
 import java.awt.Graphics;
 
 public class CelestialBody {
-	public double mass;
-	public double x;
-	public double y;
-	public double vx;
-	public double vy;
-	public double rSOI;
-	public double a;
-	public double size;
-	public double bigG = 6.674E-11;
+	private double mass;
+	private double x;
+	private double y;
+	private double vx;
+	private double vy;
+	private double rSOI;
+	private double semiMajorAxis;
+	private double size;
+	private double bigG = 6.674E-11;
 	
 	
-	CelestialBody(double mass, double x, double y, double vx, double vy, double a, double size){
+	CelestialBody(double mass, double x, double y, double vx, double vy, double semiMajorAxis, double size){
 		this.mass = mass;
 		this.x = x;
 		this.y = y;
 		this.vx = vx;
 		this.vy = vy;
-		this.a = a;
+		this.semiMajorAxis = semiMajorAxis;
 		this.rSOI = rSOIcalc();
 		this.size = size;
 	}
 
-	public double rSOIcalc() {
-		return this.a * (this.mass/Masses.getmSun());
+	private double rSOIcalc() {
+		return this.semiMajorAxis * (this.mass/Masses.getmSun());
 	}
 	
 	public void update(double dt) {
@@ -110,8 +110,8 @@ public class CelestialBody {
 	public void setrSOI(double rSOI) {
 		this.rSOI = rSOI;
 	}
-	public double getA() {
-		return this.a;
+	public double getSemiMajorAxis() {
+		return this.semiMajorAxis;
 	}
 }
 
