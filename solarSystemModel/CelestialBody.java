@@ -3,17 +3,19 @@ package solarSystemModel;
 import java.awt.Graphics;
 
 public class CelestialBody {
-	private double mass;
-	private double x;
-	private double y;
-	private double vx;
-	private double vy;
-	private double rSOI;
-	private double semiMajorAxis;
-	private double size;
-	private double bigG = 6.674E-11;
-	
-	
+	protected double mass;
+	protected double x;
+	protected double y;
+	protected double vx;
+	protected double vy;
+	protected double rSOI;
+	protected double semiMajorAxis;
+	protected double size;
+	protected double bigG = 6.674E-11;
+
+	private Star parent;
+
+
 	CelestialBody(double mass, double x, double y, double vx, double vy, double semiMajorAxis, double size){
 		this.mass = mass;
 		this.x = x;
@@ -23,6 +25,18 @@ public class CelestialBody {
 		this.semiMajorAxis = semiMajorAxis;
 		this.rSOI = rSOIcalc();
 		this.size = size;
+	}
+
+	CelestialBody(double mass, double x, double y, double vx, double vy, double semiMajorAxis, double size, Star parent){
+		this.mass = mass;
+		this.x = x;
+		this.y = y;
+		this.vx = vx;
+		this.vy = vy;
+		this.semiMajorAxis = semiMajorAxis;
+		this.rSOI = rSOIcalc();
+		this.size = size;
+		this.parent = parent;
 	}
 
 	private double rSOIcalc() {
@@ -61,13 +75,17 @@ public class CelestialBody {
 	private double calculateAx() {
 		//return bigG * ((Masses.getmSun())/Math.pow(this.x, 2));
 		//System.out.println((bigG * Masses.getmSun()*(-this.x))/(Math.pow(Math.pow(this.x, 2) + Math.pow(this.y, 2),(3/2))));
-		return (bigG * Masses.getmSun()*(-this.x))/Math.pow((this.x*this.x + this.y*this.y),1.5);
+		//return (bigG * this.parent.getMass()*(this.parent.getX()-this.x)) / Math.pow(((this.x-this.parent.getX())*(this.x-this.parent.getX())) + ((this.y-this.parent.getY())*(this.y-this.parent.getY())),1.5);
+
+		return (bigG * Masses.getmSun()*(-this.x)) / Math.pow((this.x*this.x + this.y*this.y),1.5);
 	}
 
 	private double calculateAy() {
 		//return bigG * ((Masses.getmSun())/Math.pow(this.y, 2));
 		//System.out.println(Math.pow((this.x*this.x + this.y*this.y),1.5));
-		return (bigG * Masses.getmSun()*(-this.y))/Math.pow((this.x*this.x + this.y*this.y),1.5);
+		//return (bigG * this.parent.getMass()*(this.parent.getY()-this.y)) / Math.pow(((this.x-this.parent.getX())*(this.x-this.parent.getX())) + ((this.y-this.parent.getY())*(this.y-this.parent.getY())),1.5);
+
+		return (bigG * Masses.getmSun()*(-this.y)) / Math.pow((this.x*this.x + this.y*this.y),1.5);
 	}
 
 	public void drawPlanet(Graphics g){

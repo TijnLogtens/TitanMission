@@ -22,8 +22,12 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	public CelestialBody saturn;
 	public CelestialBody uranus;
 	public CelestialBody neptune;
-	
-	List<CelestialBody> planets;
+	public CelestialBody moon;
+	public CelestialBody titan;
+
+	public Satellite[] marsMoons = new Satellite[2];
+	public Satellite[] jupiterMoons = new Satellite[4];
+	public Satellite[] saturnMoons = new Satellite[7];
 	
 	//Moons
 	
@@ -41,14 +45,16 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	public void init() {
 		//TODO initialise planets and sun
 		sun = new Star(Masses.getmSun(), 0, 0, Diameters.getdSun());
-		mercury = new CelestialBody(Masses.getmMercury(), -5.843237462283994E10, -2.143781663349622E10, 6.693497964118796E+03, -4.362708337948559E+04, semiMajorAxis.getaMercury(), Diameters.getdMercury());
-		venus = new CelestialBody(Masses.getmVenus(), -2.580458154996926E+09, -1.087011239119300E+11, 3.477728421647656E+04, -9.612123998925466E+02, semiMajorAxis.getaVenus(),Diameters.getdVenus());
-		earth = new CelestialBody(Masses.getmEarth(), -1.490108621500159E+11, -2.126396301163715E+09, -6.271192280390987E+01, -2.988491242814953E+04, semiMajorAxis.getaEarth(),Diameters.getdEarth());
-		mars = new CelestialBody(Masses.getmMars(), 2.324287221167859E+10, 2.314995121135774E+11, -2.319279681535404E+04, 4.479321597588995E+03, semiMajorAxis.getaMars(), Diameters.getdMars());
-		jupiter = new CelestialBody(Masses.getmJupiter(), -2.356728458452976E+11, -7.610012694580332E+11, 1.233361263555140E+04, -3.252782848348839E+03, semiMajorAxis.getaJupiter(), Diameters.getdJupiter());
-		saturn = new CelestialBody(Masses.getmSaturn(), 3.547593532400821E+11, -1.461948830848272E+12, 8.867827359240396E+03, 2.247044412940183E+03, semiMajorAxis.getaSaturn(), Diameters.getdSaturn());
-		uranus = new CelestialBody(Masses.getmUranus(), 2.520721625280142E+12, 1.570265330931762E+12, -3.638605615637463E+03, 5.459468350572506E+03, semiMajorAxis.getaUranus(), Diameters.getdUranus());
-		neptune = new CelestialBody(Masses.getmNeptune(), 4.344787551365745E+12, -1.083664718815018E+12, 1.292632887654737E+03, 5.305024140488896E+03, semiMajorAxis.getaNeptune(), Diameters.getdNeptune());
+		mercury = new CelestialBody(Masses.getmMercury(), -5.843237462283994E10, -2.143781663349622E10, 6.693497964118796E+03, -4.362708337948559E+04, semiMajorAxis.getaMercury(), Diameters.getdMercury(), sun);
+		venus = new CelestialBody(Masses.getmVenus(), -2.580458154996926E+09, -1.087011239119300E+11, 3.477728421647656E+04, -9.612123998925466E+02, semiMajorAxis.getaVenus(),Diameters.getdVenus(), sun);
+		earth = new CelestialBody(Masses.getmEarth(), -1.490108621500159E+11, -2.126396301163715E+09, -6.271192280390987E+01, -2.988491242814953E+04, semiMajorAxis.getaEarth(),Diameters.getdEarth(), sun);
+		mars = new CelestialBody(Masses.getmMars(), 2.324287221167859E+10, 2.314995121135774E+11, -2.319279681535404E+04, 4.479321597588995E+03, semiMajorAxis.getaMars(), Diameters.getdMars(), sun);
+		jupiter = new CelestialBody(Masses.getmJupiter(), -2.356728458452976E+11, -7.610012694580332E+11, 1.233361263555140E+04, -3.252782848348839E+03, semiMajorAxis.getaJupiter(), Diameters.getdJupiter(), sun);
+		saturn = new CelestialBody(Masses.getmSaturn(), 3.547593532400821E+11, -1.461948830848272E+12, 8.867827359240396E+03, 2.247044412940183E+03, semiMajorAxis.getaSaturn(), Diameters.getdSaturn(), sun);
+		uranus = new CelestialBody(Masses.getmUranus(), 2.520721625280142E+12, 1.570265330931762E+12, -3.638605615637463E+03, 5.459468350572506E+03, semiMajorAxis.getaUranus(), Diameters.getdUranus(), sun);
+		neptune = new CelestialBody(Masses.getmNeptune(), 4.344787551365745E+12, -1.083664718815018E+12, 1.292632887654737E+03, 5.305024140488896E+03, semiMajorAxis.getaNeptune(), Diameters.getdNeptune(), sun);
+		moon = new Satellite(Masses.getmMoon(), -3.518238400980993E+08, -8.598213408503399E+07, 2.167615778151889E+01, -1.061706350429193E+03, semiMajorAxis.getaMoon(), Diameters.getdMoon(), earth);
+		titan = new Satellite(Masses.getmTitan(), -1.016860465751689E+09, -5.901972769593473E+08, 3.214103533464870E+03, -4.060883992202967E+03, semiMajorAxis.getaTitan(), Diameters.getdTitan(), saturn);
 	}
 	
 	@Override
@@ -67,11 +73,13 @@ public class solarSystemPanel extends JPanel implements Runnable{
 		saturn.update(dt);
 		uranus.update(dt);
 		neptune.update(dt);
+		moon.update(dt);
+		titan.update(dt);
 
 	}
 	
 	public void render() {
-		Timer timer = new Timer(1, new ActionListener(){
+		Timer timer = new Timer(20, new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				update();
 				repaint();
@@ -101,6 +109,9 @@ public class solarSystemPanel extends JPanel implements Runnable{
 		uranus.drawPlanet(g);
 		g.setColor(Color.BLUE);
 		neptune.drawPlanet(g);
+		g.setColor(Color.GRAY);
+		moon.drawPlanet(g);
+		titan.drawPlanet(g);
 
 	}
 	
