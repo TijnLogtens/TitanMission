@@ -11,8 +11,20 @@ public abstract class semiMajorAxis {
 	private final static double aNeptune = 2872460000000.0;
 	private final static double aUranus = 4495060000000.0;
 	private final static double aMoon = 0;
+	private final static double aPhobos = 0;
+	private final static double aDeimos = 0;
+	private final static double aIo = 0;
+	private final static double aEuropa = 0;
+	private final static double aGanymede = 0;
+	private final static double aCallisto = 0;
+	private final static double aMimas = 0;
+	private final static double aEnceladus = 0;
+	private final static double aThethys = 0;
+	private final static double aDione = 0;
+	private final static double aRhea = 0;
 	private final static double aTitan = 0;
-	
+	private final static double aIapetus = 0;
+
 	public static double getaMercury() {
 		return aMercury;
 	}
@@ -40,8 +52,45 @@ public abstract class semiMajorAxis {
 	public static double getaMoon() {
 		return aMoon;
 	}
+	public static double getaPhobos() {
+		return aPhobos;
+	}
+	public static double getaDeimos() {
+		return aDeimos;
+	}
+	public static double getaIo() {
+		return aIo;
+	}
+	public static double getaEuropa() {
+		return aEuropa;
+	}
+	public static double getaGanymede() {
+		return aGanymede;
+	}
+	public static double getaCallisto() {
+		return aCallisto;
+	}
+	public static double getaMimas() {
+		return aMimas;
+	}
+	public static double getaEnceladus() {
+		return aEnceladus;
+	}
+	public static double getaThethys() {
+		return aThethys;
+	}
+	public static double getaDione() {
+		return aDione;
+	}
+	public static double getaRhea() {
+		return aRhea;
+	}
 	public static double getaTitan() {
 		return aTitan;
 	}
+	public static double getaIapetus() {
+		return aIapetus;
+	}
+
 }
 	

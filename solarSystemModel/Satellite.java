@@ -57,7 +57,7 @@ public class Satellite extends CelestialBody {
 
         //System.out.println("X pos = " + x + "	Y pos = " + y);
 
-        g.fillOval((int) ((x+parent.getX()) /1E9) + 500-(int)((size/5E5)/2), (int) ((y+parent.getY())/1E9) + 500-(int)((size/5E5)/2), (int) (size/5E5), (int) (size/5E5));
+        g.fillOval((int) ((x+parent.getX()) /DISTANCE_SCALER) + 500-(int)((size/SIZE_SCALER)/2), (int) ((y+parent.getY())/DISTANCE_SCALER) + 500-(int)((size/SIZE_SCALER)/2), (int) (size/SIZE_SCALER), (int) (size/SIZE_SCALER));
     }
 
     public CelestialBody getParent() {

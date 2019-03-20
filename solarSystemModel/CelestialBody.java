@@ -3,6 +3,10 @@ package solarSystemModel;
 import java.awt.Graphics;
 
 public class CelestialBody {
+
+	protected final int DISTANCE_SCALER = (int)1E9;
+	protected final int SIZE_SCALER = (int)5E5;
+
 	protected double mass;
 	protected double x;
 	protected double y;
@@ -12,6 +16,7 @@ public class CelestialBody {
 	protected double semiMajorAxis;
 	protected double size;
 	protected double bigG = 6.674E-11;
+
 
 	private Star parent;
 
@@ -92,7 +97,7 @@ public class CelestialBody {
 
 		//System.out.println("X pos = " + x + "	Y pos = " + y);
 
-		g.fillOval((int) (x /1E9) + 500-(int)((size/1E6)/2), (int) (y/1E9) + 500-(int)((size/1E6)/2), (int) (size/1E6), (int) (size/1E6));
+		g.fillOval((int) (x /DISTANCE_SCALER) + 500-(int)((size/SIZE_SCALER)/2), (int) (y/DISTANCE_SCALER) + 500-(int)((size/SIZE_SCALER)/2), (int) (size/SIZE_SCALER), (int) (size/SIZE_SCALER));
 	}
 
 	public double getMass() {
