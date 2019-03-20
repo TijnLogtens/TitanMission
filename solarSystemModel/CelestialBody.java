@@ -1,10 +1,12 @@
 package solarSystemModel;
 
 import java.awt.Graphics;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class CelestialBody {
 
-	protected final int DISTANCE_SCALER = (int)1E9;
+	protected final int DISTANCE_SCALER = (int)5E9;
 	protected final int SIZE_SCALER = (int)5E5;
 
 	protected double mass;
@@ -16,10 +18,11 @@ public class CelestialBody {
 	protected double semiMajorAxis;
 	protected double size;
 	protected double bigG = 6.674E-11;
-
-
+	private int index = 0;
 	private Star parent;
 
+	public double[] trail_x = new double[250];
+	public double[] trail_y = new double[250];
 
 	CelestialBody(double mass, double x, double y, double vx, double vy, double semiMajorAxis, double size){
 		this.mass = mass;
@@ -30,6 +33,10 @@ public class CelestialBody {
 		this.semiMajorAxis = semiMajorAxis;
 		this.rSOI = rSOIcalc();
 		this.size = size;
+		for(int i = 0; i < trail_x.length; i++){
+			trail_x[i] = -1;
+			trail_y[i] = -1;
+		}
 	}
 
 	CelestialBody(double mass, double x, double y, double vx, double vy, double semiMajorAxis, double size, Star parent){
@@ -42,12 +49,16 @@ public class CelestialBody {
 		this.rSOI = rSOIcalc();
 		this.size = size;
 		this.parent = parent;
+		for(int i = 0; i < trail_x.length; i++){
+			trail_x[i] = -1;
+			trail_y[i] = -1;
+		}
 	}
 
 	private double rSOIcalc() {
 		return this.semiMajorAxis * (this.mass/Masses.getmSun());
 	}
-	
+
 	public double[] update(double dt) {
 		double dx = calculateX(dt);
 		double dy = calculateY(dt);
@@ -98,7 +109,21 @@ public class CelestialBody {
 
 		//System.out.println("X pos = " + x + "	Y pos = " + y);
 
-		g.fillOval((int) (x /DISTANCE_SCALER) + 500-(int)((size/SIZE_SCALER)/2), (int) (y/DISTANCE_SCALER) + 500-(int)((size/SIZE_SCALER)/2), (int) (size/SIZE_SCALER), (int) (size/SIZE_SCALER));
+		int norm_x = (int) (x/DISTANCE_SCALER) + 500;
+		int norm_y = (int) (y/DISTANCE_SCALER) + 500;
+
+		g.fillOval(norm_x-(int)((size/SIZE_SCALER)/2), norm_y-(int)((size/SIZE_SCALER)/2), (int) (size/SIZE_SCALER), (int) (size/SIZE_SCALER));
+
+		trail_x[index] = norm_x;
+		trail_y[index] = norm_y;
+		index++;
+
+		for(int i=0;i<trail_x.length;i++){
+			g.fillOval((int) trail_x[i], (int) trail_y[i], 2, 2);
+		}
+		if(index==250){
+			index = 0;
+		}
 	}
 
 	public double getMass() {
@@ -136,6 +161,12 @@ public class CelestialBody {
 	}
 	public double getSemiMajorAxis() {
 		return this.semiMajorAxis;
+	}
+	public double getIndex(){
+		return index;
+}
+	public void setIndex(int index){
+		this.index = index;
 	}
 }
 

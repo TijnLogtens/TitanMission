@@ -8,7 +8,7 @@ public class Star {
 	private double y;
 	private double size;
 	private final int DISTANCE_SCALER = (int)1E9;
-	private final int SIZE_SCALER = (int)5E5;
+	private final int SIZE_SCALER = (int)5E7;
 
 	Star(double mass, double x, double y, double size){
 		this.mass = mass;

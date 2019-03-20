@@ -21,11 +21,11 @@ public abstract class Masses {
 	private final static double mMimas = 3.7493E19;
 	private final static double mEnceladus = 1.08022E20;
 	private final static double mTethys = 6.17449E20;
-	private final static double mDione = 0;
-	private final static double mRhea = 0;
-	private final static double mIapetus = 0;
+	private final static double mDione = 1.095452E21;
+	private final static double mRhea = 2.306518E21;
 	private final static double mTitan = 1.3452E23;
-	
+	private final static double mIapetus = 1.805635E21;
+
 	public static double getmSun() {
 		return mSun;
 	}
@@ -56,7 +56,43 @@ public abstract class Masses {
 	public static double getmMoon() {
 		return mMoon;
 	}
+	public static double getmPhobos() {
+		return mPhobos;
+	}
+	public static double getmDeimos() {
+		return mDeimos;
+	}
+	public static double getmIo() {
+		return mIo;
+	}
+	public static double getmEuropa() {
+		return mEuropa;
+	}
+	public static double getmGanymede() {
+		return mGanymede;
+	}
+	public static double getmCallisto() {
+		return mCallisto;
+	}
+	public static double getmMimas() {
+		return mMimas;
+	}
+	public static double getmEnceladus() {
+		return mEnceladus;
+	}
+	public static double getmTethys() {
+		return mTethys;
+	}
+	public static double getmDione() {
+		return mDione;
+	}
+	public static double getmRhea() {
+		return mRhea;
+	}
 	public static double getmTitan() {
 		return mTitan;
+	}
+	public static double getmIapetus() {
+		return mIapetus;
 	}
 }
