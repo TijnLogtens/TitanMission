@@ -32,6 +32,7 @@ import javafx.scene.PerspectiveCamera;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Transform;
 import javafx.scene.input.ScrollEvent;
 import java.lang.Object;
 
@@ -47,6 +48,27 @@ public class Test extends Application {
   double anchorAngleY=0;
   final DoubleProperty angleX=new SimpleDoubleProperty(0);
   final DoubleProperty angleY=new SimpleDoubleProperty(0);
+
+  class BGroup extends Group {
+
+    Rotate r;
+    Transform t = new Rotate();
+
+    void rotateByX(int ang) {
+      r = new Rotate(ang, Rotate.X_AXIS);
+      t = t.createConcatenation(r);
+      this.getTransforms().clear();
+      this.getTransforms().addAll(t);
+    }
+
+    void rotateByY(int ang) {
+      r = new Rotate(ang, Rotate.Y_AXIS);
+      t = t.createConcatenation(r);
+      this.getTransforms().clear();
+      this.getTransforms().addAll(t);
+    }
+  }
+
 
   public void initialMouseControl(Group group, Scene scene, Stage stage){
     Rotate xRotate;
@@ -67,17 +89,13 @@ public class Test extends Application {
       angleY.set(anchorAngleX + anchorY - event.getSceneY());
     });
 
-    stage.addEventHandler(ScrollEvent.SCROLL, event ->{
+    /*stage.addEventHandler(ScrollEvent.SCROLL, event ->{
       double delta =event.getDeltaY(); // +ve then fwd if -ve then bckwd
       group.translateZProperty().set(group.getTranslateZ()+ delta);
-    });
-
-
+    }); */
   }
 
      public void start(Stage stage) {
-
-      
 
        //Drawing SUN
        Sphere sun = new Sphere();
@@ -88,7 +106,7 @@ public class Test extends Application {
        sun.setTranslateX(sun_.getX()-sun.getRadius());
        sun.setTranslateY(sun_.getY()-  sun.getRadius());
        //setting the cull face of the sphere to front
-       sun.setCullFace(CullFace.BACK);
+       //sun.setCullFace(CullFace.BACK);
        //Setting color to the sphere
        PhongMaterial m1 = new PhongMaterial();
        m1.setDiffuseColor(Color.YELLOW);
@@ -108,7 +126,7 @@ public class Test extends Application {
        mercury.setTranslateX((merc.getX()/DISTANCE_SIZE) +500  - mercury.getRadius());
         //System.out.println(merc.getY()/2E8);
        mercury.setTranslateY(merc.getY()/DISTANCE_SIZE + 500 - mercury.getRadius());
-       mercury.setCullFace(CullFace.BACK);
+       //mercury.setCullFace(CullFace.BACK);
        m2.setDiffuseColor(Color.GRAY);
        m2.setSpecularColor(Color.GRAY);
        mercury.setMaterial(m2);
@@ -121,14 +139,14 @@ public class Test extends Application {
        venus.setRadius(ven.getSize()/(2*SCALAR_SIZE));
        venus.setTranslateX(ven.getX()/DISTANCE_SIZE + 500 - venus.getRadius());
        venus.setTranslateY(ven.getY() /DISTANCE_SIZE + 500 - venus.getRadius());
-       venus.setCullFace(CullFace.BACK);
+       //venus.setCullFace(CullFace.BACK);
        m3.setDiffuseColor(Color.PERU);
        m3.setSpecularColor(Color.PERU);
        venus.setMaterial(m3);
 
 
 
-      
+
        //Drawing EARTH
        Sphere earth = new Sphere();
        CelestialBody ear = new CelestialBody(Masses.getmEarth(), -1.490108621500159E+11, -2.126396301163715E+09, -6.271192280390987E+01, -2.988491242814953E+04, 0,Diameters.getdEarth(), sun_);
@@ -136,7 +154,7 @@ public class Test extends Application {
        earth.setRadius(ear.getSize()/(2*SCALAR_SIZE));
        earth.setTranslateX(ear.getX()/DISTANCE_SIZE + 500 - earth.getRadius());
        earth.setTranslateY(ear.getY()/DISTANCE_SIZE + 500 - earth.getRadius());
-       earth.setCullFace(CullFace.BACK);
+       //earth.setCullFace(CullFace.BACK);
        m4.setDiffuseColor(Color.BLUE);
        m4.setSpecularColor(Color.GREEN);
        earth.setMaterial(m4);
@@ -149,7 +167,7 @@ public class Test extends Application {
        mars.setRadius(mar.getSize()/(2*SCALAR_SIZE));
        mars.setTranslateX(mar.getX()/ DISTANCE_SIZE + 500 - mars.getRadius());
        mars.setTranslateY(mar.getY()/ DISTANCE_SIZE + 500 - mars.getRadius());
-       mars.setCullFace(CullFace.BACK);
+      // mars.setCullFace(CullFace.BACK);
        m5.setDiffuseColor(Color.BROWN);
        m5.setSpecularColor(Color.BROWN);
        mars.setMaterial(m5);
@@ -161,7 +179,7 @@ public class Test extends Application {
        jupiter.setRadius(jup.getSize()/(2*SCALAR_SIZE));
        jupiter.setTranslateX(jup.getX()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
        jupiter.setTranslateY(jup.getY()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
-       jupiter.setCullFace(CullFace.BACK);
+       //jupiter.setCullFace(CullFace.BACK);
        m6.setDiffuseColor(Color.ORANGE);
        m6.setSpecularColor(Color.ORANGE);
        jupiter.setMaterial(m6);
@@ -173,7 +191,7 @@ public class Test extends Application {
        saturn.setRadius(sat.getSize()/(2*SCALAR_SIZE));
        saturn.setTranslateX(sat.getX() / DISTANCE_SIZE + 500 - saturn.getRadius());
        saturn.setTranslateY(sat.getY() / DISTANCE_SIZE + 500 - saturn.getRadius());
-       saturn.setCullFace(CullFace.BACK);
+       //saturn.setCullFace(CullFace.BACK);
        m7.setDiffuseColor(Color.GOLD);
        m7.setSpecularColor(Color.GOLD);
        saturn.setMaterial(m7);
@@ -186,7 +204,7 @@ public class Test extends Application {
        neptune.setRadius(nep.getSize()/(2*SCALAR_SIZE));
        neptune.setTranslateX(nep.getX()/DISTANCE_SIZE + 500 - neptune.getRadius() );
        neptune.setTranslateY(nep.getY()/ DISTANCE_SIZE + 500 - neptune.getRadius());
-       neptune.setCullFace(CullFace.BACK);
+       //neptune.setCullFace(CullFace.BACK);
        m8.setDiffuseColor(Color.DARKBLUE);
        m8.setSpecularColor(Color.DARKBLUE);
        neptune.setMaterial(m8);
@@ -197,12 +215,12 @@ public class Test extends Application {
        uranus.setRadius(ur.getSize()/(2*SCALAR_SIZE));
        uranus.setTranslateX(ur.getX()/ DISTANCE_SIZE+ 500 - uranus.getRadius() );
        uranus.setTranslateY(ur.getY()/ DISTANCE_SIZE+ 500 - uranus.getRadius());
-       uranus.setCullFace(CullFace.BACK);
+      // uranus.setCullFace(CullFace.BACK);
        m9.setDiffuseColor(Color.DODGERBLUE);
        m9.setSpecularColor(Color.DODGERBLUE);
        uranus.setMaterial(m9);
 
-       
+
 
        int[] mercIndex = new int[]{0};
        int[] venIndex = new int[] {0};
@@ -213,7 +231,7 @@ public class Test extends Application {
        int[] neptIndex = new int[] {0};
        int[] uranusIndex = new int[] {0};
 
-       
+
 
        Sphere[] mercTrail = new Sphere[250];
        Sphere[] venTrail = new Sphere[250];
@@ -223,9 +241,6 @@ public class Test extends Application {
        Sphere[] saturnTrail = new Sphere[250];
        Sphere[] neptTrail = new Sphere[250];
        Sphere[] uranusTrail = new Sphere[250];
-
-        
-
 
 
        for(int i = 0; i < 250; i++){
@@ -277,14 +292,11 @@ public class Test extends Application {
           uranusTrail[i].setTranslateX(uranus.getTranslateX());
           uranusTrail[i].setTranslateY(uranus.getTranslateY());
           uranusTrail[i].setMaterial(m9);
-          
+
 
        }
-       
 
-       
-  
-        
+
        //Creating a Group object
        Group root = new Group(sun,mercury,venus,earth,mars,jupiter,saturn,neptune,uranus);
        Group trail = new Group(mercTrail);
@@ -295,9 +307,26 @@ public class Test extends Application {
        Group saturntrail = new Group(saturnTrail);
        Group neptrail = new Group(neptTrail);
        Group uranustrail = new Group(uranusTrail);
-       Group group = new Group(root,trail, ventrail, earthtrail, marstrail, juptrail, saturntrail, neptrail, uranustrail);
+       BGroup group = new BGroup();
+       group.getChildren().addAll(root,trail,ventrail,earthtrail,marstrail,juptrail,saturntrail,neptrail,uranustrail);
+       group.translateXProperty().set(10);
+       group.translateYProperty().set(10);
+       group.translateZProperty().set(10);
+
+
+
+       stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+      switch (event.getCode()) {
+        case S:
+          group.translateZProperty().set(group.getTranslateZ() + 1000);
+          break;
+        case W:
+          group.translateZProperty().set(group.getTranslateZ() - 100);
+          break;
+      }
+    });
+
        //Creating a scene object
-       
 
        Pane panel = new Pane();
        /*
@@ -313,29 +342,13 @@ public class Test extends Application {
        */
        panel.getChildren().add(group);
        panel.setStyle("-fx-background-color: black");
-       
-       Scene scene = new Scene(panel,1000,1000);
 
+       Scene scene = new Scene(panel,10000,10000);
 
-         initialMouseControl(group,scene,stage);
-       
-       /* //Set Background
-       Image image=new Image("File:space.png");
-       ImageView mv= new ImageView(image);
+       Camera c= new PerspectiveCamera();
+       scene.setCamera(c);
 
-       root.getChildren().addAll(mv); */
-
-       //final StackPane stack = new StackPane();
-       //final StackPane stack1 = new StackPane();
-
-       //stack.setLayoutX(30);
-       //stack.setLayoutY(30);
-
-       //stack1.getChildren().addAll(venus,earth,mars,jupiter,uranus,neptune,saturn,sun);
-
-       //root.getChildren().add(stack);
-       //stack.getChildren().addAll(mercury);
-
+        initialMouseControl(group,scene,stage);
 
        //Setting title to the Stage
        stage.setTitle("Universe");
@@ -348,7 +361,7 @@ public class Test extends Application {
         stage.show();
 
 
-        //MOVE MERCURY
+        //MOVE PLANETS
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
@@ -421,7 +434,7 @@ public class Test extends Application {
                  if(uranusIndex[0] == 250) {uranusIndex[0] = 0;}
                 uranusTrail[uranusIndex[0]].setTranslateX(uranus.getTranslateX());
                 uranusTrail[uranusIndex[0]].setTranslateY(uranus.getTranslateY());
-                uranusIndex[0]++;             
+                uranusIndex[0]++;
 
             }
           };
@@ -458,6 +471,7 @@ public class Test extends Application {
         trans.play();*/
 
      }
+
 
      public static void main(String[] args){
         Application.launch(args);
