@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -60,19 +59,35 @@ public class solarSystemPanel extends JPanel implements Runnable{
 		uranus = new CelestialBody(Masses.getmUranus(), 2.520721625280142E+12, 1.570265330931762E+12, -3.638605615637463E+03, 5.459468350572506E+03, semiMajorAxis.getaUranus(), Diameters.getdUranus(), sun);
 		neptune = new CelestialBody(Masses.getmNeptune(), 4.344787551365745E+12, -1.083664718815018E+12, 1.292632887654737E+03, 5.305024140488896E+03, semiMajorAxis.getaNeptune(), Diameters.getdNeptune(), sun);
 		moon = new Satellite(Masses.getmMoon(), -3.518238400980993E+08, -8.598213408503399E+07, 2.167615778151889E+01, -1.061706350429193E+03, semiMajorAxis.getaMoon(), Diameters.getdMoon(), earth);
-		/*phobos = new Satellite(Masses.getmPhobos(), -6.158431385405609E+06, -6.363353887023877E+06, 1.288711455996767E+03, -1.557153702986508E+03, semiMajorAxis.getaPhobos(), Diameters.getdPhobos(), mars);
+		phobos = new Satellite(Masses.getmPhobos(), -6.158431385405609E+06, -6.363353887023877E+06, 1.288711455996767E+03, -1.557153702986508E+03, semiMajorAxis.getaPhobos(), Diameters.getdPhobos(), mars);
 		deimos = new Satellite(Masses.getmDeimos(), 1.783618538019075E+07, 1.352491840245665E+07, -6.725498522894642E+02, 1.098537553338818E+03, semiMajorAxis.getaDeimos(), Diameters.getdDeimos(), mars);
 		io = new Satellite(Masses.getmIo(), 1.380920023293307E+08, -3.967491880441244E+08, 1.644325961621238E+04, 5.668373803162439E+03, semiMajorAxis.getaIo(), Diameters.getdIo(), jupiter);
 		europa = new Satellite(Masses.getmEuropa(), -3.514385830422270E+07, 6.635734967793569E+08, -1.384460356721946E+04, -6.797082818354832E+02, semiMajorAxis.getaEuropa(), Diameters.getdEuropa(), jupiter);
 		ganymede = new Satellite(Masses.getmGanymede(), -1.064633035469716E+08, -1.062583793009553E+09, 1.084493571087621E+04, -1.070950584454436E+03, semiMajorAxis.getaGanymede(), Diameters.getdGanymede(), jupiter);
 		callisto = new Satellite(Masses.getmCallisto(), 8.412953282863846E+08, -1.678519668237818E+09, 7.329296441560971E+03, 3.728818013089040E+03, semiMajorAxis.getaCallisto(), Diameters.getdCallisto(), jupiter);
-		/*mimas = new Satellite(Masses.getmMimas(), x, y, vx, vy, sma, d, saturn);
-		enceladus = new Satellite(Masses.getmEnceladus(), x, y, vx, vy, sma, d, saturn);
-		tethys = new Satellite(Masses.getmTethys(), x, y, vx, vy, sma, d, saturn);
-		dione = new Satellite(Masses.getmDione(), x, y, vx, vy, sma, d, saturn);
-		rhea = new Satellite(Masses.getmRhea(), x, y, vx, vy, sma, d, saturn);*/
+		mimas = new Satellite(Masses.getmMimas(), 1.702370769859285E+08, 5.240743093920160E+07, -5.641973557593450E+03, 1.187802980204081E+04, semiMajorAxis.getaMimas(), Diameters.getdMimas(), saturn);
+		enceladus = new Satellite(Masses.getmEnceladus(), 4.043410177838349E+07, -2.099704509737120E+08, 1.237775363400243E+04, 1.359801571845373E+03, semiMajorAxis.getaEnceladus(), Diameters.getdEnceladus(), saturn);
+		tethys = new Satellite(Masses.getmTethys(), 2.578489759525506E+07, 2.591232559522352E+08, -1.124571410198163E+04, 1.432070907839130E+03, semiMajorAxis.getaTethys(), Diameters.getdTethys(), saturn);
+		dione = new Satellite(Masses.getmDione(), -2.990812265460490E+08, -1.895031364702201E+08, 6.047137493908562E+03, -7.334608197372648E+03, semiMajorAxis.getaDione(), Diameters.getdDione(), saturn);
+		rhea = new Satellite(Masses.getmRhea(), -3.184084780449074E+08, 3.841103830754230E+08, -6.727273153029782E+03, -4.300650493718985E+03, semiMajorAxis.getaRhea(), Diameters.getdRhea(), saturn);
 		titan = new Satellite(Masses.getmTitan(), -1.016860465751689E+09, -5.901972769593473E+08, 3.214103533464870E+03, -4.060883992202967E+03, semiMajorAxis.getaTitan(), Diameters.getdTitan(), saturn);
-		//iapetus = new Satellite(Masses.getmIapetus(), x, y, vx, vy, sma, d, saturn);
+		iapetus = new Satellite(Masses.getmIapetus(), 2.820995567947916E+09, 1.763866711651760E+09, -1.808672326309362E+03, 2.804214324649085E+03, semiMajorAxis.getaIapetus(), Diameters.getdIapetus(), saturn);
+/*
+		moon = new Satellite(Masses.getmMoon(), -1.493626859901140E+11, -2.212378435248749E+09, 1.540496550112790E+02, -3.094661877857872E+04, semiMajorAxis.getaMoon(), Diameters.getdMoon(), earth);
+		phobos = new Satellite(Masses.getmPhobos(), 2.323671378029319E+10, 2.314931487596904E+11, -2.190408535935727E+04, 2.922167894602486E+03, semiMajorAxis.getaPhobos(), Diameters.getdPhobos(), mars);
+		deimos = new Satellite(Masses.getmDeimos(), 2.326070839705878E+10, 2.315130370319799E+11, -2.386534666764350E+04, 5.577859150927813E+03, semiMajorAxis.getaDeimos(), Diameters.getdDeimos(), mars);
+		io = new Satellite(Masses.getmIo(), -2.355347538476891E+11, -7.613980186377425E+11, 2.877687225609879E+04, 2.415590983046155E+03, semiMajorAxis.getaIo(), Diameters.getdIo(), jupiter);
+		europa = new Satellite(Masses.getmEuropa(), -2.357079897083227E+11, -7.603376959529190E+11, -1.510990927333046E+03, -3.932491101951766E+03, semiMajorAxis.getaEuropa(), Diameters.getdEuropa(), jupiter);
+		ganymede = new Satellite(Masses.getmGanymede(), -2.357793091535654E+11, -7.620638532427080E+11, 2.317854835076262E+04, -4.323733404570719E+03, semiMajorAxis.getaGanymede(), Diameters.getdGanymede(), jupiter);
+		callisto = new Satellite(Masses.getmCallisto(), -2.348315505217321E+11, -7.626797891179361E+11, 1.966290908144738E+04, 4.760351929727559E+02, semiMajorAxis.getaCallisto(), Diameters.getdCallisto(), jupiter);
+		mimas = new Satellite(Masses.getmMimas(), 1.702370769859285E+08, 5.240743093920160E+07, -5.641973557593450E+03, 1.187802980204081E+04, semiMajorAxis.getaMimas(), Diameters.getdMimas(), saturn);
+		enceladus = new Satellite(Masses.getmEnceladus(), 4.043410177838349E+07, -2.099704509737120E+08, 1.237775363400243E+04, 1.359801571845373E+03, semiMajorAxis.getaEnceladus(), Diameters.getdEnceladus(), saturn);
+		tethys = new Satellite(Masses.getmTethys(), 2.578489759525506E+07, 2.591232559522352E+08, -1.124571410198163E+04, 1.432070907839130E+03, semiMajorAxis.getaTethys(), Diameters.getdTethys(), saturn);
+		dione = new Satellite(Masses.getmDione(), -2.990812265460490E+08, -1.895031364702201E+08, 6.047137493908562E+03, -7.334608197372648E+03, semiMajorAxis.getaDione(), Diameters.getdDione(), saturn);
+		rhea = new Satellite(Masses.getmRhea(), 3.544409447620372E+11, -1.461564720465197E+12, 2.140554206210613E+03, -2.053606080778802E+03, semiMajorAxis.getaRhea(), Diameters.getdRhea(), saturn);
+		titan = new Satellite(Masses.getmTitan(), -1.016860465751689E+09, -5.901972769593473E+08, 3.214103533464870E+03, -4.060883992202967E+03, semiMajorAxis.getaTitan(), Diameters.getdTitan(), saturn);
+		iapetus = new Satellite(Masses.getmIapetus(), 2.820995567947916E+09, 1.763866711651760E+09, -1.808672326309362E+03, 2.804214324649085E+03, semiMajorAxis.getaIapetus(), Diameters.getdIapetus(), saturn);
+*/
 
 	}
 
@@ -83,7 +98,7 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	}
 
 	public void render() {
-		Timer timer = new Timer(10, new ActionListener(){
+		Timer timer = new Timer(5, new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				update();
 				repaint();
@@ -93,6 +108,15 @@ public class solarSystemPanel extends JPanel implements Runnable{
 	}
 
 	public void update() {
+		double[] moon_points=moon.update(dt);
+		phobos.update(dt);
+		deimos.update(dt);
+		io.update(dt);
+		//System.out.println("X pos = " + io.getX() + "	Y pos = " + io.getY());
+		europa.update(dt);
+		ganymede.update(dt);
+		callisto.update(dt);
+
 		double[] merc_points = mercury.update(dt);
 		double[] venus_points= venus.update(dt);
 		double[] earth_points=earth.update(dt);
@@ -101,17 +125,15 @@ public class solarSystemPanel extends JPanel implements Runnable{
 		double[] saturn_points=saturn.update(dt);
 		double[] uranus_points=uranus.update(dt);
 		double[] neptune_points=neptune.update(dt);
-		double[] moon_points=moon.update(dt);
-		/*phobos.update(dt);
-		deimos.update(dt);
-		io.update(dt);
-		//System.out.println("X pos = " + io.getX() + "	Y pos = " + io.getY());
-		europa.update(dt);
-		ganymede.update(dt);
-		callisto.update(dt);*/
+		/*mimas.update(dt);
+		enceladus.update(dt);
+		tethys.update(dt);
+		dione.update(dt);
+		rhea.update(dt);
 		points = new double[][]{merc_points, venus_points, earth_points,mars_points,jupiter_points,saturn_points,uranus_points,neptune_points,moon_points};
 		titan.update(dt);
-
+		iapetus.update(dt);
+*/
 	}
 
 
@@ -138,14 +160,20 @@ public class solarSystemPanel extends JPanel implements Runnable{
 		neptune.drawPlanet(g);
 		g.setColor(Color.GRAY);
 		moon.drawPlanet(g);
-		/*phobos.drawPlanet(g);
+		phobos.drawPlanet(g);
 		deimos.drawPlanet(g);
 		io.drawPlanet(g);
 		europa.drawPlanet(g);
 		ganymede.drawPlanet(g);
-		callisto.drawPlanet(g);*/
+		callisto.drawPlanet(g);
+		/*mimas.drawPlanet(g);
+		enceladus.drawPlanet(g);
+		tethys.drawPlanet(g);
+		dione.drawPlanet(g);
+		rhea.drawPlanet(g);
 		titan.drawPlanet(g);
-
+		iapetus.drawPlanet(g);
+*/
 	}
 
 }

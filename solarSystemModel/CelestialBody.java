@@ -94,15 +94,15 @@ public class CelestialBody {
 		//System.out.println((bigG * Masses.getmSun()*(-this.x))/(Math.pow(Math.pow(this.x, 2) + Math.pow(this.y, 2),(3/2))));
 		//return (bigG * this.parent.getMass()*(this.parent.getX()-this.x)) / Math.pow(((this.x-this.parent.getX())*(this.x-this.parent.getX())) + ((this.y-this.parent.getY())*(this.y-this.parent.getY())),1.5);
 
-		return (bigG * Masses.getmSun()*(-this.x)) / Math.pow((this.x*this.x + this.y*this.y),1.5);
+		return (bigG * this.parent.getMass()*(this.parent.getX()-this.x)) / Math.pow(((this.parent.getX()-this.x)*(this.parent.getX()-this.x) + (this.parent.getY()-this.y)*(this.parent.getY()-this.y)),1.5);
 	}
 
 	private double calculateAy() {
 		//return bigG * ((Masses.getmSun())/Math.pow(this.y, 2));
 		//System.out.println(Math.pow((this.x*this.x + this.y*this.y),1.5));
 		//return (bigG * this.parent.getMass()*(this.parent.getY()-this.y)) / Math.pow(((this.x-this.parent.getX())*(this.x-this.parent.getX())) + ((this.y-this.parent.getY())*(this.y-this.parent.getY())),1.5);
-
-		return (bigG * Masses.getmSun()*(-this.y)) / Math.pow((this.x*this.x + this.y*this.y),1.5);
+		return (bigG * this.parent.getMass()*(this.parent.getY()-this.y)) / Math.pow(((this.parent.getX()-this.x)*(this.parent.getX()-this.x) + (this.parent.getY()-this.y)*(this.parent.getY()-this.y)),1.5);
+		//return (bigG * this.parent.getMass()*(-this.y)) / Math.pow((this.x*this.x + this.y*this.y),1.5);
 	}
 
 	public void drawPlanet(Graphics g){
