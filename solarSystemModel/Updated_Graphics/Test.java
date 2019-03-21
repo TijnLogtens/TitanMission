@@ -109,9 +109,9 @@ public class Test extends Application {
       //sun.setCullFace(CullFace.BACK);
       //Setting color to the sphere
       PhongMaterial m1 = new PhongMaterial();
-      m1.setDiffuseMap(new Image(getClass().getResourceAsStream("sun.png")));
-      m1.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("sun.png")));
-      m1.setSpecularMap(new Image(getClass().getResourceAsStream("sun.png")));
+      m1.setDiffuseMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
+      m1.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
+      m1.setSpecularMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
       sun.setMaterial(m1);
 
       //Drawing MERCURY
@@ -125,9 +125,9 @@ public class Test extends Application {
        //System.out.println(merc.getY()/2E8);
       mercury.setTranslateY(merc.getY()/DISTANCE_SIZE + 500 - mercury.getRadius());
       //mercury.setCullFace(CullFace.BACK);
-      m2.setDiffuseMap(new Image(getClass().getResourceAsStream("merc.png")));
-      m2.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("merc.png")));
-      m2.setSpecularMap(new Image(getClass().getResourceAsStream("merc.png")));
+      m2.setDiffuseMap(new Image(getClass().getResourceAsStream("merc.jpg")));
+      m2.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("merc.jpg")));
+      m2.setSpecularMap(new Image(getClass().getResourceAsStream("merc.jpg")));
       mercury.setMaterial(m2);
 
 
@@ -139,9 +139,9 @@ public class Test extends Application {
       venus.setTranslateX(ven.getX()/DISTANCE_SIZE + 500 - venus.getRadius());
       venus.setTranslateY(ven.getY() /DISTANCE_SIZE + 500 - venus.getRadius());
       //venus.setCullFace(CullFace.BACK);
-      m3.setDiffuseMap(new Image(getClass().getResourceAsStream("venus.png")));
-      m3.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("venus.png")));
-      m3.setSpecularMap(new Image(getClass().getResourceAsStream("venus.png")));
+      m3.setDiffuseMap(new Image(getClass().getResourceAsStream("venus.jpg")));
+      m3.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("venus.jpg")));
+      m3.setSpecularMap(new Image(getClass().getResourceAsStream("venus.jpg")));
       venus.setMaterial(m3);
 
 
@@ -154,9 +154,9 @@ public class Test extends Application {
       earth.setTranslateX(ear.getX()/DISTANCE_SIZE + 500 - earth.getRadius());
       earth.setTranslateY(ear.getY()/DISTANCE_SIZE + 500 - earth.getRadius());
       //earth.setCullFace(CullFace.BACK);
-      m4.setDiffuseMap(new Image(getClass().getResourceAsStream("earth.png")));
-      m4.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("earth.png")));
-      m4.setSpecularMap(new Image(getClass().getResourceAsStream("earth.png")));
+      m4.setDiffuseMap(new Image(getClass().getResourceAsStream("earth.jpg")));
+      m4.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("earth.jpg")));
+      m4.setSpecularMap(new Image(getClass().getResourceAsStream("earth.jpg")));
       earth.setMaterial(m4);
 
 
@@ -181,9 +181,9 @@ public class Test extends Application {
       jupiter.setTranslateX(jup.getX()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
       jupiter.setTranslateY(jup.getY()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
       //jupiter.setCullFace(CullFace.BACK);
-      m6.setDiffuseMap(new Image(getClass().getResourceAsStream("jupiter.png")));
-      m6.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("jupiter.png")));
-      m6.setSpecularMap(new Image(getClass().getResourceAsStream("jupiter.png")));
+      m6.setDiffuseMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
+      m6.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
+      m6.setSpecularMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
       jupiter.setMaterial(m6);
 
       //Drawing SATURN
@@ -194,9 +194,9 @@ public class Test extends Application {
       saturn.setTranslateX(sat.getX() / DISTANCE_SIZE + 500 - saturn.getRadius());
       saturn.setTranslateY(sat.getY() / DISTANCE_SIZE + 500 - saturn.getRadius());
       //saturn.setCullFace(CullFace.BACK);
-      m7.setDiffuseMap(new Image(getClass().getResourceAsStream("saturn.png")));
-      m7.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("saturn.png")));
-      m7.setSpecularMap(new Image(getClass().getResourceAsStream("saturn.png")));
+      m7.setDiffuseMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
+      m7.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
+      m7.setSpecularMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
       saturn.setMaterial(m7);
 
       //Drawing NEPTUNE
@@ -208,9 +208,9 @@ public class Test extends Application {
       neptune.setTranslateX(nep.getX()/DISTANCE_SIZE + 500 - neptune.getRadius() );
       neptune.setTranslateY(nep.getY()/ DISTANCE_SIZE + 500 - neptune.getRadius());
       //neptune.setCullFace(CullFace.BACK);
-      m8.setDiffuseMap(new Image(getClass().getResourceAsStream("neptune.png")));
-      m8.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("neptune.png")));
-      m8.setSpecularMap(new Image(getClass().getResourceAsStream("neptune.png")));
+      m8.setDiffuseMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
+      m8.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
+      m8.setSpecularMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
       neptune.setMaterial(m8);
 
       //Drawing URANUS
@@ -220,9 +220,9 @@ public class Test extends Application {
       uranus.setTranslateX(ur.getX()/ DISTANCE_SIZE+ 500 - uranus.getRadius() );
       uranus.setTranslateY(ur.getY()/ DISTANCE_SIZE+ 500 - uranus.getRadius());
      // uranus.setCullFace(CullFace.BACK);
-     m9.setDiffuseMap(new Image(getClass().getResourceAsStream("uranus.png")));
-     m9.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("uranus.png")));
-     m9.setSpecularMap(new Image(getClass().getResourceAsStream("uranus.png")));
+     m9.setDiffuseMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
+     m9.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
+     m9.setSpecularMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
       uranus.setMaterial(m9);
 
         //Drawing MOON
