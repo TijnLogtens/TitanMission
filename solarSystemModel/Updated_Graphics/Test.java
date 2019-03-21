@@ -38,8 +38,9 @@ import java.lang.Object;
 
 public class Test extends Application {
     int i=0;
-    private final double SCALAR_SIZE = 1E5;
-    private final double DISTANCE_SIZE = 2E8;
+    private final double SCALAR_SIZE = 5E4;
+    private final double DISTANCE_SIZE = 9E7;
+    private final double MOON_SCALAR = 7E1;
     private final double dt = 24*60*60;
 
     double anchorX;
@@ -89,153 +90,165 @@ public class Test extends Application {
             angleY.set(anchorAngleX + anchorY - event.getSceneY());
         });
 
-    /*stage.addEventHandler(ScrollEvent.SCROLL, event ->{
-      double delta =event.getDeltaY(); // +ve then fwd if -ve then bckwd
-      group.translateZProperty().set(group.getTranslateZ()+ delta);
-    }); */
+    stage.addEventHandler(ScrollEvent.SCROLL, event ->{
+      double delta = -event.getDeltaY(); // +ve then fwd if -ve then bckwd
+      group.translateZProperty().set(group.getTranslateZ()+ delta * 200);
+    });
     }
 
     public void start(Stage stage) {
 
-      //Drawing SUN
-      Sphere sun = new Sphere();
-      Star sun_ = new Star(Masses.getmSun(), 500, 500, Diameters.getdSun());
-      //Setting the radius of the Sphere
-      sun.setRadius((sun_.getSize()/2)/1E7);
-      //Setting the position of the sphere
-      sun.setTranslateX(sun_.getX()-sun.getRadius());
-      sun.setTranslateY(sun_.getY()-  sun.getRadius());
-      //setting the cull face of the sphere to front
-      //sun.setCullFace(CullFace.BACK);
-      //Setting color to the sphere
-      PhongMaterial m1 = new PhongMaterial();
-      m1.setDiffuseMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
-      m1.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
-      m1.setSpecularMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
-      sun.setMaterial(m1);
+        //Drawing SUN
+        Sphere sun = new Sphere();
+        Star sun_ = new Star(Masses.getmSun(), 500, 500, Diameters.getdSun());
+        //Setting the radius of the Sphere
+        sun.setRadius((sun_.getSize()/2)/3E6);
+        //Setting the position of the sphere
+        sun.setTranslateX(sun_.getX()- sun.getRadius()/2);
+        sun.setTranslateY(sun_.getY()- sun.getRadius()/2);
+        //setting the cull face of the sphere to front
+        //sun.setCullFace(CullFace.BACK);
+        //Setting color to the sphere
+        PhongMaterial m1 = new PhongMaterial();
+        m1.setDiffuseMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
+        m1.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
+        m1.setSpecularMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
+        sun.setMaterial(m1);
 
-      //Drawing MERCURY
-      Sphere mercury = new Sphere();
-      CelestialBody merc = new CelestialBody(Masses.getmMercury(), -5.843237462283994E10, -2.143781663349622E10, 6.693497964118796E+03, -4.362708337948559E+04, 0, Diameters.getdMercury(), sun_);
-      PhongMaterial m2 = new PhongMaterial();
-      //System.out.println(merc.getSize()/(2*1E5));
-      mercury.setRadius(merc.getSize()/(2*SCALAR_SIZE));
-      //System.out.println((merc.getX()/2E8));
-      mercury.setTranslateX((merc.getX()/DISTANCE_SIZE) +500  - mercury.getRadius());
-       //System.out.println(merc.getY()/2E8);
-      mercury.setTranslateY(merc.getY()/DISTANCE_SIZE + 500 - mercury.getRadius());
-      //mercury.setCullFace(CullFace.BACK);
-      m2.setDiffuseMap(new Image(getClass().getResourceAsStream("merc.jpg")));
-      m2.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("merc.jpg")));
-      m2.setSpecularMap(new Image(getClass().getResourceAsStream("merc.jpg")));
-      mercury.setMaterial(m2);
-
-
-      //Drawing VENUS
-      Sphere venus = new Sphere();
-      CelestialBody ven = new CelestialBody(Masses.getmVenus(), -2.580458154996926E+09, -1.087011239119300E+11, 3.477728421647656E+04, -9.612123998925466E+02, 0,Diameters.getdVenus(), sun_);
-      PhongMaterial m3 = new PhongMaterial();
-      venus.setRadius(ven.getSize()/(2*SCALAR_SIZE));
-      venus.setTranslateX(ven.getX()/DISTANCE_SIZE + 500 - venus.getRadius());
-      venus.setTranslateY(ven.getY() /DISTANCE_SIZE + 500 - venus.getRadius());
-      //venus.setCullFace(CullFace.BACK);
-      m3.setDiffuseMap(new Image(getClass().getResourceAsStream("venus.jpg")));
-      m3.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("venus.jpg")));
-      m3.setSpecularMap(new Image(getClass().getResourceAsStream("venus.jpg")));
-      venus.setMaterial(m3);
+        //Drawing MERCURY
+        Sphere mercury = new Sphere();
+        CelestialBody merc = new CelestialBody(Masses.getmMercury(), -5.843237462283994E10, -2.143781663349622E10, 6.693497964118796E+03, -4.362708337948559E+04, 0, Diameters.getdMercury(), sun_);
+        PhongMaterial m2 = new PhongMaterial();
+        //System.out.println(merc.getSize()/(2*1E5));
+        mercury.setRadius(merc.getSize()/(2*SCALAR_SIZE));
+        //System.out.println((merc.getX()/2E8));
+        mercury.setTranslateX((merc.getX()/DISTANCE_SIZE) +500  - mercury.getRadius());
+        //System.out.println(merc.getY()/2E8);
+        mercury.setTranslateY(merc.getY()/DISTANCE_SIZE + 500 - mercury.getRadius());
+        //mercury.setCullFace(CullFace.BACK);
+        m2.setDiffuseMap(new Image(getClass().getResourceAsStream("merc.jpg")));
+        m2.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("merc.jpg")));
+        m2.setSpecularMap(new Image(getClass().getResourceAsStream("merc.jpg")));
+        mercury.setMaterial(m2);
 
 
+        //Drawing VENUS
+        Sphere venus = new Sphere();
+        CelestialBody ven = new CelestialBody(Masses.getmVenus(), -2.580458154996926E+09, -1.087011239119300E+11, 3.477728421647656E+04, -9.612123998925466E+02, 0,Diameters.getdVenus(), sun_);
+        PhongMaterial m3 = new PhongMaterial();
+        venus.setRadius(ven.getSize()/(2*SCALAR_SIZE));
+        venus.setTranslateX(ven.getX()/DISTANCE_SIZE + 500 - venus.getRadius());
+        venus.setTranslateY(ven.getY() /DISTANCE_SIZE + 500 - venus.getRadius());
+        //venus.setCullFace(CullFace.BACK);
+        m3.setDiffuseMap(new Image(getClass().getResourceAsStream("venus.jpg")));
+        m3.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("venus.jpg")));
+        m3.setSpecularMap(new Image(getClass().getResourceAsStream("venus.jpg")));
+        venus.setMaterial(m3);
 
-      //Drawing EARTH
-      Sphere earth = new Sphere();
-      CelestialBody ear = new CelestialBody(Masses.getmEarth(), -1.490108621500159E+11, -2.126396301163715E+09, -6.271192280390987E+01, -2.988491242814953E+04, 0,Diameters.getdEarth(), sun_);
-      PhongMaterial m4 = new PhongMaterial();
-      earth.setRadius(ear.getSize()/(2*SCALAR_SIZE));
-      earth.setTranslateX(ear.getX()/DISTANCE_SIZE + 500 - earth.getRadius());
-      earth.setTranslateY(ear.getY()/DISTANCE_SIZE + 500 - earth.getRadius());
-      //earth.setCullFace(CullFace.BACK);
-      m4.setDiffuseMap(new Image(getClass().getResourceAsStream("earth.jpg")));
-      m4.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("earth.jpg")));
-      m4.setSpecularMap(new Image(getClass().getResourceAsStream("earth.jpg")));
-      earth.setMaterial(m4);
 
 
-      //Drawing MARS
-      Sphere mars = new Sphere();
-      CelestialBody mar = new CelestialBody(Masses.getmMars(), 2.324287221167859E+10, 2.314995121135774E+11, -2.319279681535404E+04, 4.479321597588995E+03, 0, Diameters.getdMars(), sun_);
-      PhongMaterial m5 = new PhongMaterial();
-      mars.setRadius(mar.getSize()/(2*SCALAR_SIZE));
-      mars.setTranslateX(mar.getX()/ DISTANCE_SIZE + 500 - mars.getRadius());
-      mars.setTranslateY(mar.getY()/ DISTANCE_SIZE + 500 - mars.getRadius());
-     // mars.setCullFace(CullFace.BACK);
-      m5.setDiffuseMap(new Image(getClass().getResourceAsStream("mars.jpg")));
-      m5.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("mars.jpg")));
-      m5.setSpecularMap(new Image(getClass().getResourceAsStream("mars.jpg")));
-      mars.setMaterial(m5);
+        //Drawing EARTH
+        Sphere earth = new Sphere();
+        CelestialBody ear = new CelestialBody(Masses.getmEarth(), -1.490108621500159E+11, -2.126396301163715E+09, -6.271192280390987E+01, -2.988491242814953E+04, 0,Diameters.getdEarth(), sun_);
+        PhongMaterial m4 = new PhongMaterial();
+        earth.setRadius(ear.getSize()/(2*SCALAR_SIZE));
+        earth.setTranslateX(ear.getX()/DISTANCE_SIZE + 500 - earth.getRadius());
+        earth.setTranslateY(ear.getY()/DISTANCE_SIZE + 500 - earth.getRadius());
+        //earth.setCullFace(CullFace.BACK);
+        m4.setDiffuseMap(new Image(getClass().getResourceAsStream("earth.jpg")));
+        m4.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("earth.jpg")));
+        m4.setSpecularMap(new Image(getClass().getResourceAsStream("earth.jpg")));
+        earth.setMaterial(m4);
 
-      //Drawing JUPITER
-      Sphere jupiter = new Sphere();
-      CelestialBody jup = new CelestialBody(Masses.getmJupiter(), -2.356728458452976E+11, -7.610012694580332E+11, 1.233361263555140E+04, -3.252782848348839E+03, 0, Diameters.getdJupiter(), sun_);
-      PhongMaterial m6 = new PhongMaterial();
-      jupiter.setRadius(jup.getSize()/(2*SCALAR_SIZE));
-      jupiter.setTranslateX(jup.getX()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
-      jupiter.setTranslateY(jup.getY()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
-      //jupiter.setCullFace(CullFace.BACK);
-      m6.setDiffuseMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
-      m6.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
-      m6.setSpecularMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
-      jupiter.setMaterial(m6);
 
-      //Drawing SATURN
-      Sphere saturn = new Sphere();
-      CelestialBody sat = new CelestialBody(Masses.getmSaturn(), 3.547593532400821E+11, -1.461948830848272E+12, 8.867827359240396E+03, 2.247044412940183E+03, 0, Diameters.getdSaturn(), sun_);
-      PhongMaterial m7 = new PhongMaterial();
-      saturn.setRadius(sat.getSize()/(2*SCALAR_SIZE));
-      saturn.setTranslateX(sat.getX() / DISTANCE_SIZE + 500 - saturn.getRadius());
-      saturn.setTranslateY(sat.getY() / DISTANCE_SIZE + 500 - saturn.getRadius());
-      //saturn.setCullFace(CullFace.BACK);
-      m7.setDiffuseMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
-      m7.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
-      m7.setSpecularMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
-      saturn.setMaterial(m7);
+        //Drawing MARS
+        Sphere mars = new Sphere();
+        CelestialBody mar = new CelestialBody(Masses.getmMars(), 2.324287221167859E+10, 2.314995121135774E+11, -2.319279681535404E+04, 4.479321597588995E+03, 0, Diameters.getdMars(), sun_);
+        PhongMaterial m5 = new PhongMaterial();
+        mars.setRadius(mar.getSize()/(2*SCALAR_SIZE));
+        mars.setTranslateX(mar.getX()/ DISTANCE_SIZE + 500 - mars.getRadius());
+        mars.setTranslateY(mar.getY()/ DISTANCE_SIZE + 500 - mars.getRadius());
+        // mars.setCullFace(CullFace.BACK);
+        m5.setDiffuseMap(new Image(getClass().getResourceAsStream("mars.jpg")));
+        m5.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("mars.jpg")));
+        m5.setSpecularMap(new Image(getClass().getResourceAsStream("mars.jpg")));
+        mars.setMaterial(m5);
 
-      //Drawing NEPTUNE
-      Sphere neptune = new Sphere();
-      CelestialBody nep = new CelestialBody(Masses.getmNeptune(), 4.344787551365745E+12, -1.083664718815018E+12, 1.292632887654737E+03, 5.305024140488896E+03, 0, Diameters.getdNeptune(), sun_);
-      PhongMaterial m9 = new PhongMaterial();
-      PhongMaterial m8 = new PhongMaterial();
-      neptune.setRadius(nep.getSize()/(2*SCALAR_SIZE));
-      neptune.setTranslateX(nep.getX()/DISTANCE_SIZE + 500 - neptune.getRadius() );
-      neptune.setTranslateY(nep.getY()/ DISTANCE_SIZE + 500 - neptune.getRadius());
-      //neptune.setCullFace(CullFace.BACK);
-      m8.setDiffuseMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
-      m8.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
-      m8.setSpecularMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
-      neptune.setMaterial(m8);
+        //Drawing JUPITER
+        Sphere jupiter = new Sphere();
+        CelestialBody jup = new CelestialBody(Masses.getmJupiter(), -2.356728458452976E+11, -7.610012694580332E+11, 1.233361263555140E+04, -3.252782848348839E+03, 0, Diameters.getdJupiter(), sun_);
+        PhongMaterial m6 = new PhongMaterial();
+        jupiter.setRadius(jup.getSize()/(2*SCALAR_SIZE));
+        jupiter.setTranslateX(jup.getX()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
+        jupiter.setTranslateY(jup.getY()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
+        //jupiter.setCullFace(CullFace.BACK);
+        m6.setDiffuseMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
+        m6.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
+        m6.setSpecularMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
+        jupiter.setMaterial(m6);
 
-      //Drawing URANUS
-      Sphere uranus = new Sphere();
-      CelestialBody ur = new CelestialBody(Masses.getmUranus(), 2.520721625280142E+12, 1.570265330931762E+12, -3.638605615637463E+03, 5.459468350572506E+03,0, Diameters.getdUranus(), sun_);
-      uranus.setRadius(ur.getSize()/(2*SCALAR_SIZE));
-      uranus.setTranslateX(ur.getX()/ DISTANCE_SIZE+ 500 - uranus.getRadius() );
-      uranus.setTranslateY(ur.getY()/ DISTANCE_SIZE+ 500 - uranus.getRadius());
-     // uranus.setCullFace(CullFace.BACK);
-     m9.setDiffuseMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
-     m9.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
-     m9.setSpecularMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
-      uranus.setMaterial(m9);
+        //Drawing SATURN
+        Sphere saturn = new Sphere();
+        CelestialBody sat = new CelestialBody(Masses.getmSaturn(), 3.547593532400821E+11, -1.461948830848272E+12, 8.867827359240396E+03, 2.247044412940183E+03, 0, Diameters.getdSaturn(), sun_);
+        PhongMaterial m7 = new PhongMaterial();
+        saturn.setRadius(sat.getSize()/(2*SCALAR_SIZE));
+        saturn.setTranslateX(sat.getX() / DISTANCE_SIZE + 500 - saturn.getRadius());
+        saturn.setTranslateY(sat.getY() / DISTANCE_SIZE + 500 - saturn.getRadius());
+        //saturn.setCullFace(CullFace.BACK);
+        m7.setDiffuseMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
+        m7.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
+        m7.setSpecularMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
+        saturn.setMaterial(m7);
+
+        //Drawing NEPTUNE
+        Sphere neptune = new Sphere();
+        CelestialBody nep = new CelestialBody(Masses.getmNeptune(), 4.344787551365745E+12, -1.083664718815018E+12, 1.292632887654737E+03, 5.305024140488896E+03, 0, Diameters.getdNeptune(), sun_);
+        PhongMaterial m9 = new PhongMaterial();
+        PhongMaterial m8 = new PhongMaterial();
+        neptune.setRadius(nep.getSize()/(2*SCALAR_SIZE));
+        neptune.setTranslateX(nep.getX()/DISTANCE_SIZE + 500 - neptune.getRadius() );
+        neptune.setTranslateY(nep.getY()/ DISTANCE_SIZE + 500 - neptune.getRadius());
+        //neptune.setCullFace(CullFace.BACK);
+        m8.setDiffuseMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
+        m8.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
+        m8.setSpecularMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
+        neptune.setMaterial(m8);
+
+        //Drawing URANUS
+        Sphere uranus = new Sphere();
+        CelestialBody ur = new CelestialBody(Masses.getmUranus(), 2.520721625280142E+12, 1.570265330931762E+12, -3.638605615637463E+03, 5.459468350572506E+03,0, Diameters.getdUranus(), sun_);
+        uranus.setRadius(ur.getSize()/(2*SCALAR_SIZE));
+        uranus.setTranslateX(ur.getX()/ DISTANCE_SIZE+ 500 - uranus.getRadius() );
+        uranus.setTranslateY(ur.getY()/ DISTANCE_SIZE+ 500 - uranus.getRadius());
+        // uranus.setCullFace(CullFace.BACK);
+        m9.setDiffuseMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
+        m9.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
+        m9.setSpecularMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
+        uranus.setMaterial(m9);
 
         //Drawing MOON
         Sphere moon = new Sphere();
         CelestialBody luna = new Satellite(Masses.getmMoon(), -3.518238400980993E8, -8.598213408503398E7, 21.67615778151889, -1061.706350429193, semiMajorAxis.getaMoon(), Diameters.getdMoon(), ear);
         PhongMaterial m10 = new PhongMaterial();
         moon.setRadius(luna.getSize()/(2*SCALAR_SIZE));
-        moon.setTranslateX(luna.getX()/ DISTANCE_SIZE+ 500 - moon.getRadius() + earth.getTranslateX());
-        moon.setTranslateY(luna.getY()/ DISTANCE_SIZE+ 500 - moon.getRadius() + earth.getTranslateY());
+        moon.setTranslateX(luna.getX()/ DISTANCE_SIZE - moon.getRadius() + earth.getTranslateX() + earth.getRadius()/2);
+        moon.setTranslateY(luna.getY()/ DISTANCE_SIZE - moon.getRadius() + earth.getTranslateY() + earth.getRadius()/2);
         //moon.setCullFace(CullFace.BACK);
         m10.setDiffuseColor(Color.GRAY);
         m10.setSpecularColor(Color.GRAY);
         moon.setMaterial(m10);
+
+        //Drawing TITAN
+        Sphere titan = new Sphere();
+        CelestialBody SVI = new Satellite(Masses.getmTitan(), -1.016860465751689E09, -5.901972769593473E08, 3.214103533464870E03, -4.060883992202967E03, semiMajorAxis.getaTitan(), Diameters.getdTitan(), sat);
+        titan.setRadius(SVI.getSize()*2/(SCALAR_SIZE));
+        titan.setTranslateX(SVI.getX()/ DISTANCE_SIZE - titan.getRadius() + saturn.getTranslateX() + saturn.getRadius()/2);
+        titan.setTranslateY(SVI.getY()/ DISTANCE_SIZE - titan.getRadius() + saturn.getTranslateY() + saturn.getRadius()/2);
+        //moon.setCullFace(CullFace.BACK);
+        m10.setDiffuseColor(Color.GRAY);
+        m10.setSpecularColor(Color.GRAY);
+        titan.setMaterial(m10);
+
 
 
         int[] mercIndex = new int[]{0};
@@ -320,7 +333,7 @@ public class Test extends Application {
 
 
         //Creating a Group object
-        Group root = new Group(sun,mercury,venus,earth,mars,jupiter,saturn,neptune,uranus,moon);
+        Group root = new Group(sun,mercury,venus,earth,mars,jupiter,saturn,neptune,uranus,moon,titan);
         Group trail = new Group(mercTrail);
         Group ventrail = new Group(venTrail);
         Group earthtrail = new Group(earthTrail);
@@ -391,7 +404,7 @@ public class Test extends Application {
 
 
         AnimationTimer timer = new AnimationTimer() {
-            //int x=300; int y=300;
+
             @Override
             public void handle(long l) {
                 double[] points = merc.update(dt);
@@ -459,9 +472,15 @@ public class Test extends Application {
                 uranusIndex[0]++;
 
                 double[] points8 = luna.update(dt);
-                moon.setTranslateX((points8[0]/DISTANCE_SIZE) + 500 - moon.getRadius() + earth.getTranslateX());
-                moon.setTranslateY((points8[1]/DISTANCE_SIZE) + 500 - moon.getRadius() + earth.getTranslateY());
+                moon.setTranslateX((points8[0]/DISTANCE_SIZE*MOON_SCALAR) - moon.getRadius() + earth.getTranslateX() + earth.getRadius()/2);
+                moon.setTranslateY((points8[1]/DISTANCE_SIZE*MOON_SCALAR) - moon.getRadius() + earth.getTranslateY() + earth.getRadius()/2);
 
+                double[] points9 = SVI.update(dt);
+                titan.setTranslateX((points9[0]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateX() + saturn.getRadius()/2 - 500);
+                titan.setTranslateY((points9[1]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateY() + saturn.getRadius()/2 - 500);
+
+                //System.out.println("Titan: " + points9[0] + " " + points9[1]);
+                //System.out.println("Saturn: " + points4[0] + " " + points4[1]);
             }
         };
 
