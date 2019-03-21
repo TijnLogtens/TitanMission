@@ -1,4 +1,4 @@
-package solarSystemModel;
+//package solarSystemModel;
 
 import java.awt.Graphics;
 
