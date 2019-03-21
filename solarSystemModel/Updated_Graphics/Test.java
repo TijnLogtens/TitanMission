@@ -381,6 +381,13 @@ public class Test extends Application {
 
         Scene scene = new Scene(panel,1000,1000);
 
+                Image image=new Image(getClass().getResourceAsStream("space.jpeg"));
+
+                BackgroundImage bgImg = new BackgroundImage(image,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+                Background b= new Background(bgImg);
+                panel.setBackground(b);
+                Scene scene = new Scene(panel,1000,1000);
+
         Camera c= new PerspectiveCamera();
         scene.setCamera(c);
 
