@@ -26,12 +26,55 @@ import javafx.animation.PathTransition;
 import javafx.util.*;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.layout.Pane;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.Camera;
+import javafx.scene.PerspectiveCamera;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.transform.Rotate;
+import javafx.scene.input.ScrollEvent;
+import java.lang.Object;
 
 public class Test extends Application {
   int i=0;
   private final double SCALAR_SIZE = 1E5;
   private final double DISTANCE_SIZE = 2E8;
   private final double dt = 24*60*60;
+
+  double anchorX;
+  double anchorY;
+  double anchorAngleX=0;
+  double anchorAngleY=0;
+  final DoubleProperty angleX=new SimpleDoubleProperty(0);
+  final DoubleProperty angleY=new SimpleDoubleProperty(0);
+
+  public void initialMouseControl(Group group, Scene scene, Stage stage){
+    Rotate xRotate;
+    Rotate yRotate;
+    group.getTransforms().addAll(xRotate= new Rotate(0,Rotate.X_AXIS), yRotate=new Rotate(0,Rotate.Y_AXIS));
+    xRotate.angleProperty().bind(angleX);
+    yRotate.angleProperty().bind(angleY);
+
+    scene.setOnMousePressed(event ->{
+      anchorX=event.getSceneX();
+      anchorY=event.getSceneY();
+      anchorAngleX=angleX.get();
+      anchorAngleY=angleY.get();
+    });
+
+    scene.setOnMouseDragged(event ->{
+      angleX.set(anchorAngleX - (anchorY - event.getSceneY()));
+      angleY.set(anchorAngleX + anchorY - event.getSceneY());
+    });
+
+    stage.addEventHandler(ScrollEvent.SCROLL, event ->{
+      double delta =event.getDeltaY(); // +ve then fwd if -ve then bckwd
+      group.translateZProperty().set(group.getTranslateZ()+ delta);
+    });
+
+
+  }
+
      public void start(Stage stage) {
 
       
@@ -252,10 +295,12 @@ public class Test extends Application {
        Group saturntrail = new Group(saturnTrail);
        Group neptrail = new Group(neptTrail);
        Group uranustrail = new Group(uranusTrail);
+       Group group = new Group(root,trail, ventrail, earthtrail, marstrail, juptrail, saturntrail, neptrail, uranustrail);
        //Creating a scene object
        
-       
+
        Pane panel = new Pane();
+       /*
        panel.getChildren().add(trail);
        panel.getChildren().add(ventrail);
        panel.getChildren().add(marstrail);
@@ -265,10 +310,14 @@ public class Test extends Application {
        panel.getChildren().add(uranustrail);
        panel.getChildren().add(earthtrail);
        panel.getChildren().add(root);
+       */
+       panel.getChildren().add(group);
        panel.setStyle("-fx-background-color: black");
        
        Scene scene = new Scene(panel,1000,1000);
 
+
+         initialMouseControl(group,scene,stage);
        
        /* //Set Background
        Image image=new Image("File:space.png");
