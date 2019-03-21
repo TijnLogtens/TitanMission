@@ -34,7 +34,11 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Transform;
 import javafx.scene.input.ScrollEvent;
-import java.lang.Object;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundSize;
 
 public class Test extends Application {
     int i=0;
@@ -377,7 +381,7 @@ public class Test extends Application {
        panel.getChildren().add(root);
        */
         panel.getChildren().add(group);
-        panel.setStyle("-fx-background-color: black");
+      //  panel.setStyle("-fx-background-color: black");
 
         Scene scene = new Scene(panel,1000,1000);
 
@@ -386,7 +390,7 @@ public class Test extends Application {
                 BackgroundImage bgImg = new BackgroundImage(image,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
                 Background b= new Background(bgImg);
                 panel.setBackground(b);
-                Scene scene = new Scene(panel,1000,1000);
+
 
         Camera c= new PerspectiveCamera();
         scene.setCamera(c);
