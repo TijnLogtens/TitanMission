@@ -2,6 +2,8 @@ public class Probe {
     public static void calculate() {
         double g = 9.81;
         double R = 12756 / 2;
+        //vE is the orbital velocity of Earth
+        double vE=29.8;
         //transfer transfers km to au
         double transfer = 6.6845871226706 * Math.pow(10, -9);
         //d1 is the distance between Saturn and Titan
@@ -32,17 +34,17 @@ public class Probe {
         //vC is the average velocity of probe orbit
         double vC = 2 * Math.PI * a * transfer / pP;
         //vP is the velocity at perihelion
-        double vP = vC * Math.pow((1 + e / 1 - e), 0.5);
+        double vP = vC * Math.pow(((1 + e )/( 1 - e)), 0.5);
         //v is the vP transferred to km/s
         double v = vP / transfer / (3600 * 24 * 365);
         //v1 is the initial velocity
-        double v1 = Math.pow(2 * 0.5 * Math.pow(10.25, 2) + g * R * Math.pow(10, -3), 0.5);
+        double v1 = Math.pow(2 * 0.5 * Math.pow(v-vE, 2) + g * R * Math.pow(10, -3), 0.5);
 
         System.out.println(v1);
         System.out.println(time);
         System.out.println(aS);
         System.out.println(aT);
-        System.out.println(e);
+        System.out.println(v);
 
 
         double x1=d2*Math.sin(90-aS);
