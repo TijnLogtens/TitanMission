@@ -176,21 +176,21 @@ public class CelestialBody{
 					first[2] = temp * (this.z - planet.getZ());
 
 					// ~Second Order after a half timestep
-					double[] temp_vel = step(this.vx, this.vy, this.vz, first, dt / 2);
+					double[] temp_vel = step(this.vx, this.vy, this.vz, first, 0.5);
 					double[] temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
 					second[0] = planet.getX() - temp_position[0] * temp;
 					second[1] = planet.getY() - temp_position[1] * temp;
 					second[2] = planet.getZ() - temp_position[2] * temp;
 
 					// ~Third Order after a half timestep
-					temp_vel = step(this.vx, this.vy, this.vz, first, dt / 2);
+					temp_vel = step(this.vx, this.vy, this.vz, first, 0.5);
 					temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
 					third[0] = planet.getX() - temp_position[0] * temp;
 					third[1] = planet.getY() - temp_position[1] * temp;
 					third[2] = planet.getZ() - temp_position[2] * temp;
 
 					// ~Fourth Order after 1 timestep in the future using
-					temp_vel = step(this.vx, this.vy, this.vz, first, dt / 2);
+					temp_vel = step(this.vx, this.vy, this.vz, first, 1);
 					temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
 					fourth[0] = planet.getX() - temp_position[0] * temp;
 					fourth[1] = planet.getY() - temp_position[1] * temp;
