@@ -1,4 +1,4 @@
-package solarSystemModel;
+//package solarSystemModel;
 
 import java.awt.Graphics;
 
@@ -30,6 +30,9 @@ public class Star {
 	}
 	public double getY() {
 		return y;
+	}
+	public double getSize(){
+		return size;
 	}
 
 	

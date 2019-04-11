@@ -1,4 +1,4 @@
-package solarSystemModel;
+//package solarSystemModel;
 
 public abstract class Diameters {
 	private final static double dSun = 1391400000;

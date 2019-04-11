@@ -1,4 +1,4 @@
-package solarSystemModel;
+//package solarSystemModel;
 
 public abstract class Masses {
 	
