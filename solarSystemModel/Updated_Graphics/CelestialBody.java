@@ -151,6 +151,79 @@ public class CelestialBody{
 		}
 	}
 
+
+	public double update(ArrayList<Object> planets, double dt) {
+		double [] first = new double[3];
+		double[]  second = new double[3];
+		double[] third = new double[3];
+		double[] fourth = new double[3];
+		double[] acceleration = new double[3];
+
+		for (Object planet : planets) {
+			if (this != (CelestialBody) planet) {
+				double distance = (this.x - planet.x) **2 + (this.y - planet.y) **2 + (this.z - planet.z) **2;
+				double dist = Math.sqrt(distance);
+				double temp = bigG * planet.mass / distance **3;
+
+
+				// Euler acceleration -- ~First Order
+				first[0] = temp * (this.x - planet.x);
+				first[1] = temp * (this.y - planet.y);
+				first[2] = temp * (this.z - planet.z);
+
+				// ~Second Order after a half timestep
+				double[] temp_vel = step(this.vx, this.vy, this.vz, first, dt / 2);
+				double[] temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
+				second[0] = planet.x - temp_position[0] * temp;
+				second[1] = planet.y - temp_position[1] * temp;
+				second[2] = planet.z - temp_position[2] * temp;
+
+				// ~Third Order after a half timestep
+				temp_vel = step(this.vx, this.vy, this.vz, first, dt / 2);
+				temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
+				third[0] = planet.x - temp_position[0] * temp;
+				third[1] = planet.y - temp_position[1] * temp;
+				third[2] = planet.z - temp_position[2] * temp;
+
+				// ~Fourth Order after 1 timestep in the future using
+				temp_vel = step(this.vx, this.vy, this.vz, first, dt / 2);
+				temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
+				fourth[0] = planet.x - temp_position[0] * temp;
+				fourth[1] = planet.y - temp_position[1] * temp;
+				fourth[2] = planet.z - temp_position[2] * temp;
+
+				acceleration[0] += (first[0] + 2* second[0] + 2* third[0] + fourth[0]);
+				acceleration[1] += (first[1] + 2* second[1] + 2* third[1] + fourth[1]);
+				acceleration[2] += (first[2] + 2* second[2] + 2* third[2] + fourth[2]);
+
+			}
+
+		}
+
+		double[] velocity = step(vx, vy, vz, acceleration, dt);
+		double[] position = step(this.x, this.y, this.z, velocity, dt);
+
+		this.vx = velocity[0];
+		this.vy = velocity[1];
+		this.vz = velocity[2];
+
+		this.x = position[0];
+		this.y = position[1];
+		this.z = position[2];
+
+		return position;
+	}
+
+	private double[] step(double p1, double p2, double p3, double[] k, double dt){
+		double[] updated = new double[3];
+
+		updated[0] = p1 + k[0] *dt;
+		updated[1] =p2 + k[1] *dt;
+		updated[2] =p3 + k[2] *dt;
+
+		return updated;
+	}
+
 	public double getMass() {
 		return mass;
 	}
