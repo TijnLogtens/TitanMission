@@ -121,7 +121,8 @@ public class Test extends Application {
 
         //Drawing MERCURY
         Sphere mercury = new Sphere();
-        CelestialBody merc = new CelestialBody(Masses.getmMercury(), -5.843237462283994E10, -2.143781663349622E10, 6.693497964118796E+03, -4.362708337948559E+04, 0, Diameters.getdMercury(), sun_);
+        // z= 3.608679295141068E+06 +E03  VZ=-4.178969254985038E+00 +E03
+        CelestialBody merc = new CelestialBody(Masses.getmMercury(), -5.843237462283994E10, -2.143781663349622E10, 3.608679295141068E9, 6.693497964118796E+03, -4.362708337948559E+04,-4.178969254985038E+03, 0, Diameters.getdMercury(), sun_);
         PhongMaterial m2 = new PhongMaterial();
         //System.out.println(merc.getSize()/(2*1E5));
         mercury.setRadius(merc.getSize()/(2*SCALAR_SIZE));
@@ -138,7 +139,8 @@ public class Test extends Application {
 
         //Drawing VENUS
         Sphere venus = new Sphere();
-        CelestialBody ven = new CelestialBody(Masses.getmVenus(), -2.580458154996926E+09, -1.087011239119300E+11, 3.477728421647656E+04, -9.612123998925466E+02, 0,Diameters.getdVenus(), sun_);
+        // z=-1.342601858592726E+06 vz=-2.020103291838695E+00
+        CelestialBody ven = new CelestialBody(Masses.getmVenus(), -2.580458154996926E+09, -1.087011239119300E+11,-1.342601858592726E+09, 3.477728421647656E+04, -9.612123998925466E+02,-2.020103291838695E+03, 0,Diameters.getdVenus(), sun_);
         PhongMaterial m3 = new PhongMaterial();
         venus.setRadius(ven.getSize()/(2*SCALAR_SIZE));
         venus.setTranslateX(ven.getX()/DISTANCE_SIZE + 500 - venus.getRadius());
@@ -153,7 +155,8 @@ public class Test extends Application {
 
         //Drawing EARTH
         Sphere earth = new Sphere();
-        CelestialBody ear = new CelestialBody(Masses.getmEarth(), -1.490108621500159E+11, -2.126396301163715E+09, -6.271192280390987E+01, -2.988491242814953E+04, 0,Diameters.getdEarth(), sun_);
+        //z=1.388910094132880E+02 vz=1.101633412416092E-03
+        CelestialBody ear = new CelestialBody(Masses.getmEarth(), -1.490108621500159E+11, -2.126396301163715E+09,1.388910094132880E+05, -6.271192280390987E+01, -2.988491242814953E+04,1.101633412416092E+00, 0,Diameters.getdEarth(), sun_);
         PhongMaterial m4 = new PhongMaterial();
         earth.setRadius(ear.getSize()/(2*SCALAR_SIZE));
         earth.setTranslateX(ear.getX()/DISTANCE_SIZE + 500 - earth.getRadius());
@@ -167,7 +170,8 @@ public class Test extends Application {
 
         //Drawing MARS
         Sphere mars = new Sphere();
-        CelestialBody mar = new CelestialBody(Masses.getmMars(), 2.324287221167859E+10, 2.314995121135774E+11, -2.319279681535404E+04, 4.479321597588995E+03, 0, Diameters.getdMars(), sun_);
+        //z=4.280415288364515E+06  vz=6.629375352771729E-01
+        CelestialBody mar = new CelestialBody(Masses.getmMars(), 2.324287221167859E+10, 2.314995121135774E+11,4.280415288364515E+09, -2.319279681535404E+04, 4.479321597588995E+03,6.629375352771729E+02, 0, Diameters.getdMars(), sun_);
         PhongMaterial m5 = new PhongMaterial();
         mars.setRadius(mar.getSize()/(2*SCALAR_SIZE));
         mars.setTranslateX(mar.getX()/ DISTANCE_SIZE + 500 - mars.getRadius());
@@ -180,7 +184,8 @@ public class Test extends Application {
 
         //Drawing JUPITER
         Sphere jupiter = new Sphere();
-        CelestialBody jup = new CelestialBody(Masses.getmJupiter(), -2.356728458452976E+11, -7.610012694580332E+11, 1.233361263555140E+04, -3.252782848348839E+03, 0, Diameters.getdJupiter(), sun_);
+        //z=8.434019057867110E+06   vz=-2.625332120353037E-01
+        CelestialBody jup = new CelestialBody(Masses.getmJupiter(), -2.356728458452976E+11, -7.610012694580332E+11,8.434019057867110E+09, 1.233361263555140E+04, -3.252782848348839E+03,-2.625332120353037E+02, 0, Diameters.getdJupiter(), sun_);
         PhongMaterial m6 = new PhongMaterial();
         jupiter.setRadius(jup.getSize()/(2*SCALAR_SIZE));
         jupiter.setTranslateX(jup.getX()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
@@ -193,7 +198,8 @@ public class Test extends Application {
 
         //Drawing SATURN
         Sphere saturn = new Sphere();
-        CelestialBody sat = new CelestialBody(Masses.getmSaturn(), 3.547593532400821E+11, -1.461948830848272E+12, 8.867827359240396E+03, 2.247044412940183E+03, 0, Diameters.getdSaturn(), sun_);
+        //z= 1.129255310798091E+07 vz=-3.923703407460523E-01
+        CelestialBody sat = new CelestialBody(Masses.getmSaturn(), 3.547593532400821E+11, -1.461948830848272E+12, 1.129255310798091E+10, 8.867827359240396E+03, 2.247044412940183E+03,-3.923703407460523E+02, 0, Diameters.getdSaturn(), sun_);
         PhongMaterial m7 = new PhongMaterial();
         saturn.setRadius(sat.getSize()/(2*SCALAR_SIZE));
         saturn.setTranslateX(sat.getX() / DISTANCE_SIZE + 500 - saturn.getRadius());
@@ -206,7 +212,8 @@ public class Test extends Application {
 
         //Drawing NEPTUNE
         Sphere neptune = new Sphere();
-        CelestialBody nep = new CelestialBody(Masses.getmNeptune(), 4.344787551365745E+12, -1.083664718815018E+12, 1.292632887654737E+03, 5.305024140488896E+03, 0, Diameters.getdNeptune(), sun_);
+        //z=-7.782629925658041E+07 vz=-1.386814230827889E-01
+        CelestialBody nep = new CelestialBody(Masses.getmNeptune(), 4.344787551365745E+12, -1.083664718815018E+12,-7.782629925658041E+10, 1.292632887654737E+03, 5.305024140488896E+03,-1.386814230827889E+02, 0, Diameters.getdNeptune(), sun_);
         PhongMaterial m9 = new PhongMaterial();
         PhongMaterial m8 = new PhongMaterial();
         neptune.setRadius(nep.getSize()/(2*SCALAR_SIZE));
@@ -220,7 +227,8 @@ public class Test extends Application {
 
         //Drawing URANUS
         Sphere uranus = new Sphere();
-        CelestialBody ur = new CelestialBody(Masses.getmUranus(), 2.520721625280142E+12, 1.570265330931762E+12, -3.638605615637463E+03, 5.459468350572506E+03,0, Diameters.getdUranus(), sun_);
+        //z=-2.681128773651946E+07  vz= 6.727967066481910E-02
+        CelestialBody ur = new CelestialBody(Masses.getmUranus(), 2.520721625280142E+12, 1.570265330931762E+12,-2.681128773651946E+10, -3.638605615637463E+03, 5.459468350572506E+03, 6.727967066481910E+01 ,0, Diameters.getdUranus(), sun_);
         uranus.setRadius(ur.getSize()/(2*SCALAR_SIZE));
         uranus.setTranslateX(ur.getX()/ DISTANCE_SIZE+ 500 - uranus.getRadius() );
         uranus.setTranslateY(ur.getY()/ DISTANCE_SIZE+ 500 - uranus.getRadius());
@@ -232,7 +240,8 @@ public class Test extends Application {
 
         //Drawing MOON
         Sphere moon = new Sphere();
-        CelestialBody luna = new Satellite(Masses.getmMoon(), -3.518238400980993E8, -8.598213408503398E7, 21.67615778151889, -1061.706350429193, semiMajorAxis.getaMoon(), Diameters.getdMoon(), ear);
+        //z=3.149044021775210E+04  vz=2.083694127112523E-02
+        CelestialBody luna = new Satellite(Masses.getmMoon(), -3.518238400980993E8, -8.598213408503398E7,3.149044021775210E+07,  21.67615778151889, -1061.706350429193,2.083694127112523E+01, semiMajorAxis.getaMoon(), Diameters.getdMoon(), ear);
         PhongMaterial m10 = new PhongMaterial();
         moon.setRadius(luna.getSize()/(2*SCALAR_SIZE));
         moon.setTranslateX(luna.getX()/ DISTANCE_SIZE - moon.getRadius() + earth.getTranslateX() + earth.getRadius()/2);
@@ -244,7 +253,8 @@ public class Test extends Application {
 
         //Drawing TITAN
         Sphere titan = new Sphere();
-        CelestialBody SVI = new Satellite(Masses.getmTitan(), -1.016860465751689E09, -5.901972769593473E08, 3.214103533464870E03, -4.060883992202967E03, semiMajorAxis.getaTitan(), Diameters.getdTitan(), sat);
+        //z=4.053220873985564E+05  vz=1.773387664307017E+00
+        CelestialBody SVI = new Satellite(Masses.getmTitan(), -1.016860465751689E09, -5.901972769593473E08,4.053220873985564E+08, 3.214103533464870E03, -4.060883992202967E03,1.773387664307017E+03, semiMajorAxis.getaTitan(), Diameters.getdTitan(), sat);
         titan.setRadius(SVI.getSize()*2/(SCALAR_SIZE));
         titan.setTranslateX(SVI.getX()/ DISTANCE_SIZE - titan.getRadius() + saturn.getTranslateX() + saturn.getRadius()/2);
         titan.setTranslateY(SVI.getY()/ DISTANCE_SIZE - titan.getRadius() + saturn.getTranslateY() + saturn.getRadius()/2);
