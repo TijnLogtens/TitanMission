@@ -104,7 +104,7 @@ public class Test extends Application {
 
         //Drawing SUN
         Sphere sun = new Sphere();
-        Star sun_ = new Star(Masses.getmSun(), 500, 500, Diameters.getdSun());
+        Star sun_ = new Star(Masses.getmSun(), 0, 0, Diameters.getdSun());
         //Setting the radius of the Sphere
         sun.setRadius((sun_.getSize()/2)/3E6);
         //Setting the position of the sphere
@@ -127,9 +127,10 @@ public class Test extends Application {
         //System.out.println(merc.getSize()/(2*1E5));
         mercury.setRadius(merc.getSize()/(2*SCALAR_SIZE));
         //System.out.println((merc.getX()/2E8));
-        mercury.setTranslateX((merc.getX()/DISTANCE_SIZE) +500  - mercury.getRadius());
+        mercury.setTranslateX((merc.getX()/DISTANCE_SIZE)  - mercury.getRadius());
         //System.out.println(merc.getY()/2E8);
-        mercury.setTranslateY(merc.getY()/DISTANCE_SIZE + 500 - mercury.getRadius());
+        mercury.setTranslateY(merc.getY()/DISTANCE_SIZE  - mercury.getRadius());
+        mercury.setTranslateZ(merc.getZ()/DISTANCE_SIZE  - mercury.getRadius());
         //mercury.setCullFace(CullFace.BACK);
         m2.setDiffuseMap(new Image(getClass().getResourceAsStream("merc.jpg")));
         m2.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("merc.jpg")));
@@ -143,8 +144,9 @@ public class Test extends Application {
         CelestialBody ven = new CelestialBody(Masses.getmVenus(), -2.580458154996926E+09, -1.087011239119300E+11,-1.342601858592726E+09, 3.477728421647656E+04, -9.612123998925466E+02,-2.020103291838695E+03, 0,Diameters.getdVenus(), sun_);
         PhongMaterial m3 = new PhongMaterial();
         venus.setRadius(ven.getSize()/(2*SCALAR_SIZE));
-        venus.setTranslateX(ven.getX()/DISTANCE_SIZE + 500 - venus.getRadius());
-        venus.setTranslateY(ven.getY() /DISTANCE_SIZE + 500 - venus.getRadius());
+        venus.setTranslateX(ven.getX()/DISTANCE_SIZE  - venus.getRadius());
+        venus.setTranslateY(ven.getY() /DISTANCE_SIZE  - venus.getRadius());
+        venus.setTranslateZ(ven.getZ() /DISTANCE_SIZE  - venus.getRadius());
         //venus.setCullFace(CullFace.BACK);
         m3.setDiffuseMap(new Image(getClass().getResourceAsStream("venus.jpg")));
         m3.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("venus.jpg")));
@@ -159,8 +161,9 @@ public class Test extends Application {
         CelestialBody ear = new CelestialBody(Masses.getmEarth(), -1.490108621500159E+11, -2.126396301163715E+09,1.388910094132880E+05, -6.271192280390987E+01, -2.988491242814953E+04,1.101633412416092E+00, 0,Diameters.getdEarth(), sun_);
         PhongMaterial m4 = new PhongMaterial();
         earth.setRadius(ear.getSize()/(2*SCALAR_SIZE));
-        earth.setTranslateX(ear.getX()/DISTANCE_SIZE + 500 - earth.getRadius());
-        earth.setTranslateY(ear.getY()/DISTANCE_SIZE + 500 - earth.getRadius());
+        earth.setTranslateX(ear.getX()/DISTANCE_SIZE  - earth.getRadius());
+        earth.setTranslateY(ear.getY()/DISTANCE_SIZE  - earth.getRadius());
+        earth.setTranslateZ(ear.getZ()/DISTANCE_SIZE  - earth.getRadius());
         //earth.setCullFace(CullFace.BACK);
         m4.setDiffuseMap(new Image(getClass().getResourceAsStream("earth.jpg")));
         m4.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("earth.jpg")));
@@ -174,8 +177,9 @@ public class Test extends Application {
         CelestialBody mar = new CelestialBody(Masses.getmMars(), 2.324287221167859E+10, 2.314995121135774E+11,4.280415288364515E+09, -2.319279681535404E+04, 4.479321597588995E+03,6.629375352771729E+02, 0, Diameters.getdMars(), sun_);
         PhongMaterial m5 = new PhongMaterial();
         mars.setRadius(mar.getSize()/(2*SCALAR_SIZE));
-        mars.setTranslateX(mar.getX()/ DISTANCE_SIZE + 500 - mars.getRadius());
-        mars.setTranslateY(mar.getY()/ DISTANCE_SIZE + 500 - mars.getRadius());
+        mars.setTranslateX(mar.getX()/ DISTANCE_SIZE  - mars.getRadius());
+        mars.setTranslateY(mar.getY()/ DISTANCE_SIZE  - mars.getRadius());
+        mars.setTranslateZ(mar.getZ()/ DISTANCE_SIZE  - mars.getRadius());
         // mars.setCullFace(CullFace.BACK);
         m5.setDiffuseMap(new Image(getClass().getResourceAsStream("mars.jpg")));
         m5.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("mars.jpg")));
@@ -188,8 +192,9 @@ public class Test extends Application {
         CelestialBody jup = new CelestialBody(Masses.getmJupiter(), -2.356728458452976E+11, -7.610012694580332E+11,8.434019057867110E+09, 1.233361263555140E+04, -3.252782848348839E+03,-2.625332120353037E+02, 0, Diameters.getdJupiter(), sun_);
         PhongMaterial m6 = new PhongMaterial();
         jupiter.setRadius(jup.getSize()/(2*SCALAR_SIZE));
-        jupiter.setTranslateX(jup.getX()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
-        jupiter.setTranslateY(jup.getY()/ DISTANCE_SIZE + 500 - jupiter.getRadius());
+        jupiter.setTranslateX(jup.getX()/ DISTANCE_SIZE  - jupiter.getRadius());
+        jupiter.setTranslateY(jup.getY()/ DISTANCE_SIZE  - jupiter.getRadius());
+        jupiter.setTranslateZ(jup.getZ()/ DISTANCE_SIZE  - jupiter.getRadius());
         //jupiter.setCullFace(CullFace.BACK);
         m6.setDiffuseMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
         m6.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("jupiter.jpg")));
@@ -202,8 +207,8 @@ public class Test extends Application {
         CelestialBody sat = new CelestialBody(Masses.getmSaturn(), 3.547593532400821E+11, -1.461948830848272E+12, 1.129255310798091E+10, 8.867827359240396E+03, 2.247044412940183E+03,-3.923703407460523E+02, 0, Diameters.getdSaturn(), sun_);
         PhongMaterial m7 = new PhongMaterial();
         saturn.setRadius(sat.getSize()/(2*SCALAR_SIZE));
-        saturn.setTranslateX(sat.getX() / DISTANCE_SIZE + 500 - saturn.getRadius());
-        saturn.setTranslateY(sat.getY() / DISTANCE_SIZE + 500 - saturn.getRadius());
+        saturn.setTranslateX(sat.getX() / DISTANCE_SIZE  - saturn.getRadius());
+        saturn.setTranslateY(sat.getY() / DISTANCE_SIZE  - saturn.getRadius());
         //saturn.setCullFace(CullFace.BACK);
         m7.setDiffuseMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
         m7.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("saturn.jpg")));
@@ -217,8 +222,8 @@ public class Test extends Application {
         PhongMaterial m9 = new PhongMaterial();
         PhongMaterial m8 = new PhongMaterial();
         neptune.setRadius(nep.getSize()/(2*SCALAR_SIZE));
-        neptune.setTranslateX(nep.getX()/DISTANCE_SIZE + 500 - neptune.getRadius() );
-        neptune.setTranslateY(nep.getY()/ DISTANCE_SIZE + 500 - neptune.getRadius());
+        neptune.setTranslateX(nep.getX()/DISTANCE_SIZE  - neptune.getRadius() );
+        neptune.setTranslateY(nep.getY()/ DISTANCE_SIZE  - neptune.getRadius());
         //neptune.setCullFace(CullFace.BACK);
         m8.setDiffuseMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
         m8.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("neptune.jpg")));
@@ -230,8 +235,8 @@ public class Test extends Application {
         //z=-2.681128773651946E+07  vz= 6.727967066481910E-02
         CelestialBody ur = new CelestialBody(Masses.getmUranus(), 2.520721625280142E+12, 1.570265330931762E+12,-2.681128773651946E+10, -3.638605615637463E+03, 5.459468350572506E+03, 6.727967066481910E+01 ,0, Diameters.getdUranus(), sun_);
         uranus.setRadius(ur.getSize()/(2*SCALAR_SIZE));
-        uranus.setTranslateX(ur.getX()/ DISTANCE_SIZE+ 500 - uranus.getRadius() );
-        uranus.setTranslateY(ur.getY()/ DISTANCE_SIZE+ 500 - uranus.getRadius());
+        uranus.setTranslateX(ur.getX()/ DISTANCE_SIZE - uranus.getRadius() );
+        uranus.setTranslateY(ur.getY()/ DISTANCE_SIZE - uranus.getRadius());
         // uranus.setCullFace(CullFace.BACK);
         m9.setDiffuseMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
         m9.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("uranus.jpg")));
@@ -429,76 +434,96 @@ public class Test extends Application {
             @Override
             public void handle(long l) {
                 double[] points = merc.update(dt);
-                mercury.setTranslateX((points[0]/DISTANCE_SIZE)+ 500 - mercury.getRadius());
-                mercury.setTranslateY((points[1]/DISTANCE_SIZE) + 500 -  mercury.getRadius());
+                mercury.setTranslateX((points[0]/DISTANCE_SIZE) - mercury.getRadius());
+                mercury.setTranslateY((points[1]/DISTANCE_SIZE)  -  mercury.getRadius());
+                mercury.setTranslateZ((points[2]/DISTANCE_SIZE)  -  mercury.getRadius());
                 if(mercIndex[0] == 250) { mercIndex[0] = 0;}
                 mercTrail[mercIndex[0]].setTranslateX(mercury.getTranslateX());
                 mercTrail[mercIndex[0]].setTranslateY(mercury.getTranslateY());
+                mercTrail[mercIndex[0]].setTranslateZ(mercury.getTranslateZ());
                 mercIndex[0]++;
 
                 double[] points1 = ven.update(dt);
-                venus.setTranslateX((points1[0]/DISTANCE_SIZE) + 500 - venus.getRadius());
-                venus.setTranslateY((points1[1]/DISTANCE_SIZE) + 500 -  venus.getRadius());
+                venus.setTranslateX((points1[0]/DISTANCE_SIZE) - venus.getRadius());
+                venus.setTranslateY((points1[1]/DISTANCE_SIZE)  -  venus.getRadius());
+                venus.setTranslateZ((points1[2]/DISTANCE_SIZE)  -  venus.getRadius());
                 if(venIndex[0] == 250) {venIndex[0] = 0;}
                 venTrail[venIndex[0]].setTranslateX(venus.getTranslateX());
                 venTrail[venIndex[0]].setTranslateY(venus.getTranslateY());
+                venTrail[venIndex[0]].setTranslateZ(venus.getTranslateZ());
                 venIndex[0]++;
 
                 double[] points7 = ear.update(dt);
-                earth.setTranslateX((points7[0]/DISTANCE_SIZE) + 500 - earth.getRadius());
-                earth.setTranslateY((points7[1]/DISTANCE_SIZE) + 500 -  earth.getRadius());
+                earth.setTranslateX((points7[0]/DISTANCE_SIZE)  - earth.getRadius());
+                earth.setTranslateY((points7[1]/DISTANCE_SIZE)  -  earth.getRadius());
+                earth.setTranslateZ((points7[2]/DISTANCE_SIZE)  -  earth.getRadius());
                 if(earthIndex[0] == 250) {earthIndex[0] = 0;}
                 earthTrail[earthIndex[0]].setTranslateX(earth.getTranslateX());
                 earthTrail[earthIndex[0]].setTranslateY(earth.getTranslateY());
+                earthTrail[earthIndex[0]].setTranslateZ(earth.getTranslateZ());
                 earthIndex[0]++;
 
                 double[] points2 = mar.update(dt);
-                mars.setTranslateX((points2[0]/DISTANCE_SIZE) + 500 - mars.getRadius());
-                mars.setTranslateY((points2[1]/DISTANCE_SIZE) + 500 -  mars.getRadius());
+                mars.setTranslateX((points2[0]/DISTANCE_SIZE)  - mars.getRadius());
+                mars.setTranslateY((points2[1]/DISTANCE_SIZE)  -  mars.getRadius());
+                mars.setTranslateZ((points2[2]/DISTANCE_SIZE)  -  mars.getRadius());
                 if(marsIndex[0] == 250) {marsIndex[0] = 0;}
                 marsTrail[marsIndex[0]].setTranslateX(mars.getTranslateX());
                 marsTrail[marsIndex[0]].setTranslateY(mars.getTranslateY());
+                marsTrail[marsIndex[0]].setTranslateZ(mars.getTranslateZ());
                 marsIndex[0]++;
 
                 double[] points3 = jup.update(dt);
-                jupiter.setTranslateX((points3[0]/DISTANCE_SIZE) + 500 - jupiter.getRadius());
-                jupiter.setTranslateY((points3[1]/DISTANCE_SIZE) + 500 -  jupiter.getRadius());
+                jupiter.setTranslateX((points3[0]/DISTANCE_SIZE)  - jupiter.getRadius());
+                jupiter.setTranslateY((points3[1]/DISTANCE_SIZE)  -  jupiter.getRadius());
+                jupiter.setTranslateZ((points3[2]/DISTANCE_SIZE)  -  jupiter.getRadius());
                 if(jupIndex[0] == 250) {jupIndex[0] = 0;}
                 jupTrail[jupIndex[0]].setTranslateX(jupiter.getTranslateX());
                 jupTrail[jupIndex[0]].setTranslateY(jupiter.getTranslateY());
+                jupTrail[jupIndex[0]].setTranslateZ(jupiter.getTranslateZ());
                 jupIndex[0]++;
 
                 double[] points4 = sat.update(dt);
-                saturn.setTranslateX((points4[0]/DISTANCE_SIZE) + 500 - saturn.getRadius());
-                saturn.setTranslateY((points4[1]/DISTANCE_SIZE) + 500 -  saturn.getRadius());
+                saturn.setTranslateX((points4[0]/DISTANCE_SIZE)  - saturn.getRadius());
+                saturn.setTranslateY((points4[1]/DISTANCE_SIZE)  -  saturn.getRadius());
+                saturn.setTranslateZ((points4[2]/DISTANCE_SIZE)  -  saturn.getRadius());
                 if(saturnIndex[0] == 250) {saturnIndex[0] = 0;}
                 saturnTrail[saturnIndex[0]].setTranslateX(saturn.getTranslateX());
                 saturnTrail[saturnIndex[0]].setTranslateY(saturn.getTranslateY());
+                saturnTrail[saturnIndex[0]].setTranslateZ(saturn.getTranslateZ());
                 saturnIndex[0]++;
 
                 double[] points5 = nep.update(dt);
-                neptune.setTranslateX((points5[0]/DISTANCE_SIZE) + 500 - neptune.getRadius());
-                neptune.setTranslateY((points5[1]/DISTANCE_SIZE) + 500 -  neptune.getRadius());
+                neptune.setTranslateX((points5[0]/DISTANCE_SIZE)  - neptune.getRadius());
+                neptune.setTranslateY((points5[1]/DISTANCE_SIZE)  -  neptune.getRadius());
+                neptune.setTranslateZ((points5[2]/DISTANCE_SIZE)  -  neptune.getRadius());
                 if(neptIndex[0] == 250) {neptIndex[0] = 0;}
                 neptTrail[neptIndex[0]].setTranslateX(neptune.getTranslateX());
                 neptTrail[neptIndex[0]].setTranslateY(neptune.getTranslateY());
+                neptTrail[neptIndex[0]].setTranslateZ(neptune.getTranslateZ());
                 neptIndex[0]++;
 
                 double[] points6 = ur.update(dt);
-                uranus.setTranslateX((points6[0]/DISTANCE_SIZE) + 500 - uranus.getRadius());
-                uranus.setTranslateY((points6[1]/DISTANCE_SIZE) + 500 -  uranus.getRadius());
+                uranus.setTranslateX((points6[0]/DISTANCE_SIZE)  - uranus.getRadius());
+                uranus.setTranslateY((points6[1]/DISTANCE_SIZE) -  uranus.getRadius());
+                uranus.setTranslateZ((points6[2]/DISTANCE_SIZE) -  uranus.getRadius());
                 if(uranusIndex[0] == 250) {uranusIndex[0] = 0;}
                 uranusTrail[uranusIndex[0]].setTranslateX(uranus.getTranslateX());
                 uranusTrail[uranusIndex[0]].setTranslateY(uranus.getTranslateY());
+                uranusTrail[uranusIndex[0]].setTranslateZ(uranus.getTranslateZ());
                 uranusIndex[0]++;
 
                 double[] points8 = luna.update(dt);
                 moon.setTranslateX((points8[0]/DISTANCE_SIZE*MOON_SCALAR) - moon.getRadius() + earth.getTranslateX() + earth.getRadius()/2);
                 moon.setTranslateY((points8[1]/DISTANCE_SIZE*MOON_SCALAR) - moon.getRadius() + earth.getTranslateY() + earth.getRadius()/2);
+                moon.setTranslateZ((points8[2]/DISTANCE_SIZE*MOON_SCALAR) - moon.getRadius() + earth.getTranslateZ() + earth.getRadius()/2);
+
 
                 double[] points9 = SVI.update(dt);
-                titan.setTranslateX((points9[0]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateX() + saturn.getRadius()/2 - 500);
-                titan.setTranslateY((points9[1]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateY() + saturn.getRadius()/2 - 500);
+                titan.setTranslateX((points9[0]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateX() + saturn.getRadius()/2);
+                titan.setTranslateY((points9[1]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateY() + saturn.getRadius()/2);
+                titan.setTranslateZ((points9[2]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateZ() + saturn.getRadius()/2);
+
 
                 //System.out.println("Titan: " + points9[0] + " " + points9[1]);
                 //System.out.println("Saturn: " + points4[0] + " " + points4[1]);
