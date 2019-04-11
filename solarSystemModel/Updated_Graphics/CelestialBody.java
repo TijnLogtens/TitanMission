@@ -12,8 +12,10 @@ public class CelestialBody{
 	protected double mass;
 	protected double x;
 	protected double y;
+	protected double z;
 	protected double vx;
 	protected double vy;
+	protected double vz;
 	protected double rSOI;
 	protected double semiMajorAxis;
 	protected double size;
@@ -21,32 +23,36 @@ public class CelestialBody{
 	private int index = 0;
 	private Star parent;
 
-       
-
 	public double[] trail_x = new double[250];
 	public double[] trail_y = new double[250];
+	public double[] trail_z = new double[250];
 
-	CelestialBody(double mass, double x, double y, double vx, double vy, double semiMajorAxis, double size){
+	CelestialBody(double mass, double x, double y, double z, double vx, double vy, double vz, double semiMajorAxis, double size){
 		this.mass = mass;
 		this.x = x;
 		this.y = y;
+		this.z = z;
 		this.vx = vx;
 		this.vy = vy;
+		this.vz = vz;
 		this.semiMajorAxis = semiMajorAxis;
 		this.rSOI = rSOIcalc();
 		this.size = size;
 		for(int i = 0; i < trail_x.length; i++){
 			trail_x[i] = -1;
 			trail_y[i] = -1;
+			trail_z[i] = -1;
 		}
 	}
 
-	CelestialBody(double mass, double x, double y, double vx, double vy, double semiMajorAxis, double size, Star parent){
+	CelestialBody(double mass, double x, double y, double z, double vx, double vy, double vz, double semiMajorAxis, double size, Star parent){
 		this.mass = mass;
 		this.x = x;
 		this.y = y;
+		this.z = z;
 		this.vx = vx;
 		this.vy = vy;
+		this.vz = vz;
 		this.semiMajorAxis = semiMajorAxis;
 		this.rSOI = rSOIcalc();
 		this.size = size;
@@ -54,6 +60,7 @@ public class CelestialBody{
 		for(int i = 0; i < trail_x.length; i++){
 			trail_x[i] = -1;
 			trail_y[i] = -1;
+			trail_z[i] = -1;
 		}
 	}
 
@@ -64,9 +71,11 @@ public class CelestialBody{
 	public double[] update(double dt) {
 		double dx = calculateX(dt);
 		double dy = calculateY(dt);
+		double dz = calculateZ(dt);
 		this.x += dx;
 		this.y += dy;
-		return new double[]{this.x,this.y};
+		this.z += dz;
+		return new double[]{this.x,this.y,this.z};
 	}
 
 	private double calculateX(double dt) {
@@ -77,6 +86,11 @@ public class CelestialBody{
 	private double calculateY(double dt) {
 		calculateVy(dt);
 		return (this.vy*dt);
+	}
+
+	private double calculateZ(double dt) {
+		calculateVz(dt);
+		return (this.vz*dt);
 	}
 
 	private void calculateVx(double dt) {
@@ -91,12 +105,17 @@ public class CelestialBody{
 		this.vy += (accY*dt);
 	}
 
+	private void calculateVz(double dt) {
+		double accZ = calculateAz();
+		this.vz += (accZ*dt);
+	}
+
 	private double calculateAx() {
 		//return bigG * ((Masses.getmSun())/Math.pow(this.x, 2));
 		//System.out.println((bigG * Masses.getmSun()*(-this.x))/(Math.pow(Math.pow(this.x, 2) + Math.pow(this.y, 2),(3/2))));
 		//return (bigG * this.parent.getMass()*(this.parent.getX()-this.x)) / Math.pow(((this.x-this.parent.getX())*(this.x-this.parent.getX())) + ((this.y-this.parent.getY())*(this.y-this.parent.getY())),1.5);
 
-		return (bigG * Masses.getmSun()*(-this.x)) / Math.pow((this.x*this.x + this.y*this.y),1.5);
+		return (bigG * Masses.getmSun()*(-this.x)) / Math.pow((this.x*this.x + this.y*this.y + this.z*this.z),1.5);
 	}
 
 	private double calculateAy() {
@@ -104,7 +123,11 @@ public class CelestialBody{
 		//System.out.println(Math.pow((this.x*this.x + this.y*this.y),1.5));
 		//return (bigG * this.parent.getMass()*(this.parent.getY()-this.y)) / Math.pow(((this.x-this.parent.getX())*(this.x-this.parent.getX())) + ((this.y-this.parent.getY())*(this.y-this.parent.getY())),1.5);
 
-		return (bigG * Masses.getmSun()*(-this.y)) / Math.pow((this.x*this.x + this.y*this.y),1.5);
+		return (bigG * Masses.getmSun()*(-this.y)) / Math.pow((this.x*this.x + this.y*this.y + this.z*this.z),1.5);
+	}
+
+	private double calculateAz() {
+		return (bigG * Masses.getmSun()*(-this.z)) / Math.pow((this.x*this.x + this.y*this.y + this.z*this.z),1.5);
 	}
 
 	public void drawPlanet(Graphics g){
@@ -174,5 +197,28 @@ public class CelestialBody{
 	public double getSize(){
 		return size; 
 	}
-}
 
+	public double getZ() {
+		return z;
+	}
+
+	public void setZ(double z) {
+		this.z = z;
+	}
+
+	public double getVz() {
+		return vz;
+	}
+
+	public void setVz(double vz) {
+		this.vz = vz;
+	}
+
+	public double getBigG() {
+		return bigG;
+	}
+
+	public Star getParent() {
+		return parent;
+	}
+}
