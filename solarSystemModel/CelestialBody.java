@@ -155,7 +155,7 @@ public class CelestialBody{
 
 	public double[] update(ArrayList<Object> planets, double dt) {
 		double[] first = new double[3];
-		double[]  second = new double[3];
+		double[] second = new double[3];
 		double[] third = new double[3];
 		double[] fourth = new double[3];
 		double[] acceleration = new double[3];
@@ -236,6 +236,7 @@ public class CelestialBody{
 				acceleration[0] += (first[0] + 2 * second[0] + 2 * third[0] + fourth[0]);
 				acceleration[1] += (first[1] + 2 * second[1] + 2 * third[1] + fourth[1]);
 				acceleration[2] += (first[2] + 2 * second[2] + 2 * third[2] + fourth[2]);
+				System.out.println("X="+acceleration[0]+"	Y= "+ acceleration[1] +"	Z="+ acceleration[2]);
 
 			} else {
 				Satellite planet = (Satellite) object;

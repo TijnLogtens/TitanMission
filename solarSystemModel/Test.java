@@ -46,7 +46,7 @@ public class Test extends Application {
     private final double SCALAR_SIZE = 5E4;
     private final double DISTANCE_SIZE = 9E7;
     private final double MOON_SCALAR = 7E1;
-    private final double dt = 24*60*60;
+    private final double dt = 0.000001;
 
 
     double anchorX;
@@ -469,7 +469,7 @@ public class Test extends Application {
                 earthTrail[earthIndex[0]].setTranslateY(earth.getTranslateY());
                 earthTrail[earthIndex[0]].setTranslateZ(earth.getTranslateZ());
                 earthIndex[0]++;
-
+				//System.out.println("X="+points7[0]+"	Y= "+ points7[1] +"	Z="+ points[2]);
                 double[] points2 = mar.update(items, dt);
                 mars.setTranslateX((points2[0]/DISTANCE_SIZE)  - mars.getRadius());
                 mars.setTranslateY((points2[1]/DISTANCE_SIZE)  -  mars.getRadius());
