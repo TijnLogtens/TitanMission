@@ -218,7 +218,7 @@ public class CelestialBody{
 				second[0] = planet.getX() - temp_position[0] * temp;
 				second[1] = planet.getY() - temp_position[1] * temp;
 				second[2] = planet.getZ() - temp_position[2] * temp;
-
+				
 				// ~Third Order after a half timestep
 				temp_vel = step(this.vx, this.vy, this.vz, first, dt/2);
 				temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
@@ -232,10 +232,10 @@ public class CelestialBody{
 				fourth[0] = planet.getX() - temp_position[0] * temp;
 				fourth[1] = planet.getY() - temp_position[1] * temp;
 				fourth[2] = planet.getZ() - temp_position[2] * temp;
-
-				acceleration[0] += (first[0] + 2 * second[0] + 2 * third[0] + fourth[0]);
-				acceleration[1] += (first[1] + 2 * second[1] + 2 * third[1] + fourth[1]);
-				acceleration[2] += (first[2] + 2 * second[2] + 2 * third[2] + fourth[2]);
+				
+				acceleration[0] += (first[0] + 2 * second[0] + 2 * third[0] + fourth[0])/6;
+				acceleration[1] += (first[1] + 2 * second[1] + 2 * third[1] + fourth[1])/6;
+				acceleration[2] += (first[2] + 2 * second[2] + 2 * third[2] + fourth[2])/6;
 			} /*else {
 				Satellite planet = (Satellite) object;
 				double distance = Math.pow((this.x - (planet.getX()+planet.getParentPlanet().getX())),2) + Math.pow((this.y - (planet.getY()+planet.getParentPlanet().getY())),2) + Math.pow((this.z - (planet.getZ()+planet.getParentPlanet().getZ())),2);
@@ -322,7 +322,7 @@ public class CelestialBody{
 		this.vx = velocity[0];
 		this.vy = velocity[1];
 		this.vz = velocity[2];
-			
+
 		this.x = position[0];
 		this.y = position[1];
 		this.z = position[2];

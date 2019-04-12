@@ -46,7 +46,7 @@ public class Test extends Application {
     private final double SCALAR_SIZE = 5E4;
     private final double DISTANCE_SIZE = 9E7;
     private final double MOON_SCALAR = 7E1;
-    private final double dt = 0.000001;
+    private final double dt = 60*60*24;
 
 
     double anchorX;
