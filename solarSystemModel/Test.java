@@ -462,7 +462,7 @@ public class Test extends Application {
                 mercTrail[mercIndex[0]].setTranslateY(mercury.getTranslateY());
                 mercTrail[mercIndex[0]].setTranslateZ(mercury.getTranslateZ());
                 mercIndex[0]++;
-
+                /*
                 double[] points1 = ven.update(items, dt);
                 venus.setTranslateX((points1[0]/DISTANCE_SIZE) - venus.getRadius());
                 venus.setTranslateY((points1[1]/DISTANCE_SIZE)  -  venus.getRadius());
@@ -543,7 +543,7 @@ public class Test extends Application {
                 titan.setTranslateX((points9[0]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateX() + saturn.getRadius()/2);
                 titan.setTranslateY((points9[1]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateY() + saturn.getRadius()/2);
                 titan.setTranslateZ((points9[2]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateZ() + saturn.getRadius()/2);
-
+                */
 
                 //System.out.println("Titan: " + points9[0] + " " + points9[1]);
                 //System.out.println("Saturn: " + points4[0] + " " + points4[1]);
