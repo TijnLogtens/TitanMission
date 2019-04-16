@@ -238,44 +238,42 @@ public class CelestialBody{
 				acceleration[2] += (first[2]+ (2 * second[2]))/3; //+ (2 * third[2]) + fourth[2])/6;
 
 
-			} /*else {
+			} else {
 				Satellite planet = (Satellite) object;
-				double distance = Math.pow((this.x - (planet.getX()+planet.getParentPlanet().getX())),2) + Math.pow((this.y - (planet.getY()+planet.getParentPlanet().getY())),2) + Math.pow((this.z - (planet.getZ()+planet.getParentPlanet().getZ())),2);
+				double distance = Math.pow((this.x - (planet.getX()+planet.getParent().getX())),2) + Math.pow((this.y - (planet.getY() + planet.getParent().getY())),2) + Math.pow((this.z - (planet.getZ()+planet.getParent().getZ())),2);
 				double dist = Math.sqrt(distance);
 				double temp = bigG * planet.getMass() / Math.pow(dist,3);
 
-
 				// Euler acceleration -- ~First Order
-				first[0] = temp * (this.x - (planet.getX()+planet.getParentPlanet().getX()));
-				first[1] = temp * (this.y - (planet.getY()+planet.getParentPlanet().getY()));
-				first[2] = temp * (this.z - (planet.getZ()+planet.getParentPlanet().getZ()));
+				first[0] = temp * ((planet.getX()+planet.getParent().getX()) - this.x);
+				first[1] = temp * ((planet.getY()+planet.getParent().getY()) - this.y);
+				first[2] = temp * ((planet.getZ()+planet.getParent().getZ()) - this.z);
 
 				// ~Second Order after a half timestep
-				double[] temp_vel = step(this.vx, this.vy, this.vz, first, dt / 2);
-				double[] temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
-				second[0] = planet.getX() - temp_position[0] * temp;
-				second[1] = planet.getY() - temp_position[1] * temp;
-				second[2] = planet.getZ() - temp_position[2] * temp;
+				double[] temp_vel = step(this.vx, this.vy, this.vz, first, 0.5 * dt);
+				double[] temp_position = step(this.x, this.y, this.z, temp_vel, 0.5 * dt);
+				second[0] = ((planet.getX()+planet.getParent().getX()) - temp_position[0]) * temp;
+				second[1] = ((planet.getY()+planet.getParent().getY()) - temp_position[1]) * temp;
+				second[2] = ((planet.getZ()+planet.getParent().getZ()) - temp_position[2]) * temp;
 
 				// ~Third Order after a half timestep
-				temp_vel = step(this.vx, this.vy, this.vz, first, dt / 2);
-				temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
-				third[0] = planet.getX() - temp_position[0] * temp;
-				third[1] = planet.getY() - temp_position[1] * temp;
-				third[2] = planet.getZ() - temp_position[2] * temp;
+				temp_vel = step(this.vx, this.vy, this.vz, second, 0.5 * dt);
+				temp_position = step(this.x, this.y, this.z, temp_vel, 0.5 * dt);
+				third[0] = ((planet.getX()+planet.getParent().getX()) - temp_position[0]) * temp;
+				third[1] = ((planet.getY()+planet.getParent().getY()) - temp_position[1]) * temp;
+				third[2] = ((planet.getZ()+planet.getParent().getZ()) - temp_position[2]) * temp;
 
 				// ~Fourth Order after 1 timestep in the future using
-				temp_vel = step(this.vx, this.vy, this.vz, first, dt / 2);
-				temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
-				fourth[0] = planet.getX() - temp_position[0] * temp;
-				fourth[1] = planet.getY() - temp_position[1] * temp;
-				fourth[2] = planet.getZ() - temp_position[2] * temp;
+				temp_vel = step(this.vx, this.vy, this.vz, third, dt);
+				temp_position = step(this.x, this.y, this.z, temp_vel, dt);
+				fourth[0] = ((planet.getX()+planet.getParent().getX()) - temp_position[0]) * temp;
+				fourth[1] = ((planet.getY()+planet.getParent().getY()) - temp_position[1]) * temp;
+				fourth[2] = ((planet.getZ()+planet.getParent().getZ()) - temp_position[2]) * temp;
 
 				acceleration[0] += (first[0] + 2 * second[0] + 2 * third[0] + fourth[0])/6;
 				acceleration[1] += (first[1] + 2 * second[1] + 2 * third[1] + fourth[1])/6;
 				acceleration[2] += (first[2] + 2 * second[2] + 2 * third[2] + fourth[2])/6;
-
-			}*/
+			}
 
 			/*if (this != (CelestialBody) object) {
 					CelestialBody planet = (CelestialBody) object;
