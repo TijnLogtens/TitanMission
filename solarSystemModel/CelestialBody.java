@@ -171,9 +171,9 @@ public class CelestialBody{
 
 
 					// Euler acceleration -- ~First Order
-					first[0] = temp * (this.x - planet.getX());
-					first[1] = temp * (this.y - planet.getY());
-					first[2] = temp * (this.z - planet.getZ());
+					first[0] = temp * (planet.getX() - this.x);
+					first[1] = temp * (planet.getY() - this.y);
+					first[2] = temp * (planet.getZ() - this.z);
 
 					// ~Second Order after a half timestep
 					double[] temp_vel = step(this.vx, this.vy, this.vz, first, 0.5);
@@ -183,14 +183,14 @@ public class CelestialBody{
 					second[2] = planet.getZ() - temp_position[2] * temp;
 
 					// ~Third Order after a half timestep
-					temp_vel = step(this.vx, this.vy, this.vz, first, 0.5);
+					temp_vel = step(this.vx, this.vy, this.vz, second, 0.5);
 					temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
 					third[0] = planet.getX() - temp_position[0] * temp;
 					third[1] = planet.getY() - temp_position[1] * temp;
 					third[2] = planet.getZ() - temp_position[2] * temp;
 
 					// ~Fourth Order after 1 timestep in the future using
-					temp_vel = step(this.vx, this.vy, this.vz, first, 1);
+					temp_vel = step(this.vx, this.vy, this.vz, third, 1);
 					temp_position = step(this.x, this.y, this.z, temp_vel, dt / 2);
 					fourth[0] = planet.getX() - temp_position[0] * temp;
 					fourth[1] = planet.getY() - temp_position[1] * temp;
@@ -218,7 +218,7 @@ public class CelestialBody{
 				second[0] = -temp_position[0] * temp;
 				second[1] = -temp_position[1] * temp;
 				second[2] = -temp_position[2] * temp;
-				/*
+				
 				// ~Third Order after a half timestep
 				temp_vel = step(this.vx, this.vy, this.vz, second, dt * 0.5);
 				temp_position = step(this.x, this.y, this.z, temp_vel, dt * 0.5);
@@ -232,7 +232,7 @@ public class CelestialBody{
 				fourth[0] = -temp_position[0] * temp;
 				fourth[1] = -temp_position[1] * temp;
 				fourth[2] = -temp_position[2] * temp;
-				*/
+				
 				acceleration[0] += (first[0]+ (2 * second[0]))/3; //+ (2 * third[0]) + fourth[0])/6;
 				acceleration[1] += (first[1]+ (2 * second[1]))/3; //+ (2 * third[1]) + fourth[1])/6;
 				acceleration[2] += (first[2]+ (2 * second[2]))/3; //+ (2 * third[2]) + fourth[2])/6;
@@ -323,7 +323,7 @@ public class CelestialBody{
 		this.vx = velocity[0];
 		this.vy = velocity[1];
 		this.vz = velocity[2];
-		System.out.println("X="+acceleration[0]+"	Y= "+ acceleration[1] +"	Z="+ acceleration[2]);
+		//System.out.println("X="+acceleration[0]+"	Y= "+ acceleration[1] +"	Z="+ acceleration[2]);
 		this.x = position[0];
 		this.y = position[1];
 		this.z = position[2];

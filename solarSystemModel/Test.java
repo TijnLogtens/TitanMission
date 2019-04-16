@@ -46,7 +46,7 @@ public class Test extends Application {
     private final double SCALAR_SIZE = 5E4;
     private final double DISTANCE_SIZE = 9E7;
     private final double MOON_SCALAR = 7E1;
-    private final double dt = 24*60*60;
+    private final double dt = 1;
 
 
     double anchorX;
@@ -453,7 +453,28 @@ public class Test extends Application {
 
             @Override
             public void handle(long l) {
-                double[] points = merc.update(items, dt);
+                double[] points = new double[3];
+                double[] points1 = new double[3];
+                double[] points7 = new double[3];
+                double[] points2 = new double[3];
+                double[] points3 = new double[3];
+                double[] points4 = new double[3];
+                double[] points5 = new double[3];
+                double[] points6 = new double[3];
+                double[] points8 = new double[3];
+                double[] points9 = new double[3];
+                for(int i = 0; i < 6*60*60; i++){
+                    points = merc.update(items, dt);
+                    points1 = ven.update(items, dt);
+                    points7 = ear.update(items, dt);
+                    points2 = mar.update(items, dt);
+                    points3 = jup.update(items, dt);
+                    points4 = sat.update(items, dt);
+                    points5 = nep.update(items, dt);
+                    points6 = ur.update(items, dt);
+                    points8 = luna.update(items, dt);
+                    points9 = SVI.update(items, dt);
+                }
                 mercury.setTranslateX((points[0]/DISTANCE_SIZE) - mercury.getRadius());
                 mercury.setTranslateY((points[1]/DISTANCE_SIZE)  -  mercury.getRadius());
                 mercury.setTranslateZ((points[2]/DISTANCE_SIZE)  -  mercury.getRadius());
@@ -462,8 +483,7 @@ public class Test extends Application {
                 mercTrail[mercIndex[0]].setTranslateY(mercury.getTranslateY());
                 mercTrail[mercIndex[0]].setTranslateZ(mercury.getTranslateZ());
                 mercIndex[0]++;
-                /*
-                double[] points1 = ven.update(items, dt);
+                
                 venus.setTranslateX((points1[0]/DISTANCE_SIZE) - venus.getRadius());
                 venus.setTranslateY((points1[1]/DISTANCE_SIZE)  -  venus.getRadius());
                 venus.setTranslateZ((points1[2]/DISTANCE_SIZE)  -  venus.getRadius());
@@ -473,7 +493,6 @@ public class Test extends Application {
                 venTrail[venIndex[0]].setTranslateZ(venus.getTranslateZ());
                 venIndex[0]++;
 
-                double[] points7 = ear.update(items, dt);
                 earth.setTranslateX((points7[0]/DISTANCE_SIZE)  - earth.getRadius());
                 earth.setTranslateY((points7[1]/DISTANCE_SIZE)  -  earth.getRadius());
                 earth.setTranslateZ((points7[2]/DISTANCE_SIZE)  -  earth.getRadius());
@@ -483,7 +502,6 @@ public class Test extends Application {
                 earthTrail[earthIndex[0]].setTranslateZ(earth.getTranslateZ());
                 earthIndex[0]++;
 
-                double[] points2 = mar.update(items, dt);
                 mars.setTranslateX((points2[0]/DISTANCE_SIZE)  - mars.getRadius());
                 mars.setTranslateY((points2[1]/DISTANCE_SIZE)  -  mars.getRadius());
                 mars.setTranslateZ((points2[2]/DISTANCE_SIZE)  -  mars.getRadius());
@@ -493,7 +511,6 @@ public class Test extends Application {
                 marsTrail[marsIndex[0]].setTranslateZ(mars.getTranslateZ());
                 marsIndex[0]++;
 
-                double[] points3 = jup.update(items, dt);
                 jupiter.setTranslateX((points3[0]/DISTANCE_SIZE)  - jupiter.getRadius());
                 jupiter.setTranslateY((points3[1]/DISTANCE_SIZE)  -  jupiter.getRadius());
                 jupiter.setTranslateZ((points3[2]/DISTANCE_SIZE)  -  jupiter.getRadius());
@@ -503,7 +520,6 @@ public class Test extends Application {
                 jupTrail[jupIndex[0]].setTranslateZ(jupiter.getTranslateZ());
                 jupIndex[0]++;
 
-                double[] points4 = sat.update(items, dt);
                 saturn.setTranslateX((points4[0]/DISTANCE_SIZE)  - saturn.getRadius());
                 saturn.setTranslateY((points4[1]/DISTANCE_SIZE)  -  saturn.getRadius());
                 saturn.setTranslateZ((points4[2]/DISTANCE_SIZE)  -  saturn.getRadius());
@@ -513,7 +529,6 @@ public class Test extends Application {
                 saturnTrail[saturnIndex[0]].setTranslateZ(saturn.getTranslateZ());
                 saturnIndex[0]++;
 
-                double[] points5 = nep.update(items, dt);
                 neptune.setTranslateX((points5[0]/DISTANCE_SIZE)  - neptune.getRadius());
                 neptune.setTranslateY((points5[1]/DISTANCE_SIZE)  -  neptune.getRadius());
                 neptune.setTranslateZ((points5[2]/DISTANCE_SIZE)  -  neptune.getRadius());
@@ -523,7 +538,6 @@ public class Test extends Application {
                 neptTrail[neptIndex[0]].setTranslateZ(neptune.getTranslateZ());
                 neptIndex[0]++;
 
-                double[] points6 = ur.update(items, dt);
                 uranus.setTranslateX((points6[0]/DISTANCE_SIZE)  - uranus.getRadius());
                 uranus.setTranslateY((points6[1]/DISTANCE_SIZE) -  uranus.getRadius());
                 uranus.setTranslateZ((points6[2]/DISTANCE_SIZE) -  uranus.getRadius());
@@ -533,17 +547,15 @@ public class Test extends Application {
                 uranusTrail[uranusIndex[0]].setTranslateZ(uranus.getTranslateZ());
                 uranusIndex[0]++;
 
-                double[] points8 = luna.update(items, dt);
                 moon.setTranslateX((points8[0]/DISTANCE_SIZE*MOON_SCALAR) - moon.getRadius() + earth.getTranslateX() + earth.getRadius()/2);
                 moon.setTranslateY((points8[1]/DISTANCE_SIZE*MOON_SCALAR) - moon.getRadius() + earth.getTranslateY() + earth.getRadius()/2);
                 moon.setTranslateZ((points8[2]/DISTANCE_SIZE*MOON_SCALAR) - moon.getRadius() + earth.getTranslateZ() + earth.getRadius()/2);
 
 
-                double[] points9 = SVI.update(items, dt);
                 titan.setTranslateX((points9[0]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateX() + saturn.getRadius()/2);
                 titan.setTranslateY((points9[1]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateY() + saturn.getRadius()/2);
                 titan.setTranslateZ((points9[2]/DISTANCE_SIZE*MOON_SCALAR*2) - titan.getRadius() + saturn.getTranslateZ() + saturn.getRadius()/2);
-                */
+                
 
                 //System.out.println("Titan: " + points9[0] + " " + points9[1]);
                 //System.out.println("Saturn: " + points4[0] + " " + points4[1]);
