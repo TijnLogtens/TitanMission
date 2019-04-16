@@ -46,7 +46,7 @@ public class Test extends Application {
     private final double SCALAR_SIZE = 5E4;
     private final double DISTANCE_SIZE = 9E7;
     private final double MOON_SCALAR = 7E1;
-    private final double dt = 1;
+    private final double dt = 20;
 
 
     double anchorX;
@@ -418,7 +418,7 @@ public class Test extends Application {
         panel.getChildren().add(group);
       //  panel.setStyle("-fx-background-color: black");
 
-        Scene scene = new Scene(panel,1000,1000);
+        Scene scene = new Scene(panel,2880,1800);
 
                 Image image=new Image(getClass().getResourceAsStream("space.jpg"));
 
@@ -463,7 +463,7 @@ public class Test extends Application {
                 double[] points6 = new double[3];
                 double[] points8 = new double[3];
                 double[] points9 = new double[3];
-                for(int i = 0; i < 6*60*60; i++){
+                for(int i = 0; i < 60*60; i++){
                     points = merc.update(items, dt);
                     points1 = ven.update(items, dt);
                     points7 = ear.update(items, dt);
