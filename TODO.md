@@ -4,6 +4,8 @@
     - Constant atmospheric density
     - Constant graviational pull
     
+    
+    • Rate of energy conversion (Ep -> Ek)
     • Drag equations 
     • Thrust equations
     • Angle equations
