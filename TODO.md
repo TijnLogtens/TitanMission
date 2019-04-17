@@ -21,3 +21,8 @@
 3 Things to research AFTERWARDS
 
     • Trajectory optimisation
+
+4 deadlines
+
+    • Spriha (graphics) April 26th
+    
