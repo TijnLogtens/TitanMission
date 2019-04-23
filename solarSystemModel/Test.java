@@ -167,7 +167,7 @@ public class Test extends Application {
         int[] jupiterIndex = new int[]{0};
         Sphere[] jupiterTrail = new Sphere[250];
         jupiter.setRadius(jup.getSize()/(2*SCALAR_SIZE));
-        initiatePlanet(jupiter, jup, m6, new Image(getClass().getResourceAsStream("jupiter.jpg")));
+        initiatePlanet(jupiter, jup, m6, new Image(getClass().getResourceAsStream("jupiter.jpg")), jupiterTrail);
         items.add(jup);
         
         //Drawing SATURN
@@ -177,7 +177,7 @@ public class Test extends Application {
         int[] saturnIndex = new int[]{0};
         Sphere[] saturnTrail = new Sphere[250];
         saturn.setRadius(sat.getSize()/(2*SCALAR_SIZE));
-        initiatePlanet(saturn, sat, m7, new Image(getClass().getResourceAsStream("saturn.jpg")));
+        initiatePlanet(saturn, sat, m7, new Image(getClass().getResourceAsStream("saturn.jpg")), saturnTrail);
         items.add(sat);
         
         //Drawing URANUS
@@ -187,7 +187,7 @@ public class Test extends Application {
         int[] uranusIndex = new int[]{0};
         Sphere[] uranusTrail = new Sphere[250];
         uranus.setRadius(ur.getSize()/(2*SCALAR_SIZE));
-        initiatePlanet(uranus, ur, m8, new Image(getClass().getResourceAsStream("uranus.jpg")));
+        initiatePlanet(uranus, ur, m8, new Image(getClass().getResourceAsStream("uranus.jpg")), uranusTrail);
         items.add(ur);
         
         //Drawing NEPTUNE
@@ -197,7 +197,7 @@ public class Test extends Application {
         int[] neptuneIndex = new int[]{0};
         Sphere[] neptuneTrail = new Sphere[250];
         neptune.setRadius(nep.getSize()/(2*SCALAR_SIZE));
-        initiatePlanet(neptune, nep, m9, new Image(getClass().getResourceAsStream("neptune.jpg")));
+        initiatePlanet(neptune, nep, m9, new Image(getClass().getResourceAsStream("neptune.jpg")) neptuneTrail);
         items.add(nep);
 
         //Drawing MOON
