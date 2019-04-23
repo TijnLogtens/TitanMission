@@ -6,7 +6,7 @@ public class Probe {
 	protected double vy;
 	protected double bigG = 6.674E-11;
 
-	Probe(double x, double y, double vx, double vy){
+	Probe(double x, double y, double vx, double vy) {
 		this.x = x;
 		this.y = y;
 		this.vx = vx;
@@ -23,40 +23,46 @@ public class Probe {
 
 	private double calculateX(double dt) {
 		calculateVx(dt);
-		return (this.vx*dt);
+		return (this.vx * dt);
 	}
 
 	private double calculateY(double dt) {
 		calculateVy(dt);
-		return (this.vy*dt);
+		return (this.vy * dt);
 	}
 
 	private void calculateVx(double dt) {
 		double accX = calculateAx();
-		//System.out.println(/*"X acc = " + */accX);
-		this.vx += (accX*dt);
+		// System.out.println(/*"X acc = " + */accX);
+		this.vx += (accX * dt);
 	}
 
 	private void calculateVy(double dt) {
 		double accY = calculateAy();
-		//System.out.print("	Y acc = " + accY + "\n");
-		this.vy += (accY*dt);
+		// System.out.print(" Y acc = " + accY + "\n");
+		this.vy += (accY * dt);
 	}
 
 	private double calculateAx() {
-		//return bigG * ((Masses.getmSun())/Math.pow(this.x, 2));
-		//System.out.println((bigG * Masses.getmSun()*(-this.x))/(Math.pow(Math.pow(this.x, 2) + Math.pow(this.y, 2),(3/2))));
-		//return (bigG * this.parent.getMass()*(this.parent.getX()-this.x)) / Math.pow(((this.x-this.parent.getX())*(this.x-this.parent.getX())) + ((this.y-this.parent.getY())*(this.y-this.parent.getY())),1.5);
+		// return bigG * ((Masses.getmSun())/Math.pow(this.x, 2));
+		// System.out.println((bigG *
+		// Masses.getmSun()*(-this.x))/(Math.pow(Math.pow(this.x, 2) + Math.pow(this.y,
+		// 2),(3/2))));
+		// return (bigG * this.parent.getMass()*(this.parent.getX()-this.x)) /
+		// Math.pow(((this.x-this.parent.getX())*(this.x-this.parent.getX())) +
+		// ((this.y-this.parent.getY())*(this.y-this.parent.getY())),1.5);
 
-		return (bigG * Masses.getmSun()*(-this.x)) / Math.pow((this.x*this.x + this.y*this.y),1.5);
+		return (bigG * Masses.getmSun() * (-this.x)) / Math.pow((this.x * this.x + this.y * this.y), 1.5);
 	}
 
 	private double calculateAy() {
-		//return bigG * ((Masses.getmSun())/Math.pow(this.y, 2));
-		//System.out.println(Math.pow((this.x*this.x + this.y*this.y),1.5));
-		//return (bigG * this.parent.getMass()*(this.parent.getY()-this.y)) / Math.pow(((this.x-this.parent.getX())*(this.x-this.parent.getX())) + ((this.y-this.parent.getY())*(this.y-this.parent.getY())),1.5);
+		// return bigG * ((Masses.getmSun())/Math.pow(this.y, 2));
+		// System.out.println(Math.pow((this.x*this.x + this.y*this.y),1.5));
+		// return (bigG * this.parent.getMass()*(this.parent.getY()-this.y)) /
+		// Math.pow(((this.x-this.parent.getX())*(this.x-this.parent.getX())) +
+		// ((this.y-this.parent.getY())*(this.y-this.parent.getY())),1.5);
 
-		return (bigG * Masses.getmSun()*(-this.y)) / Math.pow((this.x*this.x + this.y*this.y),1.5);
+		return (bigG * Masses.getmSun() * (-this.y)) / Math.pow((this.x * this.x + this.y * this.y), 1.5);
 	}
 
 	public double getMass() {
