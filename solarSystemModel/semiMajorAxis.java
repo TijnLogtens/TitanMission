@@ -10,20 +10,20 @@ public abstract class semiMajorAxis {
 	private final static double aSaturn = 1433530000000.0;
 	private final static double aNeptune = 2872460000000.0;
 	private final static double aUranus = 4495060000000.0;
-	private final static double aMoon = 0;
-	private final static double aPhobos = 0;
-	private final static double aDeimos = 0;
-	private final static double aIo = 0;
-	private final static double aEuropa = 0;
-	private final static double aGanymede = 0;
-	private final static double aCallisto = 0;
-	private final static double aMimas = 0;
-	private final static double aEnceladus = 0;
-	private final static double aTethys = 0;
-	private final static double aDione = 0;
-	private final static double aRhea = 0;
-	private final static double aTitan = 0;
-	private final static double aIapetus = 0;
+	private final static double aMoon = 3.844E5;
+	private final static double aPhobos = 9376E3;
+	private final static double aDeimos = 23463.2E3;
+	private final static double aIo = 421800E3;
+	private final static double aEuropa = 671100E3;
+	private final static double aGanymede = 1.0704E9;
+	private final static double aCallisto = 1882700E3;
+	private final static double aMimas = 185539000.0;
+	private final static double aEnceladus = 237948000.0;
+	private final static double aTethys = 294619000.0;
+	private final static double aDione = 377396000.0;
+	private final static double aRhea = 527108000.0;
+	private final static double aTitan = 1.22187E9;
+	private final static double aIapetus = 3.56082E9;
 
 	public static double getaMercury() {
 		return aMercury;

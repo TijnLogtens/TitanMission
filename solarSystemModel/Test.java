@@ -1,30 +1,30 @@
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
+//import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.effect.Lighting;
-import javafx.scene.layout.StackPane;
+//import javafx.scene.effect.Lighting;
+//import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
+//import javafx.scene.shape.Circle;
+//import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.application.Application;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+//import javafx.scene.image.ImageView;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.shape.CullFace;
-import javafx.stage.Stage;
+//import javafx.scene.shape.CullFace;
+//import javafx.stage.Stage;
 import javafx.scene.shape.Sphere;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+//import javafx.scene.paint.Color;
+//import javafx.scene.paint.Paint;
 import javafx.scene.paint.PhongMaterial;
-import javafx.animation.PathTransition;
-import javafx.util.*;
-import javafx.scene.shape.Ellipse;
+//import javafx.animation.PathTransition;
+//import javafx.util.*;
+//import javafx.scene.shape.Ellipse;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.Camera;
@@ -107,16 +107,11 @@ public class Test extends Application {
         ArrayList<CelestialBody> items = new ArrayList<>();
         //Drawing SUN
         Sphere sun = new Sphere();
-        CelestialBody sun_ = new Star(Masses.getmSun(), 0, 0, 0, semiMajorAxis.getaJupiter(), Diameters.getdSun());
-        sun.setRadius((sun_.getSize()/2)/3E6);
-        sun.setTranslateX(sun_.getX());
-        sun.setTranslateY(sun_.getY());
-        sun.setTranslateZ(sun_.getZ());
+        CelestialBody sun_ = new Star(Masses.getmSun(), 0, 0, 0, Double.MAX_VALUE, Diameters.getdSun());
         PhongMaterial m1 = new PhongMaterial();
-        m1.setDiffuseMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
-        m1.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
-        m1.setSpecularMap(new Image(getClass().getResourceAsStream("sun.jpeg")));
-        sun.setMaterial(m1);
+        sun.setRadius((sun_.getSize()/2)/3E6);
+        initiatePlanetLocation(sun, sun_);
+        initiatePlanetSprite(sun, m1, new Image(getClass().getResourceAsStream("sun.jpeg")));
         items.add(sun_);
 
         //Drawing MERCURY
@@ -249,6 +244,8 @@ public class Test extends Application {
                 case W:
                     group.translateZProperty().set(group.getTranslateZ() - 3000);
                     break;
+                default:
+                    break;
             }
         });
 
@@ -332,7 +329,7 @@ public class Test extends Application {
         //create a keyFrame, the keyValue is reached at time 2s
         Duration duration = Duration.millis(1);
         //one can add a specific action when the keyframe is reached
-        EventHandler onFinished = new EventHandler<ActionEvent>() {
+        EventHandler<ActionEvent> onFinished = new EventHandler<>() {
             public void handle(ActionEvent t) {
                 //stack.setTranslateX(100); //java.lang.Math.random()*200-100
                 //reset counter

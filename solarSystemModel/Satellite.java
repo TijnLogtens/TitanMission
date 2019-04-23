@@ -70,7 +70,7 @@ public class Satellite extends CelestialBody {
         return (bigG * parent.getMass()*(-this.z)) / Math.pow((this.x*this.x + this.y*this.y + this.z*this.z),1.5);
     }
 
-    public double[] update(ArrayList<Object> planets, double dt) {
+    public double[] update(ArrayList<CelestialBody> planets, double dt) {
 		double[] first = new double[3];
 		double[] second = new double[3];
 		double[] third = new double[3];
@@ -78,7 +78,6 @@ public class Satellite extends CelestialBody {
 		double[] acceleration = new double[3];
         
 		for (Object object : planets) {
-			int type = -1;
 			if(object instanceof CelestialBody) {
 				CelestialBody planet = (CelestialBody) object;
 				if(planet != this) {
