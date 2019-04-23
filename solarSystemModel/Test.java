@@ -197,7 +197,7 @@ public class Test extends Application {
         int[] neptuneIndex = new int[]{0};
         Sphere[] neptuneTrail = new Sphere[250];
         neptune.setRadius(nep.getSize()/(2*SCALAR_SIZE));
-        initiatePlanet(neptune, nep, m9, new Image(getClass().getResourceAsStream("neptune.jpg")) neptuneTrail);
+        initiatePlanet(neptune, nep, m9, new Image(getClass().getResourceAsStream("neptune.jpg")), neptuneTrail);
         items.add(nep);
 
         //Drawing MOON
