@@ -2,43 +2,12 @@
 
 import java.awt.Graphics;
 
-public class Star {
-	private double mass;
-	private double x;
-	private double y;
-	private double z;
-	private double size;
-	private final int DISTANCE_SCALER = (int)1E9;
-	private final int SIZE_SCALER = (int)5E7;
+public class Star extends CelestialBody {
 
-	Star(double mass, double x, double y, double z, double size){
-		this.mass = mass;
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.size = size;
-	}
+	private static final int DISTANCE_SCALER = (int)1E9;
+	private static final int SIZE_SCALER = (int)5E7;
 
-	public void drawPlanet(Graphics g){
-
-		g.fillOval((int) (x /DISTANCE_SCALER) + 500-(int)((size/SIZE_SCALER)/2), (int) (y/DISTANCE_SCALER) + 500-(int)((size/SIZE_SCALER)/2), (int) (size/SIZE_SCALER), (int) (size/SIZE_SCALER));
+	public Star(double mass, double x, double y, double z, double sma, double size){
+		super(mass, x, y, z, 0, 0, 0, sma, size);
 	}
-
-	public double getMass() {
-		return mass;
-	}
-	public double getX() {
-		return x;
-	}
-	public double getY() {
-		return y;
-	}
-	public double getZ() {
-		return z;
-	}
-	public double getSize(){
-		return size;
-	}
-
-
 }
