@@ -30,8 +30,8 @@ public class LandingScreen extends Application {
     @Override
     public void start(Stage stage) {
 
-    int WIDTH=2880;
-    int HEIGHT=1800;
+    int WIDTH=1000;
+    int HEIGHT=1000;
 
     HBox hbox1 = new HBox();
     HBox hbox2 = new HBox();

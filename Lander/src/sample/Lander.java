@@ -10,7 +10,7 @@ public class Lander {
     private double x_speed;
     private double y_speed;
     private final static double g = 1.352;
-    private final static double b = 1;
+    private final static double b = 0.75;
     public Lander(double Mass, double x_pos, double y_pos, double x_speed, double y_speed){
         this.Mass = Mass;
         this.x_pos  = x_pos;
@@ -21,7 +21,11 @@ public class Lander {
     public double update(double dt){
         //Euler's method
         double firstvy = CalculateVy(dt);
-        y_pos += dt*firstvy;
+        if(y_pos>0) {
+            y_pos += dt * firstvy;
+        } else {
+            y_pos -= dt * firstvy;
+        }
         return y_pos;
     }
 
