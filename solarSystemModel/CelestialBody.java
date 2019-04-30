@@ -1,7 +1,6 @@
 
 //package solarSystemModel;
 
-import java.awt.Graphics;
 import java.util.*;
 
 public class CelestialBody {
@@ -141,28 +140,6 @@ public class CelestialBody {
 				/ Math.pow((this.x * this.x + this.y * this.y + this.z * this.z), 1.5);
 	}
 
-	public void drawPlanet(Graphics g) {
-
-		// System.out.println("X pos = " + x + " Y pos = " + y);
-
-		int norm_x = (int) (x / DISTANCE_SCALER) + 500;
-		int norm_y = (int) (y / DISTANCE_SCALER) + 500;
-
-		g.fillOval(norm_x - (int) ((size / SIZE_SCALER) / 2), norm_y - (int) ((size / SIZE_SCALER) / 2),
-				(int) (size / SIZE_SCALER), (int) (size / SIZE_SCALER));
-
-		trail_x[index] = norm_x;
-		trail_y[index] = norm_y;
-		index++;
-
-		for (int i = 0; i < trail_x.length; i++) {
-			g.fillOval((int) trail_x[i], (int) trail_y[i], 2, 2);
-		}
-		if (index == 250) {
-			index = 0;
-		}
-	}
-
 	public double[] update(ArrayList<CelestialBody> bodies, double dt) {
 		double[] first = new double[3];
 		double[] second = new double[3];
@@ -212,14 +189,15 @@ public class CelestialBody {
 		double[] velocity = step(this.vx, this.vy, this.vz, acceleration, dt);
 		double[] position = step(this.x, this.y, this.z, velocity, dt);
 
+		
 		this.vx = velocity[0];
 		this.vy = velocity[1];
 		this.vz = velocity[2];
-
+		/*
 		this.x = position[0];
 		this.y = position[1];
 		this.z = position[2];
-
+		*/
 		return position;
 	}
 
@@ -231,6 +209,12 @@ public class CelestialBody {
 		updated[2] = p3 + k[2] * dt;
 
 		return updated;
+	}
+
+	public void updatePosition(double[] position){
+		this.x = position[0];
+		this.y = position[1];
+		this.z = position[2];
 	}
 
 	public double getMass() {

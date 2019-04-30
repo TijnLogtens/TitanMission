@@ -1,30 +1,17 @@
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
-//import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-//import javafx.scene.effect.Lighting;
-//import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-//import javafx.scene.shape.Circle;
-//import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.application.Application;
 import javafx.scene.image.Image;
-//import javafx.scene.image.ImageView;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-//import javafx.scene.shape.CullFace;
-//import javafx.stage.Stage;
 import javafx.scene.shape.Sphere;
-//import javafx.scene.paint.Color;
-//import javafx.scene.paint.Paint;
 import javafx.scene.paint.PhongMaterial;
-//import javafx.animation.PathTransition;
-//import javafx.util.*;
-//import javafx.scene.shape.Ellipse;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.Camera;
@@ -105,7 +92,7 @@ public class Test extends Application {
         ArrayList<CelestialBody> items = new ArrayList<>();
         // Drawing SUN
         Sphere sun = new Sphere();
-        CelestialBody sun_ = new Star(Masses.getmSun(), 0, 0, 0, Double.MAX_VALUE, Diameters.getdSun());
+        CelestialBody sun_ = new CelestialBody(Masses.getmSun(), 0, 0, 0, 0, 0, 0, Double.MAX_VALUE, Diameters.getdSun());
         PhongMaterial m1 = new PhongMaterial();
         sun.setRadius((sun_.getSize() / 2) / 3E6);
         initiatePlanetLocation(sun, sun_);
@@ -262,6 +249,9 @@ public class Test extends Application {
             case W:
                 group.translateZProperty().set(group.getTranslateZ() - 3000);
                 break;
+            case ESCAPE:
+                System.exit(0);
+                break;
             default:
                 break;
             }
@@ -303,46 +293,35 @@ public class Test extends Application {
 
             @Override
             public void handle(long l) {
-                double[] points0 = new double[3];
-                double[] points1 = new double[3];
-                double[] points2 = new double[3];
-                double[] points3 = new double[3];
-                double[] points4 = new double[3];
-                double[] points5 = new double[3];
-                double[] points6 = new double[3];
-                double[] points7 = new double[3];
-                double[] points8 = new double[3];
-                double[] points9 = new double[3];
-
+                double[][] points = new double[items.size()][3];
                 for (int i = 0; i < 60 * 60; i++) {
-                    points0 = merc.update(items, dt);
-                    points1 = ven.update(items, dt);
-                    points2 = ear.update(items, dt);
-                    points3 = mar.update(items, dt);
-                    points4 = jup.update(items, dt);
-                    points5 = sat.update(items, dt);
-                    points6 = ur.update(items, dt);
-                    points7 = nep.update(items, dt);
-                    points8 = luna.update(items, dt);
-                    points9 = SVI.update(items, dt);
+                    for(int j = 0; j < items.size(); j++){
+                        points[j] = items.get(j).update(items, dt);
+                    }
+                    
+                    for(int j = 0; j < items.size(); j++){
+                        items.get(j).updatePosition(points[j]);
+                    }
                 }
+                
+                updatePlanet(points[0], sun);
+                updatePlanet(points[1], mercury, mercuryIndex, mercuryTrail);
+                updatePlanet(points[2], venus, venusIndex, venusTrail);
+                updatePlanet(points[3], earth, earthIndex, earthTrail);
+                updatePlanet(points[4], mars, marsIndex, marsTrail);
+                updatePlanet(points[5], jupiter, jupiterIndex, jupiterTrail);
+                updatePlanet(points[6], saturn, saturnIndex, saturnTrail);
+                updatePlanet(points[7], uranus, uranusIndex, uranusTrail);
+                updatePlanet(points[8], neptune, neptuneIndex, neptuneTrail);
 
-                updatePlanet(points0, mercury, mercuryIndex, mercuryTrail);
-                updatePlanet(points1, venus, venusIndex, venusTrail);
-                updatePlanet(points2, earth, earthIndex, earthTrail);
-                updatePlanet(points3, mars, marsIndex, marsTrail);
-                updatePlanet(points4, jupiter, jupiterIndex, jupiterTrail);
-                updatePlanet(points5, saturn, saturnIndex, saturnTrail);
-                updatePlanet(points6, uranus, uranusIndex, uranusTrail);
-                updatePlanet(points7, neptune, neptuneIndex, neptuneTrail);
+                moon.setTranslateX((points[9][0] - ear.getX()) * MOON_SCALAR / DISTANCE_SIZE + earth.getTranslateX());
+                moon.setTranslateY((points[9][1] - ear.getY()) * MOON_SCALAR / DISTANCE_SIZE + earth.getTranslateY());
+                moon.setTranslateZ((points[9][2] - ear.getZ()) * MOON_SCALAR / DISTANCE_SIZE + earth.getTranslateZ());
 
-                moon.setTranslateX((points8[0] - ear.getX()) * MOON_SCALAR / DISTANCE_SIZE + earth.getTranslateX());
-                moon.setTranslateY((points8[1] - ear.getY()) * MOON_SCALAR / DISTANCE_SIZE + earth.getTranslateY());
-                moon.setTranslateZ((points8[2] - ear.getZ()) * MOON_SCALAR / DISTANCE_SIZE + earth.getTranslateZ());
-
-                titan.setTranslateX((points9[0] - sat.getX()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateX());
-                titan.setTranslateY((points9[1] - sat.getY()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateY());
-                titan.setTranslateZ((points9[2] - sat.getZ()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
+                titan.setTranslateX((points[10][0] - sat.getX()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateX());
+                titan.setTranslateY((points[10][1] - sat.getY()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateY());
+                titan.setTranslateZ((points[10][2] - sat.getZ()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
+                
             }
         };
 
@@ -403,6 +382,10 @@ public class Test extends Application {
     private void updatePlanet(double[] points, Sphere planet, int[] planetIndex, Sphere[] planetTrail) {
         updatePlanetLocation(points, planet);
         updatePlanetTrail(planet, planetIndex, planetTrail);
+    }
+
+    private void updatePlanet(double[] points, Sphere planet){
+        updatePlanetLocation(points, planet);
     }
 
     private void updatePlanetTrail(Sphere planet, int[] trailIndex, Sphere[] planetTrail) {
