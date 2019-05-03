@@ -81,12 +81,11 @@ public class Main extends Application {
             @Override
             public void handle(long l) {
 
-                //if( lander.getY_pos() > 0) {
-                    lander.setY_pos(lander.update(1000));
-                    rocket.setTranslateY(-(lander.getY_pos()/1E5) + HEIGHT/2);
-                    System.out.println((lander.getY_pos()/1E6));
-                //}
-
+                if( lander.getPosY() > 0) {
+                    lander.setPosY(lander.update(1000));
+                    rocket.setTranslateY(-(lander.getPosY()/1E5) + HEIGHT/2);
+                    System.out.println((lander.getPosY()/1E6));
+                }
 
             }
         };

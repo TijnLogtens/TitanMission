@@ -4,73 +4,75 @@ import java.util.*;
 
 public class Lander {
 
-    private double Mass;
-    private double x_pos;
-    private double y_pos;
-    private double x_speed;
-    private double y_speed;
-    private final static double g = 1.352;
-    private final static double b = 0.75;
-    public Lander(double Mass, double x_pos, double y_pos, double x_speed, double y_speed){
-        this.Mass = Mass;
-        this.x_pos  = x_pos;
-        this.y_pos = y_pos;
-        this.x_speed = x_speed;
+    private double mass;
+    private double posX;
+    private double posY;
+    private double speedX;
+    private double speedY;
+    private final static double g = 1.352; //gravitational constant of Titan
+    private final static double b = 0.75; //coefficient of drag of the rocket
+    public Lander(double mass, double posX, double posY, double speedX, double speedY){
+        this.mass = mass;
+        this.posX  = posX;
+        this.posY = posY;
+        this.speedX = speedX;
+        this.speedY = speedY;
     }
 
     public double update(double dt){
         //Euler's method
+        double newPosY = posY;
         double firstvy = CalculateVy(dt);
-        if(y_pos>0) {
-            y_pos += dt * firstvy;
+        if(posY>0) {
+            newPosY += dt * firstvy;
         } else {
-            y_pos -= dt * firstvy;
+            newPosY -= dt * firstvy;
         }
-        return y_pos;
+        return newPosY;
     }
 
     public double CalculateVy(double dt){
-        return -1*(( Mass * g) / b - ( Mass * g) / b * Math.exp((-b)/ Mass * dt));
+        return -1*(( mass * g) / b - ( mass * g) / b * Math.exp((-b)/ mass * dt));
     }
 
 
     public double getMass() {
-        return Mass;
+        return mass;
     }
 
     public void setMass(double mass) {
-        Mass = mass;
+        this.mass = mass;
     }
 
-    public double getX_pos() {
-        return x_pos;
+    public double getPosX() {
+        return posX;
     }
 
-    public void setX_pos(double x_pos) {
-        this.x_pos = x_pos;
+    public void setPosX(double posX) {
+        this.posX = posX;
     }
 
-    public double getY_pos() {
-        return y_pos;
+    public double getPosY() {
+        return posY;
     }
 
-    public void setY_pos(double y_pos) {
-        this.y_pos = y_pos;
+    public void setPosY(double posY) {
+        this.posY = posY;
     }
 
-    public double getX_speed() {
-        return x_speed;
+    public double getSpeedX() {
+        return speedX;
     }
 
-    public void setX_speed(double x_speed) {
-        this.x_speed = x_speed;
+    public void setSpeedX(double speedX) {
+        this.speedX = speedX;
     }
 
-    public double getY_speed() {
-        return y_speed;
+    public double getSpeedY() {
+        return speedY;
     }
 
-    public void setY_speed(double y_speed) {
-        this.y_speed = y_speed;
+    public void setSpeedY(double speedY) {
+        this.speedY = speedY;
     }
 }
