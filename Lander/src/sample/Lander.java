@@ -9,6 +9,14 @@ public class Lander {
     private double posY;
     private double speedX;
     private double speedY;
+    private double verticalWind;
+    private double horizontalWind;
+    private double horizontalThruster;
+    private double verticalThruster;
+    private double currentFuel;
+    private double elapsedTime;
+
+
     private final static double g = 1.352; //gravitational constant of Titan
     private final static double b = 0.75; //coefficient of drag of the rocket
     public Lander(double mass, double posX, double posY, double speedX, double speedY){
@@ -17,12 +25,15 @@ public class Lander {
         this.posY = posY;
         this.speedX = speedX;
         this.speedY = speedY;
+        this.elapsedTime = 0;
     }
 
     public double update(double dt){
+        this.elapsedTime += dt;
         //Euler's method
         double newPosY = posY;
-        double firstvy = CalculateVy(dt);
+        double firstvy = CalculateVy(elapsedTime);
+        //System.out.println(firstvy);
         if(posY>0) {
             newPosY += dt * firstvy;
         } else {
@@ -74,5 +85,45 @@ public class Lander {
 
     public void setSpeedY(double speedY) {
         this.speedY = speedY;
+    }
+
+    public void setVerticalWind(double verticalWind) {
+        this.verticalWind = verticalWind;
+    }
+
+    public void setHorizontalWind(double horizontalWind) {
+        this.horizontalWind = horizontalWind;
+    }
+
+    public double getHorizontalThruster() {
+        return horizontalThruster;
+    }
+
+    public void setHorizontalThruster(double horizontalThruster) {
+        this.horizontalThruster = horizontalThruster;
+    }
+
+    public double getVerticalThruster() {
+        return verticalThruster;
+    }
+
+    public void setVerticalThruster(double verticalThruster) {
+        this.verticalThruster = verticalThruster;
+    }
+
+    public double getCurrentFuel() {
+        return currentFuel;
+    }
+
+    public void setCurrentFuel(double currentFuel) {
+        this.currentFuel = currentFuel;
+    }
+
+    public double getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(double elapsedTime) {
+        this.elapsedTime = elapsedTime;
     }
 }
