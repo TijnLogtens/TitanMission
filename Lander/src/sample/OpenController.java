@@ -1,6 +1,6 @@
 package sample;
 
-public class OpenController {
+public class OpenController implements ControllerInterface {
 
 
     public double velocity(double mass){

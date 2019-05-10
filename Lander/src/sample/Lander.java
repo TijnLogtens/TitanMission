@@ -16,6 +16,7 @@ public class Lander {
     private double currentFuel;
     private double elapsedTime;
     private OpenController thrust;
+    private Controller controller;
     private double kerosene;
 
     private final static double g = 1.352; //gravitational constant of Titan
@@ -29,24 +30,26 @@ public class Lander {
         this.elapsedTime = 0;
         this.kerosene = this.mass * 0.98;
         this.thrust = new OpenController();
+        this.controller = new Controller(true);
     }
 
-    public double update(double dt){
+    public double[] update(double dt){
         this.elapsedTime += dt;
+        controller.updateWind(dt);
         //Euler's method
         double newPosY = posY;
         double firstvy = CalculateVy(elapsedTime);
-        //System.out.println(firstvy);
         if(posY>0) {
-            newPosY += dt * firstvy + (thrust.velocity(kerosene) * dt);
+            newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())/* + (thrust.velocity(kerosene) * dt)*/;
         } else {
-            newPosY -= dt * firstvy + (thrust.velocity(kerosene)* dt);
+            newPosY -= dt * firstvy + Math.sqrt(controller.getVerticalWind())/* + (thrust.velocity(kerosene)* dt)*/;
         }
-        double dKerosene = kerosene - ((mass * g * dt)/2.749);
+/*        double dKerosene = kerosene - ((mass * g * dt)/2.749);
         mass -= dKerosene;
         kerosene -= dKerosene;
-
-        return newPosY;
+*/
+        double newPosX = posX + Math.sqrt(controller.getHorizontalWind());
+        return new double[]{newPosX, newPosY};
     }
 
     public double CalculateVy(double dt){
