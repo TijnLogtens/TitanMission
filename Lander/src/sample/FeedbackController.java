@@ -41,7 +41,7 @@ public class FeedbackController implements ControllerInterface {
         }
 
 
-
+            return 0;
     }
 
     public boolean getmakeMainThrusterStronger(){
