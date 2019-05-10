@@ -15,7 +15,8 @@ public class Lander {
     private double verticalThruster;
     private double currentFuel;
     private double elapsedTime;
-
+    private OpenController thrust;
+    private double kerosene;
 
     private final static double g = 1.352; //gravitational constant of Titan
     private final static double b = 0.75; //coefficient of drag of the rocket
@@ -26,6 +27,8 @@ public class Lander {
         this.speedX = speedX;
         this.speedY = speedY;
         this.elapsedTime = 0;
+        this.kerosene = this.mass * 0.98;
+        this.thrust = new OpenController();
     }
 
     public double update(double dt){
@@ -35,10 +38,14 @@ public class Lander {
         double firstvy = CalculateVy(elapsedTime);
         //System.out.println(firstvy);
         if(posY>0) {
-            newPosY += dt * firstvy;
+            newPosY += dt * firstvy + (thrust.velocity(kerosene) * dt);
         } else {
-            newPosY -= dt * firstvy;
+            newPosY -= dt * firstvy + (thrust.velocity(kerosene)* dt);
         }
+        double dKerosene = kerosene - ((mass * g * dt)/2.749);
+        mass -= dKerosene;
+        kerosene -= dKerosene;
+
         return newPosY;
     }
 
