@@ -1,38 +1,61 @@
 package sample;
 
+import java.util.*;
+
 public class FeedbackController implements ControllerInterface {
 
-    private double initialVxWind;
-    private double initialVyWind;
-
-    private final static double ERROR_MARGIN = 0.1;
-
-    /*   controller
-     *   actuator
-     *   plant
+    /**
+     * totalVelocityX is a combination of your  velocityX + windVelocityX
+     * totalVelocityY is a combination of your velocityY + windVelocityY
+     *
+     * Feedback Controller:
+     * 1) receptor
+     * 2) Controller Center -- Determines the next action
+     * 3) The effector -- Changes the coordinates as well
+     *
+     * We need to return the side thrust as well as the updated X and Y velocities, that will become the current ones.
+     *
+     * TO DO: Take into consideration gravity.
      */
 
-    /*
-     *   we need thrust as a function of error
-     *   we have 3 thrusters, 2 small (angle), one main (lift)
-     */
+    private boolean makeMainThrusterStronger = false;
+
+    private double sideThruster = 0;
+
+    public double ControllerCenter(double windVelocityX, double windVelocityY,  double currentVelocityX, double currentVelocityY){
+
+        //Calculate resulting velocities
+        double resultingVelocityX = currentVelocityX - windVelocityX;
+        double resultingVelocityY = currentVelocityY - windVelocityY;
 
 
+        double currentTheta = Math.atan(currentVelocityY/currentVelocityX);
+        double updatedTheta = Math.atan(resultingVelocityY/resultingVelocityX);
 
-    public double directionalThrust(){
-
-
-        return -1;
-    }
-
-    public double liftingThrust(double error){
-        if(error <= ERROR_MARGIN){
-            return 0;
-       /* } else if(vx > 0) {
-            return -1 * error;*/
-        } else {
-            return error;
+        //Angle that the side thruster needs to change
+        double changeInSideThruster = updatedTheta - currentTheta;
+        sideThruster += changeInSideThruster;
+        
+        if(resultingVelocityX > currentVelocityX){
+            makeMainThrusterStronger = true;
         }
 
+
+
     }
+
+    public boolean getmakeMainThrusterStronger(){
+        return makeMainThrusterStronger;
+    }
+
+    public double getSideThruster() {
+        return sideThruster;
+    }
+
+    public void setSideThruster(double sideThruster) {
+        this.sideThruster = sideThruster;
+    }
+
+
+
 }
