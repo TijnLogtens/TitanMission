@@ -40,15 +40,23 @@ public class Lander {
         double newPosY = posY;
         double firstvy = CalculateVy(elapsedTime);
         if(posY>0) {
-            newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())/* + (thrust.velocity(kerosene) * dt)*/;
-        } else {
-            newPosY -= dt * firstvy + Math.sqrt(controller.getVerticalWind())/* + (thrust.velocity(kerosene)* dt)*/;
+            if(controller.getVerticalWind() >= 0) {
+                newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())*b + (thrust.velocity(kerosene) * dt);
+            } else {
+                newPosY += dt * firstvy - Math.sqrt(Math.abs(controller.getVerticalWind()))*b + (thrust.velocity((kerosene)) * dt);
+            }
         }
-/*        double dKerosene = kerosene - ((mass * g * dt)/2.749);
+
+        double dKerosene = kerosene - ((mass * g * dt)/2.749);
         mass -= dKerosene;
         kerosene -= dKerosene;
-*/
-        double newPosX = posX + Math.sqrt(controller.getHorizontalWind());
+
+        double newPosX;
+        if(controller.getHorizontalWind() >= 0) {
+            newPosX = posX + (controller.getHorizontalWind());
+        } else {
+            newPosX = posX - (Math.abs(controller.getHorizontalWind()));
+        }
         return new double[]{newPosX, newPosY};
     }
 
