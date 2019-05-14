@@ -28,16 +28,14 @@ public class FeedbackController implements ControllerInterface {
         double resultingVelocityX = currentVelocityX - windVelocityX;
         double resultingVelocityY = currentVelocityY - windVelocityY;
 
-
-        double currentTheta = Math.atan(currentVelocityY/currentVelocityX);
         double updatedTheta = Math.atan(resultingVelocityY/resultingVelocityX);
 
-        //Angle that the side thruster needs to change
-        double changeInSideThruster = updatedTheta - currentTheta;
-        sideThruster += changeInSideThruster;
+        sideThruster = updatedTheta;
         
         if(resultingVelocityX > currentVelocityX){
             makeMainThrusterStronger = true;
+        } else {
+            makeMainThrusterStronger = false;
         }
 
 
