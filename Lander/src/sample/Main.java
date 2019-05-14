@@ -5,6 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
@@ -101,8 +102,12 @@ public class Main extends Application {
         // create a keyFrame, the keyValue is reached at time 1s
         Duration duration = Duration.millis(1);
         // one can add a specific action when the keyframe is reached
-        EventHandler<ActionEvent> onFinished = new EventHandler<>() {
-            public void handle(ActionEvent t) {}};
+        EventHandler<ActionEvent> onFinished = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+
+            }
+        };
 
         KeyFrame keyFrame = new KeyFrame(duration, onFinished); // keyValueX, keyValueY
 
