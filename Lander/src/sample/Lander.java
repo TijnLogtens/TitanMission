@@ -15,7 +15,7 @@ public class Lander {
     private double verticalThruster;
     private double currentFuel;
     private double elapsedTime;
-    private OpenController thrust;
+    private FeedbackController thrust;
     private Controller controller;
     private double kerosene;
 
@@ -29,34 +29,41 @@ public class Lander {
         this.speedY = speedY;
         this.elapsedTime = 0;
         this.kerosene = this.mass * 0.98;
-        this.thrust = new OpenController();
+        this.thrust = new FeedbackController();
         this.controller = new Controller(true);
     }
 
     public double[] update(double dt){
         this.elapsedTime += dt;
         controller.updateWind(dt);
+        thrust.ControllerCenter(controller.getVerticalWind(), controller.getHorizontalWind(), posX, posY, dt);
         //Euler's method
         double newPosY = posY;
         double firstvy = CalculateVy(elapsedTime);
         if(posY>0) {
             if(controller.getVerticalWind() >= 0) {
-                newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())*b + (thrust.velocity(kerosene) * dt);
+                newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())*b + (thrust.velocity(kerosene, posY) * Math.cos(thrust.getSideThruster()) * dt);
             } else {
-                newPosY += dt * firstvy - Math.sqrt(Math.abs(controller.getVerticalWind()))*b + (thrust.velocity((kerosene)) * dt);
+                newPosY += dt * firstvy - Math.sqrt(Math.abs(controller.getVerticalWind()))*b + (thrust.velocity(kerosene, posY) * Math.cos(thrust.getSideThruster()) * dt);
             }
         }
 
-        double dKerosene = kerosene - ((mass * g * dt)/2.749);
-        mass -= dKerosene;
-        kerosene -= dKerosene;
-
+        /*
+        double dKerosene = ((mass * g * dt)/22.749);
+        if((kerosene - dKerosene) > 0) {
+            kerosene = kerosene - dKerosene;
+            mass -= dKerosene;
+        }
+        */
         double newPosX;
         if(controller.getHorizontalWind() >= 0) {
-            newPosX = posX + (controller.getHorizontalWind());
+            newPosX = posX + (controller.getHorizontalWind() + thrust.velocity(kerosene, posY) * Math.sin(thrust.getSideThruster()) * dt);
         } else {
-            newPosX = posX - (Math.abs(controller.getHorizontalWind()));
+            newPosX = posX - (Math.abs(controller.getHorizontalWind())) + thrust.velocity(kerosene, posY) * Math.sin(thrust.getSideThruster()) * dt;
         }
+
+        speedX = (newPosX-posX)/dt;
+        speedY = (newPosY-posY)/dt;
         return new double[]{newPosX, newPosY};
     }
 
@@ -143,5 +150,8 @@ public class Lander {
 
     public void setElapsedTime(double elapsedTime) {
         this.elapsedTime = elapsedTime;
+    }
+    public double getSideThruster(){
+        return thrust.getSideThruster();
     }
 }
