@@ -34,18 +34,15 @@ public class FeedbackController implements ControllerInterface {
         }
         double resultingposY = posY + windVelocityY * dt;
         if(resultingposX >= 0){
-             addedVelocity = Math.sqrt(Math.pow(resultingposY,2) + Math.pow(resultingposX,2));
 
-            double updatedTheta = Math.acos(resultingposY/addedVelocity) * Math.PI /180;
-            sideThruster = updatedTheta;
-        }
-        else{
+            double updatedTheta = Math.atan(resultingposY/resultingposX) * Math.PI /180;
+            sideThruster = -updatedTheta + 0.0006;
+        } else{
             //System.out.println("We here");
-            addedVelocity = -(Math.sqrt(Math.pow(resultingposY,2) + Math.pow(resultingposX,2)));
 
-            double updatedTheta = Math.acos(resultingposY/addedVelocity) * Math.PI /180;
+            double updatedTheta = Math.atan(resultingposY/-resultingposX) * Math.PI /180;
 
-            sideThruster = -updatedTheta;
+            sideThruster = updatedTheta - 0.0006;
         }
 
     }
@@ -53,34 +50,17 @@ public class FeedbackController implements ControllerInterface {
     public double velocity(double mass, double height){
 
         if(height <= 10000){
-            return Math.sqrt((2 * 46.2e9 * 0.12 / mass)) * 5.5555;
-        }
-        else if(height <= 72997653.14/8) {
+        return Math.sqrt((2 * 46.2e9 * 0.12 / mass)) * 5.575;
+        } else if(height <= 72997653.14/8) {
             //Formula of kinetic energy rewritten
             return Math.sqrt((2 * 46.2e9 * 0.12 / mass)) * 5.2 ;
-        }
-
-        else if(height <= 72997653.14/4) {
+        } else if(height <= 72997653.14/4) {
             //Formula of kinetic energy rewritten
             return Math.sqrt((2 * 46.2e9 * 0.12 / mass)) * 5;
-        }
-
-        else if(height <= 72997653.14/2) {
+        } else if(height <= 72997653.14/2) {
             //Formula of kinetic energy rewritten
-            if(sideThruster>0){
-                System.out.println("WE THRUST RIGHT");
-            } else {
-                System.out.println("WE THRUST LEFT");
-            }
-
             return Math.sqrt((2 * 46.2e9 * 0.12 / mass)) * 2.4;
-
         }
-
-
-
-
-
         return 0;
     }
 

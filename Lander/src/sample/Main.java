@@ -90,7 +90,9 @@ public class Main extends Application {
                         lander.setPosY(newPosition[1]);
                     }
                     //System.out.println(i[0]+" Y: "+newPosition[1]);
-                    System.out.println(i[0]+" X: "+newPosition[0]);
+
+                        System.out.println(i[0] + " X= " + newPosition[0] + "    Y= " + newPosition[1]);
+
                     //System.out.println(lander.getSideThruster());
                     rocket.setTranslateX(-(lander.getPosX()/1E5) + WIDTH/2);
                     rocket.setTranslateY(-(lander.getPosY()/1E5) + HEIGHT/2);

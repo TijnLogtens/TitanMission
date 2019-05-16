@@ -11,7 +11,7 @@ public class Controller {
 
     public Controller(boolean loop){
         verticalWind = Math.random()*100-50;
-        horizontalWind = 0.1;//Math.random()*20-10;
+        horizontalWind = Math.random()*20-10;
         if(loop){
             controller = new FeedbackController();
         } else {
@@ -35,7 +35,7 @@ public class Controller {
         double somethingElse;
         do {
             something = Math.random() * 3 - 1.5;
-            somethingElse = Math.random() * 0;//5 - 2.5;
+            somethingElse = Math.random() * 5 - 2.5;
             resultingWind = Math.sqrt((verticalWind + something * dt) * (verticalWind + something * dt) + (horizontalWind + somethingElse * dt) * (horizontalWind + somethingElse * dt));
         } while (resultingWind > MAXIMUM_WIND);
         verticalWind += something * dt;
