@@ -36,7 +36,7 @@ public class Lander {
     public double[] update(double dt){
         this.elapsedTime += dt;
         controller.updateWind(dt);
-        thrust.ControllerCenter(controller.getVerticalWind(), controller.getHorizontalWind(), posX, posY, dt);
+        thrust.ControllerCenter(controller.getHorizontalWind(), controller.getVerticalWind(), posX, posY, dt);
         //Euler's method
         double newPosY = posY;
         double firstvy = CalculateVy(elapsedTime);
@@ -57,9 +57,9 @@ public class Lander {
         */
         double newPosX;
         if(controller.getHorizontalWind() >= 0) {
-            newPosX = posX + (controller.getHorizontalWind() + thrust.velocity(kerosene, posY) * Math.sin(thrust.getSideThruster()) * dt);
+            newPosX = posX + (Math.sqrt(controller.getHorizontalWind()) + thrust.velocity(kerosene, posY) * Math.sin(thrust.getSideThruster()) * dt);
         } else {
-            newPosX = posX - (Math.abs(controller.getHorizontalWind())) + thrust.velocity(kerosene, posY) * Math.sin(thrust.getSideThruster()) * dt;
+            newPosX = posX - (Math.sqrt(Math.abs(controller.getHorizontalWind()))) + thrust.velocity(kerosene, posY) * Math.sin(thrust.getSideThruster()) * dt;
         }
 
         speedX = (newPosX-posX)/dt;

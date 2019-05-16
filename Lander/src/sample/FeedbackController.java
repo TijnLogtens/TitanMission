@@ -29,24 +29,23 @@ public class FeedbackController implements ControllerInterface {
         //Calculate resulting velocities
         double resultingposX = posX + windVelocityX * dt;
         if(Math.abs(resultingposX) < 1){
-            sideThruster = 0 ;
+            sideThruster = 0;
             return;
         }
         double resultingposY = posY + windVelocityY * dt;
         if(resultingposX >= 0){
              addedVelocity = Math.sqrt(Math.pow(resultingposY,2) + Math.pow(resultingposX,2));
 
-            double updatedTheta =  Math.acos(resultingposY/addedVelocity) * Math.PI /180;
-
-            sideThruster = -updatedTheta;
+            double updatedTheta = Math.acos(resultingposY/addedVelocity) * Math.PI /180;
+            sideThruster = updatedTheta;
         }
         else{
             //System.out.println("We here");
-            addedVelocity = - (Math.sqrt(Math.pow(resultingposY,2) + Math.pow(resultingposX,2)));
+            addedVelocity = -(Math.sqrt(Math.pow(resultingposY,2) + Math.pow(resultingposX,2)));
 
-            double updatedTheta =  Math.acos(resultingposY/addedVelocity) * Math.PI /180;
+            double updatedTheta = Math.acos(resultingposY/addedVelocity) * Math.PI /180;
 
-            sideThruster = updatedTheta;
+            sideThruster = -updatedTheta;
         }
 
     }
@@ -68,7 +67,14 @@ public class FeedbackController implements ControllerInterface {
 
         else if(height <= 72997653.14/2) {
             //Formula of kinetic energy rewritten
+            if(sideThruster>0){
+                System.out.println("WE THRUST RIGHT");
+            } else {
+                System.out.println("WE THRUST LEFT");
+            }
+
             return Math.sqrt((2 * 46.2e9 * 0.12 / mass)) * 2.4;
+
         }
 
 
