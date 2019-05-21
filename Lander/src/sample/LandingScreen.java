@@ -10,10 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
@@ -21,8 +20,7 @@ import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 public class LandingScreen extends Application {
 
@@ -93,24 +91,21 @@ public class LandingScreen extends Application {
         PhongMaterial m = new PhongMaterial();
         tMoon.setRadius(200);
         tMoon.setTranslateX(500);
-        tMoon.setTranslateY(500);
+        tMoon.setTranslateY(1000);
         // tMoon.setTranslateZ((SVIgetZ - satgetZ) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
         m.setDiffuseColor(Color.GRAY);
         m.setSpecularColor(Color.GRAY);
         tMoon.setMaterial(m);
 
-        // Create a Rocket
-        //Box rocket = new Box(10, 5, 3);
-
+        //Create a Rocket
+        Box rocket = new Box(50, 100, 0);
+        PhongMaterial m1 = new PhongMaterial();
         //rocket.setTranslateZ((SVIgetZ - satgetZ) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
-        //   PhongMaterial m1 = new PhongMaterial();
-        //  m1.setDiffuseColor(Color.GRAY);
-        //  m1.setSpecularColor(Color.GRAY);
-        // rocket.setMaterial(m1);
+        m1.setDiffuseMap(new Image(getClass().getResourceAsStream("rocket.png")));
+        m1.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("rocket.png")));
+        m1.setSpecularMap(new Image(getClass().getResourceAsStream("rocket.png")));
+        rocket.setMaterial(m1);
 
-        final Image rocket = new Image(getClass().getResourceAsStream("rocket.jpg"));
-        final ImageView imageView = new ImageView();
-        imageView.setImage(rocket);
         rocket.setTranslateX(500);
         rocket.setTranslateY(0);
 
@@ -120,26 +115,16 @@ public class LandingScreen extends Application {
         panel.getChildren().add(group);
         panel.getChildren().addAll(hbox2);
 
-  /*  //set background
-    Image image = new Image(getClass().getResourceAsStream("space.jpg"));
-    BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        //set background
+        Image image = new Image(getClass().getResourceAsStream("space.jpg"));
+        BackgroundImage bgImg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
-    Background b = new Background(bgImg);
-    panel.setBackground(b);*/
+        Background b = new Background(bgImg);
+        panel.setBackground(b);
 
-        Scene main = new Scene(hbox1, WIDTH, HEIGHT);
         Scene landingScene = new Scene(panel,WIDTH, HEIGHT);
 
-        Button goToLandingScene= new Button("View Landing on Titan ");
-        goToLandingScene.setOnAction(e -> stage.setScene(landingScene));
 
-        Button goToMain= new Button("View Solar System ");
-        goToMain.setOnAction(e -> stage.setScene(main));
-
-        //Button exit= new Button("Exit");
-
-        hbox1.getChildren().addAll(goToLandingScene);
-        hbox2.getChildren().addAll(goToMain);
 
     /*Camera c = new PerspectiveCamera();
     landingScene.setCamera(c);*/
@@ -152,16 +137,18 @@ public class LandingScreen extends Application {
         timeline.setAutoReverse(true);
         Lander lander = new Lander(4771, 0,GEOSTATIONARY_HEIGHT, 0,0);
 
+
         AnimationTimer timer = new AnimationTimer() {
+            int p=0;
             @Override
             public void handle(long l) {
 
                 if( lander.getPosY() > 0) {
-                    lander.setPosY(lander.update(1000));
+                    p+=10000;
+                    lander.setPosY(p);
                     rocket.setTranslateY(-(lander.getPosY()/1E5) + HEIGHT/2);
-                    System.out.println((lander.getPosY()/1E6));
+                    //System.out.println((lander.getPosY()/1E6));
                 }
-
             }
         };
 
