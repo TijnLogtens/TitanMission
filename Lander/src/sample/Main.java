@@ -90,7 +90,7 @@ public class Main extends Application {
         m.setSpecularColor(Color.GRAY);
         tMoon.setMaterial(m);
 
-        Box rocket = new Box(50, 100, 0);
+        Box rocket = new Box(75, 100, 0);
         PhongMaterial m1 = new PhongMaterial();
         //rocket.setTranslateZ((SVIgetZ - satgetZ) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
         m1.setDiffuseMap(new Image(getClass().getResourceAsStream("rocket.png")));
@@ -140,7 +140,8 @@ public class Main extends Application {
 
                     //System.out.println(lander.getSideThruster());
                     rocket.setTranslateX(-(lander.getPosX()/1E2) + WIDTH/2);
-                    rocket.setTranslateY(-(lander.getPosY()/1E5) + 750 - tMoon.getRadius() - rocket.getHeight()/2);
+                    rocket.setTranslateY(-(lander.getPosY()/1E5) + 750 - tMoon.getRadius() - (rocket.getHeight()-30)/2);
+                    rocket.setRotate(-lander.getSideThruster()*180/Math.PI);
                     i[0]++;
                 }
 
