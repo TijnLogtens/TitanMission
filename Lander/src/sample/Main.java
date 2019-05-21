@@ -67,7 +67,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception{
 
         int WIDTH=1000;
-        int HEIGHT=1000;
+        int HEIGHT=625;
         double SVIgetX=3.537424927743304E+11;
         double SVIgetY=-1.462539028125231E+12;
         double SVIgetZ=1.169787519537956E+10;
@@ -139,7 +139,7 @@ public class Main extends Application {
                         System.out.println(i[0] + " X= " + newPosition[0] + "    Y= " + newPosition[1]);
 
                     //System.out.println(lander.getSideThruster());
-                    rocket.setTranslateX(-(lander.getPosX()/1E5) + WIDTH/2);
+                    rocket.setTranslateX(-(lander.getPosX()/1E3) + WIDTH/2);
                     rocket.setTranslateY(-(lander.getPosY()/1E5) + 750 - tMoon.getRadius() - rocket.getHeight()/2);
                     i[0]++;
                 }
