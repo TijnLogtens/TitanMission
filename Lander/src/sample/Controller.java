@@ -10,8 +10,8 @@ public class Controller {
 
 
     public Controller(boolean loop){
-        verticalWind = Math.random()*100-50;
-        horizontalWind = Math.random()*20-10;
+        verticalWind = Math.random()*20-10;
+        horizontalWind = Math.random()*100-50;
         if(loop){
             controller = new FeedbackController();
         } else {
