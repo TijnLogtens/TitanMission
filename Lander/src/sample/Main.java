@@ -139,7 +139,7 @@ public class Main extends Application {
 
                     //System.out.println(lander.getSideThruster());
                     rocket.setTranslateX(-(lander.getPosX()/1E5) + WIDTH/2);
-                    rocket.setTranslateY(-(lander.getPosY()/1E5) + HEIGHT/2);
+                    rocket.setTranslateY(-(lander.getPosY()/1E5) + 750 - tMoon.getRadius() - rocket.getHeight()/2);
                     i[0]++;
                 }
 

@@ -26,7 +26,7 @@ public class FeedbackController implements ControllerInterface {
 
         double addedVelocity;
 
-        //Calculate resulting velocities
+        //Calculate resulting position
         double resultingposX = posX + windVelocityX * dt;
         if(Math.abs(resultingposX) < 1){
             sideThruster = 0;
@@ -50,7 +50,7 @@ public class FeedbackController implements ControllerInterface {
     public double velocity(double mass, double height){
 
         if(height <= 10000){
-        return Math.sqrt((2 * 46.2e9 * 0.12 / mass)) * 5.575;
+        return Math.sqrt((2 * 46.2e9 * 0.12 / mass)) * 5.5765;
         } else if(height <= 72997653.14/8) {
             //Formula of kinetic energy rewritten
             return Math.sqrt((2 * 46.2e9 * 0.12 / mass)) * 5.2 ;
