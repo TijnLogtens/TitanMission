@@ -158,4 +158,7 @@ public class Lander {
     public double successRate(){
         return controller.ReadFromFile();
     }
+    public void addLanding(int result){
+        controller.writeToFile(result);
+    }
 }

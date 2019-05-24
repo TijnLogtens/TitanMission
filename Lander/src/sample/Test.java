@@ -9,8 +9,9 @@ public class Test {
         double failure = 0;
         long iteration = 0;
         Lander lander = new Lander(4771, 0,GEOSTATIONARY_HEIGHT, 0,0);
-        System.out.println("Success Rate: " + lander.successRate());
-        while(true) {
+        for(int j=0; j<10000000; j++) {
+            //System.out.println("Success Rate: " + lander.successRate());
+            while(true){
             if (lander.getPosY() > 0) {
                 double[] newPosition = new double[2];
                 double[] previousPosition = new double[2];
@@ -21,8 +22,9 @@ public class Test {
                     lander.setPosX(newPosition[0]);
                     lander.setPosY(newPosition[1]);
                 }
-                /*
+
                 if (lander.getPosY() < 0) {
+                    /*
                     iteration++;
                     if(getResult(newPosition,previousPosition) == 1){
                         success++;
@@ -32,15 +34,17 @@ public class Test {
                     if(iteration % 1000 == 0) {
                         System.out.println(iteration + " " + (success / (success + failure) * 100));
                     }
-
+                    */
+                    lander.addLanding(getResult(newPosition, previousPosition));
                     lander = new Lander(4771, 0, GEOSTATIONARY_HEIGHT, 0, 0);
+                    break;
                 }
-                */
+            }
             }
         }
     }
 
-    private static double getResult(double[] position, double[] oldPosition){
+    private static int getResult(double[] position, double[] oldPosition){
         if(Math.abs(position[0]) <= 100 && position[1] - oldPosition[1] < 3){
             return 1;
         } else {

@@ -10,11 +10,15 @@ public class Controller {
     private ControllerInterface controller;
     private final static double ERROR_MARGIN = 0.1;
     private final static double MAXIMUM_WIND = 120;
-    private final static double EPSILON = 1E-14;
+    private final static double EPSILON = 1;
+    private static double initialVerticalWind;
+    private static double initialHorizontalWind;
 
     public Controller(boolean loop){
         verticalWind = Math.random()*20-10;
         horizontalWind = Math.random()*100-50;
+        initialHorizontalWind = (int) horizontalWind;
+        initialVerticalWind = (int) verticalWind;
         if(loop){
             controller = new FeedbackController();
         } else {
@@ -52,14 +56,14 @@ public class Controller {
             1 refers to successful landing
             0 refers to unsuccessful landing
     */
-    public double ReadFromFile(){
+    public double ReadFromFile() {
 
         int success = 0;
         int failures = 0;
         double result = 0;
 
         // pass the path to the file as a parameter
-        try{
+        try {
             //set up data file for reading
             FileReader the_file = new FileReader("landings.txt");
             //Passing the FileReader object to the BufferedReader constructor
@@ -68,7 +72,7 @@ public class Controller {
             Scanner sc = new Scanner(file);
             String line = file.readLine();
 
-            if(line == null){
+            if (line == null || line == "") {
                 System.out.println("There are no data in our database to predict the likelihood of landing");
                 return -1;
             }
@@ -76,27 +80,42 @@ public class Controller {
             do {
                 //Stores each time the user name and the password in an array
                 String[] details = line.split(":");
-                if((Math.abs(verticalWind - Double.parseDouble(details[0])) < EPSILON) && (Math.abs(horizontalWind - Double.parseDouble(details[1])) < EPSILON)) {
+                if ((Math.abs(verticalWind - Double.parseDouble(details[0])) < EPSILON) && (Math.abs(horizontalWind - Double.parseDouble(details[1])) < EPSILON)) {
                     if (Double.parseDouble(details[2]) == 1) {
                         success++;
                     } else {
                         failures++;
                     }
                 }
-            }while(((line = file.readLine()) != null) && line != "" );
+            } while (((line = file.readLine()) != null) && line != "");
 
-            if(success == 0 && failures == 0){
+            if (success == 0 && failures == 0) {
                 return -1;
             }
-            result = success/ (success + failures);
-        }
-        catch (IOException io) {
+            result = success / (success + failures);
+        } catch (IOException io) {
             System.out.println("Error trying to open file " + io.getMessage());
         }
 
         return result;
     }
-    
+
+    public void writeToFile(int result){
+        try {
+
+            //set up data file for reading
+            FileWriter the_file = new FileWriter("landings.txt", true);
+            //Passing the FileReader object to the BufferedReader constructor
+            BufferedWriter file = new BufferedWriter(the_file);
+            String str = initialHorizontalWind + ":" + initialVerticalWind + ":" + result;
+            file.write(str);
+            file.write("\r\n");
+            file.close();
+        }catch(IOException io) {
+            System.out.println("Error trying to open file " + io.getMessage());
+        }
+    }
+
 
     public void setVerticalWind(double verticalWind) {
         this.verticalWind = verticalWind;
