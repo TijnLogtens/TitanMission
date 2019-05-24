@@ -5,6 +5,8 @@ public class Test {
     private static final double GEOSTATIONARY_HEIGHT = 72997653.14;
 
     public static void main(String[] args){
+        double success = 0;
+        double failure = 0;
         long iteration = 0;
         Lander lander = new Lander(4771, 0,GEOSTATIONARY_HEIGHT, 0,0);
         while(true) {
@@ -19,7 +21,15 @@ public class Test {
                     lander.setPosY(newPosition[1]);
                 }
                 if (lander.getPosY() < 0) {
-                    System.out.println(getResult(newPosition,previousPosition));
+                    iteration++;
+                    if(getResult(newPosition,previousPosition) == 1){
+                        success++;
+                    } else {
+                        failure++;
+                    }
+                    if(iteration % 1000 == 0) {
+                        System.out.println(iteration + " " + (success / (success + failure) * 100));
+                    }
                     lander = new Lander(4771, 0, GEOSTATIONARY_HEIGHT, 0, 0);
                 }
             }
@@ -27,7 +37,7 @@ public class Test {
     }
 
     private static double getResult(double[] position, double[] oldPosition){
-        if(Math.abs(position[0]) <= 100 && position[1] - oldPosition[1] < 14){
+        if(Math.abs(position[0]) <= 100 && position[1] - oldPosition[1] < 3){
             return 1;
         } else {
             return 0;
