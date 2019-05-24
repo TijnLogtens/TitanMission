@@ -154,4 +154,8 @@ public class Lander {
     public double getSideThruster(){
         return thrust.getSideThruster();
     }
+
+    public double successRate(){
+        return controller.ReadFromFile();
+    }
 }
