@@ -7,27 +7,25 @@ import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.event.Event;
 
 
 public class Main extends Application {
     private final double SCALAR_SIZE = 5E4;
-    private final double DISTANCE_SIZE = 9E7;
-    private final double MOON_SCALAR = 7E1;
-    private final double TITAN_SCALAR = MOON_SCALAR * 1.75;
+    int WIDTH=1000;
+    int HEIGHT=625;
     double anchorX;
     double anchorY;
     double anchorAngleX = 0;
@@ -59,21 +57,14 @@ public class Main extends Application {
 
         stage.addEventHandler(ScrollEvent.SCROLL, event -> {
             double delta = -event.getDeltaY(); // +ve then fwd if -ve then bckwd
-            group.translateZProperty().set(group.getTranslateZ() + delta * 5);
+            group.translateZProperty().set(group.getTranslateZ() + delta * 2);
         });
     }
 
     @Override
     public void start(Stage stage) throws Exception{
 
-        int WIDTH=1000;
-        int HEIGHT=625;
-        double SVIgetX=3.537424927743304E+11;
-        double SVIgetY=-1.462539028125231E+12;
-        double SVIgetZ=1.169787519537956E+10;
-        double satgetX=3.547593532400821E+11;
-        double satgetY=-1.461948830848272E+12;
-        double satgetZ=1.129255310798091E+10;
+
         double satgetSize = 116464000;
 
 
@@ -85,14 +76,13 @@ public class Main extends Application {
         tMoon.setRadius(200);
         tMoon.setTranslateX(500);
         tMoon.setTranslateY(750);
-        // tMoon.setTranslateZ((SVIgetZ - satgetZ) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
-        m.setDiffuseColor(Color.GRAY);
-        m.setSpecularColor(Color.GRAY);
+        m.setDiffuseMap(new Image(getClass().getResourceAsStream("titanImg.jpg")));
+        m.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("titanImg.jpg")));
+        m.setSpecularMap(new Image(getClass().getResourceAsStream("titanImg.jpg")));
         tMoon.setMaterial(m);
 
         Box rocket = new Box(75, 100, 0);
         PhongMaterial m1 = new PhongMaterial();
-        //rocket.setTranslateZ((SVIgetZ - satgetZ) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
         m1.setDiffuseMap(new Image(getClass().getResourceAsStream("rocket.png")));
         m1.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("rocket.png")));
         m1.setSpecularMap(new Image(getClass().getResourceAsStream("rocket.png")));
