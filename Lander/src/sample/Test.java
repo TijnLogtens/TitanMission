@@ -10,7 +10,7 @@ public class Test {
         long iteration = 0;
         Lander lander = new Lander(4771, 0,GEOSTATIONARY_HEIGHT, 0,0);
         for(int j=0; j<10000000; j++) {
-            //System.out.println("Success Rate: " + lander.successRate());
+            System.out.println("Success Rate: " + lander.successRate());
             while(true){
             if (lander.getPosY() > 0) {
                 double[] newPosition = new double[2];

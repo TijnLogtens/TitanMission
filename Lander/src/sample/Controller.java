@@ -58,14 +58,14 @@ public class Controller {
     */
     public double ReadFromFile() {
 
-        int success = 0;
-        int failures = 0;
+        double success = 0;
+        double failures = 0;
         double result = 0;
 
         // pass the path to the file as a parameter
         try {
             //set up data file for reading
-            FileReader the_file = new FileReader("landings.txt");
+            FileReader the_file = new FileReader("landings2.txt");
             //Passing the FileReader object to the BufferedReader constructor
             BufferedReader file = new BufferedReader(the_file);
             //Scanning the file
@@ -80,7 +80,7 @@ public class Controller {
             do {
                 //Stores each time the user name and the password in an array
                 String[] details = line.split(":");
-                if ((Math.abs(verticalWind - Double.parseDouble(details[0])) < EPSILON) && (Math.abs(horizontalWind - Double.parseDouble(details[1])) < EPSILON)) {
+                if ((Math.abs(horizontalWind - Double.parseDouble(details[0])) < EPSILON) && (Math.abs(verticalWind - Double.parseDouble(details[1])) < EPSILON)) {
                     if (Double.parseDouble(details[2]) == 1) {
                         success++;
                     } else {
@@ -104,7 +104,7 @@ public class Controller {
         try {
 
             //set up data file for reading
-            FileWriter the_file = new FileWriter("landings.txt", true);
+            FileWriter the_file = new FileWriter("landings2.txt", true);
             //Passing the FileReader object to the BufferedReader constructor
             BufferedWriter file = new BufferedWriter(the_file);
             String str = initialHorizontalWind + ":" + initialVerticalWind + ":" + result;
