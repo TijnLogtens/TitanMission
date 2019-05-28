@@ -22,7 +22,7 @@ public class FeedbackController implements ControllerInterface {
 
     private double sideThruster = 0;
 
-    public void  ControllerCenter(double windVelocityX, double windVelocityY,  double posX, double posY, double dt){
+    public void controllerCenter(double windVelocityX, double windVelocityY, double posX, double posY, double dt){
 
         double addedVelocity;
 
@@ -47,7 +47,7 @@ public class FeedbackController implements ControllerInterface {
 
     }
 
-    public double velocity(double mass, double height){
+    public double velocity(double mass, double height, double elapsedTime){
 
         if(height <= 10000){
         return Math.sqrt((2 * 46.2e9 * 0.12 / mass)) * 5.5765;

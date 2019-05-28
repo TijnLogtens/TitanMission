@@ -116,6 +116,15 @@ public class Controller {
         }
     }
 
+    public void controllerCenter(double posX, double posY, double dt){
+            controller.controllerCenter(horizontalWind, verticalWind, posX, posY, dt);
+    }
+
+
+    public double thrust(double mass, double height, double elapsedTime){
+        return controller.velocity(mass, height, elapsedTime);
+    }
+
 
     public void setVerticalWind(double verticalWind) {
         this.verticalWind = verticalWind;
@@ -131,5 +140,9 @@ public class Controller {
 
     public double getHorizontalWind() {
         return horizontalWind;
+    }
+
+    public double getSideThruster(){
+        return controller.getSideThruster();
     }
 }
