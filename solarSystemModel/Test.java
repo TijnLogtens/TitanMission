@@ -34,7 +34,9 @@ public class Test extends Application {
     private final double DISTANCE_SIZE = 9E7;
     private final double MOON_SCALAR = 7E1;
     private final double TITAN_SCALAR = MOON_SCALAR * 1.75;
-    private final double dt = 20;
+    private final double dt = 0.5;
+
+    private int days = 0;
 
     double anchorX;
     double anchorY;
@@ -92,7 +94,8 @@ public class Test extends Application {
         ArrayList<CelestialBody> items = new ArrayList<>();
         // Drawing SUN
         Sphere sun = new Sphere();
-        CelestialBody sun_ = new CelestialBody(Masses.getmSun(), 0, 0, 0, 0, 0, 0, Double.MAX_VALUE, Diameters.getdSun());
+        CelestialBody sun_ = new CelestialBody(Masses.getmSun(), 0, 0, 0, 0, 0, 0, Double.MAX_VALUE,
+                Diameters.getdSun());
         PhongMaterial m1 = new PhongMaterial();
         sun.setRadius((sun_.getSize() / 2) / 3E6);
         initiatePlanetLocation(sun, sun_);
@@ -294,16 +297,17 @@ public class Test extends Application {
             @Override
             public void handle(long l) {
                 double[][] points = new double[items.size()][3];
-                for (int i = 0; i < 60 * 60; i++) {
-                    for(int j = 0; j < items.size(); j++){
+                for (int i = 0; i < 24*60*60*2; i++) {
+                    for (int j = 0; j < items.size(); j++) {
                         points[j] = items.get(j).update(items, dt);
                     }
-                    
-                    for(int j = 0; j < items.size(); j++){
+
+                    for (int j = 0; j < items.size(); j++) {
                         items.get(j).updatePosition(points[j]);
                     }
                 }
-                
+                days++;
+                /*
                 updatePlanet(points[0], sun);
                 updatePlanet(points[1], mercury, mercuryIndex, mercuryTrail);
                 updatePlanet(points[2], venus, venusIndex, venusTrail);
@@ -318,10 +322,18 @@ public class Test extends Application {
                 moon.setTranslateY((points[9][1] - ear.getY()) * MOON_SCALAR / DISTANCE_SIZE + earth.getTranslateY());
                 moon.setTranslateZ((points[9][2] - ear.getZ()) * MOON_SCALAR / DISTANCE_SIZE + earth.getTranslateZ());
 
-                titan.setTranslateX((points[10][0] - sat.getX()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateX());
-                titan.setTranslateY((points[10][1] - sat.getY()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateY());
-                titan.setTranslateZ((points[10][2] - sat.getZ()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
-                
+                titan.setTranslateX(
+                    (points[10][0] - sat.getX()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateX());
+                titan.setTranslateY(
+                    (points[10][1] - sat.getY()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateY());
+                titan.setTranslateZ(
+                    (points[10][2] - sat.getZ()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
+                */
+                if(days <= (15 * 365) + 3){
+                    System.out.println(points[10][0]);
+                } else {
+                    System.exit(0);
+                }
             }
         };
 
@@ -344,18 +356,14 @@ public class Test extends Application {
         timeline.play();
         timer.start();
     }
-
-    public static void main(String[] args) {
-        Application.launch(args);
-    }
-
+    
     private void initiatePlanet(Sphere planet, CelestialBody planetBody, PhongMaterial m, Image planetImage,
-            Sphere[] planetTrail) {
+    Sphere[] planetTrail) {
         initiatePlanetLocation(planet, planetBody);
         initiatePlanetSprite(planet, m, planetImage);
         initiatePlanetTrail(planet, planetTrail, m);
     }
-
+    
     private void initiatePlanetLocation(Sphere planet, CelestialBody planetBody) {
         planet.setTranslateX((planetBody.getX() / DISTANCE_SIZE));
         planet.setTranslateY((planetBody.getY() / DISTANCE_SIZE));
@@ -378,16 +386,16 @@ public class Test extends Application {
             planetTrail[i].setMaterial(m);
         }
     }
-
+    
     private void updatePlanet(double[] points, Sphere planet, int[] planetIndex, Sphere[] planetTrail) {
         updatePlanetLocation(points, planet);
         updatePlanetTrail(planet, planetIndex, planetTrail);
     }
-
-    private void updatePlanet(double[] points, Sphere planet){
+    
+    private void updatePlanet(double[] points, Sphere planet) {
         updatePlanetLocation(points, planet);
     }
-
+    
     private void updatePlanetTrail(Sphere planet, int[] trailIndex, Sphere[] planetTrail) {
         if (trailIndex[0] == 250) {
             trailIndex[0] = 0;
@@ -397,10 +405,14 @@ public class Test extends Application {
         planetTrail[trailIndex[0]].setTranslateZ(planet.getTranslateZ());
         trailIndex[0]++;
     }
-
+    
     private void updatePlanetLocation(double[] points, Sphere planet) {
         planet.setTranslateX((points[0] / DISTANCE_SIZE));
         planet.setTranslateY((points[1] / DISTANCE_SIZE));
         planet.setTranslateZ((points[2] / DISTANCE_SIZE));
+    }
+    
+    public static void main(String[] args) {
+        Application.launch(args);
     }
 }

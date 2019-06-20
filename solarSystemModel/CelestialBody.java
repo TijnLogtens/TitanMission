@@ -145,62 +145,73 @@ public class CelestialBody {
 		double[] second = new double[3];
 		double[] third = new double[3];
 		double[] fourth = new double[3];
+		double[] fifth = new double[3];
+		double[] sixth = new double[3];
 		double[] acceleration = new double[3];
 
+
+		//http://maths.cnam.fr/IMG/pdf/RungeKuttaFehlbergProof.pdf
 		for (CelestialBody planet : bodies) {
 			if (planet != this) {
-				double distance = Math.pow((this.x - planet.getX()), 2) + Math.pow((this.y - planet.getY()), 2)
-						+ Math.pow((this.z - planet.getZ()), 2);
+				double xDist = (this.x - planet.getX());
+				double yDist = (this.y - planet.getY());
+				double zDist = (this.z - planet.getZ());
+				double distance = xDist * xDist + yDist * yDist + zDist * zDist;
 				double dist = Math.sqrt(distance);
-				double temp = bigG * planet.getMass() / Math.pow(dist, 3);
+				double temp = bigG * planet.getMass() / (dist * dist * dist);
 
 				// Euler acceleration -- ~First Order
 				first[0] = temp * (planet.getX() - this.x);
 				first[1] = temp * (planet.getY() - this.y);
 				first[2] = temp * (planet.getZ() - this.z);
-
+				
 				// ~Second Order after a half timestep
-				double[] temp_vel = step(this.vx, this.vy, this.vz, first, 0.5 * dt);
-				double[] temp_position = step(this.x, this.y, this.z, temp_vel, 0.5 * dt);
+				double[] temp_vel = step(this.vx, this.vy, this.vz, first, 1/2 * dt);
+				double[] temp_position = step(this.x, this.y, this.z, temp_vel, 1/2 * dt);
 				second[0] = (planet.getX() - temp_position[0]) * temp;
 				second[1] = (planet.getY() - temp_position[1]) * temp;
 				second[2] = (planet.getZ() - temp_position[2]) * temp;
 
 				// ~Third Order after a half timestep
-				temp_vel = step(this.vx, this.vy, this.vz, second, 0.5 * dt);
-				temp_position = step(this.x, this.y, this.z, temp_vel, 0.5 * dt);
+				temp_vel = step(this.vx, this.vy, this.vz, first, second, 1/2 * dt, dt);
+				temp_position = step(this.x, this.y, this.z, temp_vel, 1/2 * dt);
 				third[0] = (planet.getX() - temp_position[0]) * temp;
 				third[1] = (planet.getY() - temp_position[1]) * temp;
 				third[2] = (planet.getZ() - temp_position[2]) * temp;
 
 				// ~Fourth Order after 1 timestep in the future using
-				temp_vel = step(this.vx, this.vy, this.vz, third, dt);
+				temp_vel = step(this.vx, this.vy, this.vz, thirdOrder(first, second, third), dt);
 				temp_position = step(this.x, this.y, this.z, temp_vel, dt);
 				fourth[0] = (planet.getX() - temp_position[0]) * temp;
 				fourth[1] = (planet.getY() - temp_position[1]) * temp;
 				fourth[2] = (planet.getZ() - temp_position[2]) * temp;
-
+				
 				acceleration[0] += (first[0] + 2 * second[0] + 2 * third[0] + fourth[0]) / 6;
 				acceleration[1] += (first[1] + 2 * second[1] + 2 * third[1] + fourth[1]) / 6;
 				acceleration[2] += (first[2] + 2 * second[2] + 2 * third[2] + fourth[2]) / 6;
-			}
+}
 		}
 
 		double[] velocity = step(this.vx, this.vy, this.vz, acceleration, dt);
 		double[] position = step(this.x, this.y, this.z, velocity, dt);
 
-		
 		this.vx = velocity[0];
 		this.vy = velocity[1];
 		this.vz = velocity[2];
 		/*
-		this.x = position[0];
-		this.y = position[1];
-		this.z = position[2];
-		*/
+		 * this.x = position[0]; this.y = position[1]; this.z = position[2];
+		 */
 		return position;
 	}
 
+	protected double[] thirdOrder(double[] a1, double[] a2, double[] a3){
+		double[] augmented = new double[3];
+		augmented[0] = a1[0] - a2[0] + a3[0];
+		augmented[1] = a1[1] - a2[1] + a3[1];
+		augmented[2] = a1[2] - a2[2] + a3[2];
+
+		return augmented;
+	}
 	protected double[] step(double p1, double p2, double p3, double[] k, double dt) {
 		double[] updated = new double[3];
 
@@ -211,7 +222,17 @@ public class CelestialBody {
 		return updated;
 	}
 
-	public void updatePosition(double[] position){
+	protected double[] step(double p1, double p2, double p3, double[] k1, double[] k2, double dt1, double dt2){
+		double[] updated = new double[3];
+		
+		updated[0] = p1 - k1[0] * dt1 + k2[0] * dt2;
+		updated[1] = p2 - k1[1] * dt1 + k2[1] * dt2;
+		updated[2] = p3 - k1[2] * dt1 + k2[2] * dt2;
+
+		return updated;
+	}
+
+	public void updatePosition(double[] position) {
 		this.x = position[0];
 		this.y = position[1];
 		this.z = position[2];
