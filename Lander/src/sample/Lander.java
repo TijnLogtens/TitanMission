@@ -44,9 +44,9 @@ public class Lander {
         double firstvy = CalculateVy(elapsedTime);
         if(posY>0) {
             if(controller.getVerticalWind() >= 0) {
-                newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())*b + (controller.thrust(kerosene, posY, elapsedTime) * Math.cos(controller.getSideThruster()) * dt);
+                newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())*b + /*controller.thrust(kerosene, posY, elapsedTime)*/ (controller.PD_ControllerY(dt, posY, mass) * Math.cos(controller.getSideThruster()) * dt);
             } else {
-                newPosY += dt * firstvy - Math.sqrt(Math.abs(controller.getVerticalWind()))*b + (controller.thrust(kerosene, posY, elapsedTime) * Math.cos(controller.getSideThruster()) * dt);
+                newPosY += dt * firstvy - Math.sqrt(Math.abs(controller.getVerticalWind()))*b + (/*controller.thrust(kerosene, posY, elapsedTime)*/ controller.PD_ControllerY(dt, posY, mass) * Math.cos(controller.getSideThruster()) * dt);
             }
         }
 
@@ -59,9 +59,9 @@ public class Lander {
         */
         double newPosX;
         if(controller.getHorizontalWind() >= 0) {
-            newPosX = posX + (Math.sqrt(controller.getHorizontalWind()) + controller.thrust(kerosene, posY, elapsedTime) * Math.sin(controller.getSideThruster()) * dt);
+            newPosX = posX + (Math.sqrt(controller.getHorizontalWind()) + /*controller.thrust(kerosene, posY, elapsedTime)*/ controller.PD_ControllerX(dt, posX, mass) * Math.sin(controller.getSideThruster()) * dt);
         } else {
-            newPosX = posX - (Math.sqrt(Math.abs(controller.getHorizontalWind()))) + controller.thrust(kerosene, posY, elapsedTime) * Math.sin(controller.getSideThruster()) * dt;
+            newPosX = posX - (Math.sqrt(Math.abs(controller.getHorizontalWind()))) + /*controller.thrust(kerosene, posY, elapsedTime)*/ controller.PD_ControllerX(dt, posX, mass) * Math.sin(controller.getSideThruster()) * dt;
         }
 
         speedX = (newPosX-posX)/dt;

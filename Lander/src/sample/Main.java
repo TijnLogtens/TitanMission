@@ -133,6 +133,8 @@ public class Main extends Application {
                     rocket.setTranslateY(-(lander.getPosY()/1E5) + 750 - tMoon.getRadius() - (rocket.getHeight()-30)/2);
                     rocket.setRotate(-lander.getSideThruster()*180/Math.PI);
                     i[0]++;
+                } else {
+                    System.exit(0);
                 }
 
             }

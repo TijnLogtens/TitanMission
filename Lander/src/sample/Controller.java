@@ -41,7 +41,7 @@ public class Controller {
         double something;
         double somethingElse;
         do {
-            something = Math.random() * 3 - 1.5;
+            something = Math.random() * 0.5;
             somethingElse = Math.random() * 5 - 2.5;
             resultingWind = Math.sqrt((verticalWind + something * dt) * (verticalWind + something * dt) + (horizontalWind + somethingElse * dt) * (horizontalWind + somethingElse * dt));
         } while (resultingWind > MAXIMUM_WIND);
@@ -123,6 +123,14 @@ public class Controller {
 
     public double thrust(double mass, double height, double elapsedTime){
         return controller.velocity(mass, height, elapsedTime);
+    }
+
+    public double PD_ControllerX(double dt, double x_coord, double mass){
+        return controller.PD_ControllerX(dt, x_coord, mass);
+    }
+
+    public double PD_ControllerY(double dt, double x_coord, double mass){
+        return controller.PD_ControllerY(dt, x_coord, mass);
     }
 
 
