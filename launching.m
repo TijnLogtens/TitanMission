@@ -1,4 +1,4 @@
-function [v0,angle] = launching(vs,vp,r)
+function [] = launching(vs,vp,r)
 % r is the position vector
 vsp=vs-vp;
 magvsp=(vsp(1)^2+vsp(2)^2+vsp(3)^2)^0.5; %magnitude of vsp
@@ -9,4 +9,12 @@ v0=(magvsp^2+2*G*M/r0)^0.5;
 magr=(r(1)^2+r(2)^2+r(3)^2)^0.5; %magnitude of r
 magnitude=magr*magvsp;
 angle=acosd((r(1)*vsp(1)+r(2)*vsp(2)+r(3)*vsp(3))/magnitude);
+
+%disp(angle)
+%disp(v0)
+%calculate v0 vector
+v=[v0*cos(angle);v0*sin(angle)]
+
+%disp(v)
+
 end
