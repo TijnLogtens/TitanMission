@@ -31,8 +31,8 @@ public class FeedbackController implements ControllerInterface {
     private double kd_y = 0.0;
     private double kp_xe = 8;
     private double kd_xe = 0.00012;
-    private double kp_ye = 0.00001406;
-    private double ki_ye = 0.00000016241;
+    private double kp_ye = 0.000014062;
+    private double ki_ye = 0.0000001622;
     private double kd_ye = 0.0;
     private double last_error_x;
     private double last_error_y;
