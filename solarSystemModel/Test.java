@@ -242,7 +242,7 @@ public class Test extends Application {
 
         // Create Rocket
         Sphere rocket = new Sphere();
-        CelestialBody Rocket= new CelestialBody(Masses.getmRocket(),-1.490108621500159E+11, -2.126396301163715E+09, -6.271192280390987E+01, -2.988491242814953E+04);
+        CelestialBody Rocket= new CelestialBody(Masses.getmRocket(),-1.490108621500159E+11, -2.126396301163715E+09, -6.271192280390987E+01, -1.960821228653749E+10);
         rocket.setRadius(30);
         items.add(Rocket);
         /**
