@@ -13,7 +13,7 @@ angle=acosd((r(1)*vsp(1)+r(2)*vsp(2)+r(3)*vsp(3))/magnitude);
 %disp(angle)
 %disp(v0)
 %calculate v0 vector
-v=[v0*cos(angle);v0*sin(angle)]
+v=[v0*cos(angle);v0*sin(angle); (v0)^2-(v0*cos(angle))^2-(v0*sin(angle))^2]
 
 %disp(v)
 
