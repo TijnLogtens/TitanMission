@@ -240,6 +240,11 @@ public class Test extends Application {
         titan.setMaterial(m10);
         items.add(SVI);
 
+        // Create Rocket
+        Sphere rocket = new Sphere();
+        CelestialBody Rocket= new CelestialBody(Masses.getmRocket(),-1.490108621500159E+11, -2.126396301163715E+09, -6.271192280390987E+01, -2.988491242814953E+04);
+        rocket.setRadius(30);
+        items.add(Rocket);
         /**
          * add all the spheres and trails into a group to add them to the scene
          */

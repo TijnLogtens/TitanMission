@@ -66,6 +66,18 @@ public class CelestialBody {
 		}
 	}
 
+	CelestialBody(double mass, double x, double y, double vx, double vy) {
+		this.mass = mass;
+		this.x = x;
+		this.y = y;
+		//this.z = z;
+		this.vx = vx;
+		this.vy = vy;
+		//this.vz = vz;
+
+	}
+
+
 	//methods
 	/**
 	 * Calculate the sphere of influence

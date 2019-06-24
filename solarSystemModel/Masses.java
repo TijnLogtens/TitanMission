@@ -25,9 +25,14 @@ public abstract class Masses {
 	private final static double mRhea = 2.306518E21;
 	private final static double mTitan = 1.3452E23;
 	private final static double mIapetus = 1.805635E21;
+	private final static double mRocket = 100000;
 
 	public static double getmSun() {
 		return mSun;
+	}
+
+	public static double getmRocket() {
+		return mRocket;
 	}
 
 	public static double getmMercury() {
