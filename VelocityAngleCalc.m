@@ -15,17 +15,16 @@ vsp = [0 0 0];
 %G = the gravitational constant
 
 G = 6.67408E-11;
-M = 5.972E24; 
+M = 5.972E24;
 
 vsp(1) = vs(1) - vp(1);
 vsp(2) = vs(2) - vp(2);
-vsp(3) = vs(3) - vp(3);
+%vsp(3) = vs(3) - vp(3);
 
-v0 = sqrt(norm(vsp)^2+(2*G*M)/r0); 
+v0 = sqrt(norm(vsp)^2+(2*G*M)/r0);
 
-r = norm(rStart); 
-vinf = norm(vsp); 
-
-angle = acosd((rStart(1).*vsp(1)+rStart(2).*vsp(2)+rStart(3).*vsp(3))/(r*vinf));
+r = norm(rStart);
+vinf = norm(vsp);
+%+rStart(3).*vsp(3)
+angle = acosd((rStart(1).*vsp(1)+rStart(2).*vsp(2))/(r*vinf));
 end
-

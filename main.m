@@ -12,8 +12,8 @@
 
 %Set the trial values for the problem
 format long;
-rStart = [-1.490108621500159E+11 -2.126396301163715E+09]*149.597870E9; %23rd of march 2019
-rEnd = [1.43E+12  ]*149.597870E9; % add Titans y at the of 6yrs 221 days
+rStart = [-9.9606191276749E-01 -1.4213879018474E-03]; %23rd of march 2019
+rEnd = [9.5588235294118 -1.3107093774423E-02]; % add Titans y at the of 6yrs 221 days
 TOF = 208310400; % in seconds
 dTrueAnomaly = acosd((rStart(1)*rEnd(1) + rStart(2)*rEnd(2))/(norm(rStart)*norm(rEnd)));
 r0 = 6578140;
