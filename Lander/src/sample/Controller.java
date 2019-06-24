@@ -7,18 +7,31 @@ public class Controller {
 
     private double verticalWind;
     private double horizontalWind;
+    private double verWind;
+    private double horWind;
     private ControllerInterface controller;
     private final static double ERROR_MARGIN = 0.1;
     private final static double MAXIMUM_WIND = 120;
     private final static double EPSILON = 1;
     private static double initialVerticalWind;
     private static double initialHorizontalWind;
+    private static double initialHorizontalWindEarth;
+    private static double initialVerticalWindEarth;
+
 
     public Controller(boolean loop){
+        //Titan
         verticalWind = Math.random()*20-10;
         horizontalWind = Math.random()*100-50;
+        //Earth
+        verWind = 0;
+        horWind  = 0;
+        //Titan
         initialHorizontalWind = (int) horizontalWind;
         initialVerticalWind = (int) verticalWind;
+        //Earth
+        initialHorizontalWindEarth = (int) verWind;
+        initialVerticalWindEarth = (int) horWind;
         if(loop){
             controller = new FeedbackController();
         } else {
@@ -27,7 +40,7 @@ public class Controller {
     }
 
     private double windInX(double dt){
-        updateWind(dt);
+        updateTitanWind(dt);
         return -1;
     }
 
@@ -36,7 +49,7 @@ public class Controller {
     }
 
 
-    public void updateWind(double dt){
+    public void updateTitanWind(double dt){
         double resultingWind;
         double something;
         double somethingElse;
@@ -48,6 +61,21 @@ public class Controller {
         verticalWind += something * dt;
         horizontalWind += somethingElse * dt;
     }
+
+    public void updateEarthWind(double dt){
+        double resultingWind;
+        double something;
+        double somethingElse;
+        do {
+            something = Math.random() - 0.5;
+            somethingElse = Math.random() * 5 - 2.5;
+            resultingWind = Math.sqrt((verticalWind + something * dt) * (verticalWind + something * dt) + (horizontalWind + somethingElse * dt) * (horizontalWind + somethingElse * dt));
+        } while (resultingWind > MAXIMUM_WIND);
+        verticalWind += something * dt;
+        horizontalWind += somethingElse * dt;
+    }
+
+
 
 
     /*
