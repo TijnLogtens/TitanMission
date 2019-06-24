@@ -29,6 +29,7 @@ import javafx.scene.layout.BackgroundSize;
 import java.util.*;
 
 public class Test extends Application {
+    //variables
     int i = 0;
     private final double SCALAR_SIZE = 5E4;
     private final double DISTANCE_SIZE = 9E7;
@@ -45,6 +46,7 @@ public class Test extends Application {
     final DoubleProperty angleX = new SimpleDoubleProperty(0);
     final DoubleProperty angleY = new SimpleDoubleProperty(0);
 
+    //creates the rotation of the camera
     class BGroup extends Group {
 
         Rotate r;
@@ -65,6 +67,12 @@ public class Test extends Application {
         }
     }
 
+    /**
+     * initialise mouse control for rotating the panel
+     * @param group the elements to rotate in the @param scene
+     * @param scene the scene to rotate
+     * @param stage the stage the @param scene is applied to
+     */
     public void initialMouseControl(Group group, Scene scene, Stage stage) {
         Rotate xRotate;
         Rotate yRotate;
@@ -90,6 +98,11 @@ public class Test extends Application {
         });
     }
 
+    /**
+     * Initialise every Sphere and CelestialBody
+     * Initialise every location and trail (if applicable)
+     * 
+     */
     public void start(Stage stage) {
         ArrayList<CelestialBody> items = new ArrayList<>();
         // Drawing SUN
@@ -227,6 +240,9 @@ public class Test extends Application {
         titan.setMaterial(m10);
         items.add(SVI);
 
+        /**
+         * add all the spheres and trails into a group to add them to the scene
+         */
         // Creating a Group object
         Group root = new Group(sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, moon, titan);
         Group mercTrail = new Group(mercuryTrail);
@@ -244,6 +260,9 @@ public class Test extends Application {
         group.translateYProperty().set(10);
         group.translateZProperty().set(10);
 
+        /**
+         * add zoom options for the window
+         */
         stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
             case S:
@@ -293,7 +312,10 @@ public class Test extends Application {
         timeline.setAutoReverse(true);
 
         AnimationTimer timer = new AnimationTimer() {
-
+            /**
+             * Update the position of all CelestialBody's and update the position of all spheres
+             * update trails, if applicable
+             */
             @Override
             public void handle(long l) {
                 double[][] points = new double[items.size()][3];
@@ -307,7 +329,7 @@ public class Test extends Application {
                     }
                 }
                 days++;
-                /*
+                
                 updatePlanet(points[0], sun);
                 updatePlanet(points[1], mercury, mercuryIndex, mercuryTrail);
                 updatePlanet(points[2], venus, venusIndex, venusTrail);
@@ -328,7 +350,7 @@ public class Test extends Application {
                     (points[10][1] - sat.getY()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateY());
                 titan.setTranslateZ(
                     (points[10][2] - sat.getZ()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
-                */
+                
                 if(days <= (15 * 365) + 3){
                     System.out.println(points[10][0]);
                 } else {
@@ -356,7 +378,14 @@ public class Test extends Application {
         timeline.play();
         timer.start();
     }
-    
+    /**
+     * initialises a planet
+     * @param planet Sphere that represents the planet
+     * @param planetBody CelestialBody that represents the planet
+     * @param m PhongMaterial that represents the texture of the planet
+     * @param planetImage Image that represents the texture of the planet
+     * @param planetTrail Trail that should be linked to the planet
+     */
     private void initiatePlanet(Sphere planet, CelestialBody planetBody, PhongMaterial m, Image planetImage,
     Sphere[] planetTrail) {
         initiatePlanetLocation(planet, planetBody);
@@ -364,12 +393,22 @@ public class Test extends Application {
         initiatePlanetTrail(planet, planetTrail, m);
     }
     
+    /**
+     * initialises the location of the Sphere in the scene
+     * @param planet Sphere that represents the planet
+     * @param planetBody CelestialBody that represents the planet
+     */
     private void initiatePlanetLocation(Sphere planet, CelestialBody planetBody) {
         planet.setTranslateX((planetBody.getX() / DISTANCE_SIZE));
         planet.setTranslateY((planetBody.getY() / DISTANCE_SIZE));
         planet.setTranslateZ((planetBody.getZ() / DISTANCE_SIZE));
     }
-
+    /**
+     * initialises the appearance of the planet
+     * @param planet Sphere that represents the planet
+     * @param m PhongMaterial that should be applied to @param planet
+     * @param planetImage Image that should be applied to @param m
+     */
     private void initiatePlanetSprite(Sphere planet, PhongMaterial m, Image planetImage) {
         m.setDiffuseMap(planetImage);
         m.setSelfIlluminationMap(planetImage);
@@ -377,6 +416,12 @@ public class Test extends Application {
         planet.setMaterial(m);
     }
 
+    /**
+     * initialises the trail of the planet
+     * @param planet Sphere that represents the planet
+     * @param planetTrail array of the Spheres that represent the trail
+     * @param m PhongMaterial that should be applied to the Spheres in @param planetTrail
+     */
     private void initiatePlanetTrail(Sphere planet, Sphere[] planetTrail, PhongMaterial m) {
         for (int i = 0; i < 250; i++) {
             planetTrail[i] = new Sphere(3);
@@ -387,15 +432,31 @@ public class Test extends Application {
         }
     }
     
+    /**
+     * upates the planets
+     * @param points new location of the planet
+     * @param planet the Sphere that represents the planet
+     * @param planetIndex the index of the element that is needed in @param planetTrail
+     * @param planetTrail the array of spheres with the trail
+     */
     private void updatePlanet(double[] points, Sphere planet, int[] planetIndex, Sphere[] planetTrail) {
         updatePlanetLocation(points, planet);
         updatePlanetTrail(planet, planetIndex, planetTrail);
     }
-    
+    /**
+     * updates the planet (if no trail exists)
+     * @param points new position of the planet
+     * @param planet the Sphere that represents the planet
+     */
     private void updatePlanet(double[] points, Sphere planet) {
         updatePlanetLocation(points, planet);
     }
-    
+    /**
+     * updates the trail of the planet
+     * @param planet Sphere that represents the planet
+     * @param trailIndex index of the element that should be accessed in @param planetTrail
+     * @param planetTrail the trail of the planet
+     */
     private void updatePlanetTrail(Sphere planet, int[] trailIndex, Sphere[] planetTrail) {
         if (trailIndex[0] == 250) {
             trailIndex[0] = 0;
@@ -405,7 +466,11 @@ public class Test extends Application {
         planetTrail[trailIndex[0]].setTranslateZ(planet.getTranslateZ());
         trailIndex[0]++;
     }
-    
+    /**
+     * updates the position of the planet
+     * @param points array of new postion of the planet
+     * @param planet Sphere that represents the planet
+     */
     private void updatePlanetLocation(double[] points, Sphere planet) {
         planet.setTranslateX((points[0] / DISTANCE_SIZE));
         planet.setTranslateY((points[1] / DISTANCE_SIZE));
