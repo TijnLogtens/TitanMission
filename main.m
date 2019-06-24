@@ -4,7 +4,7 @@
 %the specific problem
 
 %Constants: rStart,rEnd,dTrueAnomaly,TOF
-%rStart = Position vector of probe at start 
+%rStart = Position vector of probe at start
 %rEnd = Position vector of probe at interception
 %dTrueAnomaly = the true anomaly of the tranfer orbit
 %TOF = desired time of flight
@@ -12,9 +12,9 @@
 
 %Set the trial values for the problem
 format long;
-rStart = [0.473265 -0.899215 0];
-rEnd = [0.066842 1.561256 0.030948];
-TOF = 17884800;
+rStart = [-1.490108621500159E+11 -2.126396301163715E+09]*149.597870E9; %23rd of march 2019
+rEnd = [1.43E+12  ]*149.597870E9; % add Titans y at the of 6yrs 221 days
+TOF = 208310400; % in seconds
 dTrueAnomaly = acosd((rStart(1)*rEnd(1) + rStart(2)*rEnd(2))/(norm(rStart)*norm(rEnd)));
 r0 = 6578140;
 
@@ -24,10 +24,9 @@ r0 = 6578140;
 %Calculates the Type-1 and Type-2 velocity vectors for the tranfser orbits
 [v1, v2] = ShortWayCalc(rStart,rEnd,f,g,df,dg);
 
-%Earth's velocity vector at start is vp
+%Earths velocity vector at start is vp
 vp = [25876.6 13759.5 0];
 
 [v0, angle] = VelocityAngleCalc(v1, vp, rStart, r0);
-%disp("boop");
-disp(v0);
-disp(angle);
+ v=[v0*cos(angle);v0*sin(angle)]
+ disp(angle);
