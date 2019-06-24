@@ -111,7 +111,7 @@ public class Main extends Application {
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
-        Lander lander = new Lander(4771, 0,GEOSTATIONARY_HEIGHT, 0,0);
+        Lander lander = new TitanLander(4771, 0,GEOSTATIONARY_HEIGHT, 0,0);
         int[] i = new int[]{0};
         AnimationTimer timer = new AnimationTimer() {
             @Override

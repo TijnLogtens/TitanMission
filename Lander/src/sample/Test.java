@@ -2,13 +2,13 @@ package sample;
 
 public class Test {
 
-    private static final double GEOSTATIONARY_HEIGHT = 72997653.14;
+    private static final double GEOSTATIONARY_HEIGHT = 42164000;//72997653.14;
 
     public static void main(String[] args) {
         double success = 0;
         double failure = 0;
         long iteration = 0;
-        Lander lander = new Lander(4771, 0, GEOSTATIONARY_HEIGHT, 0, 0);
+        Lander lander = new EarthLander(4771, 0, GEOSTATIONARY_HEIGHT, 0, 0);
         for (int j = 0; j < 10000000; j++) {
             for (int k = 0; k < 10000; k++) {
 
@@ -46,7 +46,7 @@ public class Test {
                     }
                 }
             }
-            lander = new Lander(4771, 0, GEOSTATIONARY_HEIGHT, 0, 0);
+            lander = new EarthLander(4771, 0, GEOSTATIONARY_HEIGHT, 0, 0);
         }
     }
 

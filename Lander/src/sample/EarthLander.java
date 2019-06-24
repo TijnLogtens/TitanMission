@@ -2,7 +2,7 @@ package sample;
 
 import java.util.*;
 
-public class TitanLander extends Lander {
+public class EarthLander extends Lander {
 
     private double mass;
     private double posX;
@@ -19,9 +19,10 @@ public class TitanLander extends Lander {
     private Controller controller;
     private double kerosene;
 
-    private final static double g = 1.352; //gravitational constant of Titan
+    private final static double g = 9.80665; //gravitational constant of Earth
     private final static double b = 0.75; //coefficient of drag of the rocket
-    public TitanLander(double mass, double posX, double posY, double speedX, double speedY){
+
+    public EarthLander(double mass, double posX, double posY, double speedX, double speedY){
         this.mass = mass;
         this.posX  = posX;
         this.posY = posY;
@@ -37,15 +38,15 @@ public class TitanLander extends Lander {
 
     public double[] update(double dt){
         this.elapsedTime += dt;
-        controller.updateTitanWind(dt);
+        controller.updateEarthWind(dt);
         controller.controllerCenter(posX, posY, dt);
         double newPosY = posY;
         double firstvy = CalculateVy(elapsedTime);
         if(posY>0) {
             if(controller.getVerticalWind() >= 0) {
-                newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())*b +/* (controller.thrust(kerosene, posY, elapsedTime) */ (controller.PD_ControllerYTitan(dt, posY, mass) * Math.cos(controller.getSideThruster()) * dt);
+                newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())*b + (controller.PD_ControllerYEarth(dt, posY, mass) * Math.cos(controller.getSideThruster()) * dt);
             } else {
-                newPosY += dt * firstvy - Math.sqrt(Math.abs(controller.getVerticalWind()))*b +/* (controller.thrust(kerosene, posY, elapsedTime) */ (controller.PD_ControllerYTitan(dt, posY, mass) * Math.cos(controller.getSideThruster()) * dt);
+                newPosY += dt * firstvy - Math.sqrt(Math.abs(controller.getVerticalWind()))*b + (controller.PD_ControllerYEarth(dt, posY, mass) * Math.cos(controller.getSideThruster()) * dt);
             }
         }
 
@@ -58,9 +59,9 @@ public class TitanLander extends Lander {
         */
         double newPosX;
         if(controller.getHorizontalWind() >= 0) {
-            newPosX = posX + (Math.sqrt(controller.getHorizontalWind()) + /*controller.thrust(kerosene, posY, elapsedTime) */ controller.PD_ControllerXTitan(dt, posX, mass) * Math.sin(controller.getSideThruster()) * dt);
+            newPosX = posX + (Math.sqrt(controller.getHorizontalWind()) + controller.PD_ControllerXEarth(dt, posX, mass) * Math.sin(controller.getSideThruster()) * dt);
         } else {
-            newPosX = posX - (Math.sqrt(Math.abs(controller.getHorizontalWind()))) + /*controller.thrust(kerosene, posY, elapsedTime) */ controller.PD_ControllerXTitan(dt, posX, mass) * Math.sin(controller.getSideThruster()) * dt;
+            newPosX = posX - (Math.sqrt(Math.abs(controller.getHorizontalWind()))) + controller.PD_ControllerXEarth(dt, posX, mass) * Math.sin(controller.getSideThruster()) * dt;
         }
 
         speedX = (newPosX-posX)/dt;

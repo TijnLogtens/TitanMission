@@ -111,7 +111,7 @@ public class MainEarth extends Application {
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
-        Lander lander = new Lander(4771, 0,GEOSTATIONARY_HEIGHT, 0,0);
+        Lander lander = new EarthLander(4771, 0,GEOSTATIONARY_HEIGHT, 0,0);
         int[] i = new int[]{0};
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -120,9 +120,11 @@ public class MainEarth extends Application {
                 if( lander.getPosY() > 0) {
                     double newPosition[] = new double[2];
                     for (int i = 0; i < 10; i++) {
-                        newPosition = lander.update(1);
-                        lander.setPosX(newPosition[0]);
-                        lander.setPosY(newPosition[1]);
+                        if(lander.getPosY()>0){
+                            newPosition = lander.update(1);
+                            lander.setPosX(newPosition[0]);
+                            lander.setPosY(newPosition[1]);
+                        }
                     }
                     //System.out.println(i[0]+" Y: "+newPosition[1]);
 
