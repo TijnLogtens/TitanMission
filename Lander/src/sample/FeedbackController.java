@@ -26,10 +26,10 @@ public class FeedbackController implements ControllerInterface {
     //PID Controller variables
 
     private double kp_x = 8;
-    private double kd_x = 0.000012;
-    private double kp_y = 0.00000073;
-    private double ki_y = 0.00000000605;
-    private double kd_y = 0.003;
+    private double kd_x = 0.00012;
+    private double kp_y = 0.000000852;
+    private double ki_y = 0.000000006;
+    private double kd_y = 0.00;
     private double last_error_x;
     private double last_error_y;
     private double errorSum;

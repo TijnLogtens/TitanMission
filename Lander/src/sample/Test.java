@@ -30,18 +30,18 @@ public class Test {
                         } else {
                             failure++;
                         }
-                        //if (iteration % 100 == 0) {
+                        if (iteration % 100 == 0) {
                             System.out.println(iteration + " " + (success / (success + failure) * 100));
-                        //}
+                        }
 
                         //lander.addLanding(getResult(newPosition, previousPosition));
                         break;
                     } else if(k >= 9999){
                         iteration++;
                         failure++;
-                        //if (iteration % 100 == 0) {
+                        if (iteration % 100 == 0) {
                             System.out.println(iteration + " " + (success / (success + failure) * 100));
-                        //}
+                        }
                         break;
                     }
                 }

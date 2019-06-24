@@ -41,7 +41,7 @@ public class Controller {
         double something;
         double somethingElse;
         do {
-            something = Math.random() * 0.5;
+            something = Math.random() - 0.5;
             somethingElse = Math.random() * 5 - 2.5;
             resultingWind = Math.sqrt((verticalWind + something * dt) * (verticalWind + something * dt) + (horizontalWind + somethingElse * dt) * (horizontalWind + somethingElse * dt));
         } while (resultingWind > MAXIMUM_WIND);
