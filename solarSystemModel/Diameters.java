@@ -1,5 +1,8 @@
 package solarSystemModel;
 
+/**
+ * Contains diameters (in meters) of all the Celestial bodies: Planets, Moons and Sun.
+ */
 public abstract class Diameters {
 	private final static double dSun = 1391400000;
 	private final static double dMercury = 4879400;

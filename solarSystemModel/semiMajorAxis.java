@@ -1,5 +1,8 @@
 package solarSystemModel;
 
+/**
+ * Class contains the semi major axis lengths for all Celestial Bodies and the getters for them.
+ */
 public abstract class semiMajorAxis {
 	
 	private final static double aMercury = 57910000000.0;
