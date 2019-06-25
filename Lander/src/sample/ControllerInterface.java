@@ -7,7 +7,7 @@ public interface ControllerInterface {
     double PD_ControllerXTitan(double dt, double x_coord, double mass);
     double PD_ControllerYTitan(double dt, double y_coord, double mass);    
     double PD_ControllerXEarth(double dt, double x_coord, double mass);
-    double PD_ControllerYEarth(double dt, double y_coord, double mass);
+    double PD_ControllerYEarth(double dt, double y_coord, double mass, double kerosene);
     double getSideThruster();
 
 }

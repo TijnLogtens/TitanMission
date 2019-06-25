@@ -1,7 +1,5 @@
 package sample;
 
-import java.util.*;
-
 public class FeedbackController implements ControllerInterface {
 
     /*
@@ -41,6 +39,7 @@ public class FeedbackController implements ControllerInterface {
     private double errorSum;
     private double errorSumEarth;
     private final double set_point = 0;
+    private final double ENGINE_POWER = 7257000; //Newton
 
     @Override
     public void controllerCenter(double windVelocityX, double windVelocityY, double posX, double posY, double dt) {
@@ -113,9 +112,9 @@ public class FeedbackController implements ControllerInterface {
 
         return output;
     }
-
     @Override
     public double PD_ControllerXEarth(double dt, double x_coord, double mass) {
+
 
         // Find all the working error variables
         double error = x_coord - set_point;
@@ -130,8 +129,8 @@ public class FeedbackController implements ControllerInterface {
     }
 
     @Override
-    public double PD_ControllerYEarth(double dt, double y_coord, double mass) {
-
+    public double PD_ControllerYEarth(double dt, double y_coord, double mass, double kerosene) {
+        if(kerosene==0) return 0;
         // Find all the working error variables
         double error = y_coord - set_point;
         errorSum += y_coord;
@@ -142,7 +141,13 @@ public class FeedbackController implements ControllerInterface {
 
         last_error_ye = error;
 
-        return output;
+        double a = dt * ENGINE_POWER * kerosene / (mass + kerosene);
+        double v = a*dt;
+        if(output > v){
+            return v;
+        } else {
+            return output;
+        }
     }
 
     public boolean getmakeMainThrusterStronger() {

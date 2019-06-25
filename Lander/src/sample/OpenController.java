@@ -35,7 +35,7 @@ public class OpenController implements ControllerInterface {
     }
     
     @Override
-    public double PD_ControllerYEarth(double dt, double x_coord, double mass){
+    public double PD_ControllerYEarth(double dt, double x_coord, double mass, double kerosene){
         return -1;
     }
 

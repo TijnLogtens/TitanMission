@@ -163,8 +163,8 @@ public class Controller {
         return controller.PD_ControllerXEarth(dt, x_coord, mass);
     }
 
-    public double PD_ControllerYEarth(double dt, double x_coord, double mass) {
-        return controller.PD_ControllerYEarth(dt, x_coord, mass);
+    public double PD_ControllerYEarth(double dt, double x_coord, double mass, double kerosene) {
+        return controller.PD_ControllerYEarth(dt, x_coord, mass, kerosene);
     }
 
     public void setVerticalWind(double verticalWind) {

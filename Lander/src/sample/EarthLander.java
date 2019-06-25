@@ -4,7 +4,7 @@ import java.util.*;
 
 public class EarthLander extends Lander {
 
-    private double mass;
+    private double dryMass;
     private double posX;
     private double posY;
     private double speedX;
@@ -22,15 +22,15 @@ public class EarthLander extends Lander {
     private final static double g = 9.80665; //gravitational constant of Earth
     private final static double b = 0.75; //coefficient of drag of the rocket
 
-    public EarthLander(double mass, double posX, double posY, double speedX, double speedY){
-        this.mass = mass;
+    public EarthLander(double dryMass, double posX, double posY, double speedX, double speedY){
+        this.dryMass = dryMass;
         this.posX  = posX;
         this.posY = posY;
         this.speedX = speedX;
         this.speedY = speedY;
         this.elapsedTime = 0;
-        this.kerosene = this.mass * 0.98;
-        this.thrust = new FeedbackController();
+        this.kerosene = this.dryMass * 0.98;
+        //this.thrust = new FeedbackController();
         //loop == true -> feedback loop
         //loop == false -> open loop
         this.controller = new Controller(true);
@@ -42,26 +42,27 @@ public class EarthLander extends Lander {
         controller.controllerCenter(posX, posY, dt);
         double newPosY = posY;
         double firstvy = CalculateVy(elapsedTime);
+        double thrustPower = (controller.PD_ControllerYEarth(dt, posY, dryMass, kerosene) * Math.cos(controller.getSideThruster()) * dt);
         if(posY>0) {
             if(controller.getVerticalWind() >= 0) {
-                newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())*b + (controller.PD_ControllerYEarth(dt, posY, mass) * Math.cos(controller.getSideThruster()) * dt);
+                newPosY += dt * firstvy + Math.sqrt(controller.getVerticalWind())*b + thrustPower;
             } else {
-                newPosY += dt * firstvy - Math.sqrt(Math.abs(controller.getVerticalWind()))*b + (controller.PD_ControllerYEarth(dt, posY, mass) * Math.cos(controller.getSideThruster()) * dt);
+                newPosY += dt * firstvy - Math.sqrt(Math.abs(controller.getVerticalWind()))*b + thrustPower;
             }
         }
 
         /*
-        double dKerosene = ((mass * g * dt)/22.749);
+        double dKerosene = ((dryMass * g * dt)/22.749);
         if((kerosene - dKerosene) > 0) {
             kerosene = kerosene - dKerosene;
-            mass -= dKerosene;
+            dryMass -= dKerosene;
         }
         */
         double newPosX;
         if(controller.getHorizontalWind() >= 0) {
-            newPosX = posX + (Math.sqrt(controller.getHorizontalWind()) + controller.PD_ControllerXEarth(dt, posX, mass) * Math.sin(controller.getSideThruster()) * dt);
+            newPosX = posX + (Math.sqrt(controller.getHorizontalWind()) + controller.PD_ControllerXEarth(dt, posX, dryMass) * Math.sin(controller.getSideThruster()) * dt);
         } else {
-            newPosX = posX - (Math.sqrt(Math.abs(controller.getHorizontalWind()))) + controller.PD_ControllerXEarth(dt, posX, mass) * Math.sin(controller.getSideThruster()) * dt;
+            newPosX = posX - (Math.sqrt(Math.abs(controller.getHorizontalWind()))) + controller.PD_ControllerXEarth(dt, posX, dryMass) * Math.sin(controller.getSideThruster()) * dt;
         }
 
         speedX = (newPosX-posX)/dt;
@@ -70,16 +71,16 @@ public class EarthLander extends Lander {
     }
 
     public double CalculateVy(double dt){
-        return -1*(( mass * g) / b - ( mass * g) / b * Math.exp((-b)/ mass * dt));
+        return -1*(( dryMass * kerosene * g) / b - ( dryMass * kerosene * g) / b * Math.exp((-b)/ (dryMass*kerosene) * dt));
     }
 
 
-    public double getMass() {
-        return mass;
+    public double getDryMass() {
+        return dryMass;
     }
 
-    public void setMass(double mass) {
-        this.mass = mass;
+    public void setDryMass(double dryMass) {
+        this.dryMass = dryMass;
     }
 
     public double getPosX() {

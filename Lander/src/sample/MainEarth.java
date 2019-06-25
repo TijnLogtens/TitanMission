@@ -111,7 +111,7 @@ public class MainEarth extends Application {
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
-        Lander lander = new EarthLander(4771, 0,GEOSTATIONARY_HEIGHT, 0,0);
+        Lander lander = new EarthLander(110000, 0, GEOSTATIONARY_HEIGHT, 0, 0);
         int[] i = new int[]{0};
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -133,7 +133,7 @@ public class MainEarth extends Application {
                     //System.out.println(lander.getSideThruster());
                     rocket.setTranslateX(-(lander.getPosX()/1E2) + WIDTH/2);
                     rocket.setTranslateY(-(lander.getPosY()/1E5) + 750 - tMoon.getRadius() - (rocket.getHeight()-30)/2);
-                    rocket.setRotate(-lander.getSideThruster()*180/Math.PI);
+                    //rocket.setRotate(-lander.getSideThruster()*180/Math.PI);
                     i[0]++;
                 } else {
                     System.exit(0);
@@ -167,4 +167,3 @@ public class MainEarth extends Application {
 
     public static void main(String[] args) { launch(args);}
 }
-
