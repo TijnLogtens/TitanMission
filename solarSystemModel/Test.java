@@ -23,14 +23,16 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
+
 public class Test extends Application {
-    //variables
+    // variables
     int i = 0;
     private final double SCALAR_SIZE = 5E4;
     private final double DISTANCE_SIZE = 9E7;
     private final double MOON_SCALAR = 7E1;
     private final double TITAN_SCALAR = MOON_SCALAR * 1.75;
     private final double dt = 0.5;
+    private boolean canContinue = false;
 
     private int days = 0;
 
@@ -38,10 +40,13 @@ public class Test extends Application {
     double anchorY;
     double anchorAngleX = 0;
     double anchorAngleY = 0;
+    double initialTitanX = 3.537424927743304E+11;
+    double initialTitanY = -1.462539028125231E+12;
+    double minDifference = Double.MAX_VALUE;
     final DoubleProperty angleX = new SimpleDoubleProperty(0);
     final DoubleProperty angleY = new SimpleDoubleProperty(0);
 
-    //creates the rotation of the camera
+    // creates the rotation of the camera
     class BGroup extends Group {
 
         Rotate r;
@@ -64,6 +69,7 @@ public class Test extends Application {
 
     /**
      * initialise mouse control for rotating the panel
+     * 
      * @param group the elements to rotate in the @param scene
      * @param scene the scene to rotate
      * @param stage the stage the @param scene is applied to
@@ -94,8 +100,8 @@ public class Test extends Application {
     }
 
     /**
-     * Initialise every Sphere and CelestialBody
-     * Initialise every location and trail (if applicable)
+     * Initialise every Sphere and CelestialBody Initialise every location and trail
+     * (if applicable)
      * 
      */
     public void start(Stage stage) {
@@ -237,14 +243,16 @@ public class Test extends Application {
 
         // Create Rocket
         Sphere rocket = new Sphere();
-        CelestialBody Rocket= new CelestialBody(Masses.getmRocket(),-1.490108621500159E+11, -2.126396301163715E+09, -1.185429268224091E+04, 2.365168964595611E+04);
-        rocket.setRadius(30);
+        CelestialBody Rocket = new CelestialBody(Masses.getmRocket(), -1.48994114668E+11, -4.708050346E+09,
+            -1.979696135723772E+04, -3.103065827396854E+04);
+        rocket.setRadius(300);
+        rocket.setMaterial(m10);
         items.add(Rocket);
         /**
          * add all the spheres and trails into a group to add them to the scene
          */
         // Creating a Group object
-        Group root = new Group(sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, moon, titan);
+        Group root = new Group(sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, moon, titan, rocket);
         Group mercTrail = new Group(mercuryTrail);
         Group venTrail = new Group(venusTrail);
         Group earTrail = new Group(earthTrail);
@@ -313,15 +321,24 @@ public class Test extends Application {
 
         AnimationTimer timer = new AnimationTimer() {
             /**
-             * Update the position of all CelestialBody's and update the position of all spheres
-             * update trails, if applicable
+             * Update the position of all CelestialBody's and update the position of all
+             * spheres update trails, if applicable
              */
             @Override
             public void handle(long l) {
                 double[][] points = new double[items.size()][3];
-                for (int i = 0; i < 24*60*60*2; i++) {
+                points[11][0] = Rocket.getX();
+                points[11][1] = Rocket.getY();
+                points[11][2] = Rocket.getZ();
+                for (int i = 0; i < 24 * 60 * 60 * 2; i++) {
                     for (int j = 0; j < items.size(); j++) {
-                        points[j] = items.get(j).update(items, dt);
+                        if(j != 11){
+                            points[j] = items.get(j).update(items, dt);
+                        } else if (!canContinue){
+                            canContinue = true;
+                        } else {
+                            points[j] = items.get(j).update(items, dt);
+                        }
                     }
 
                     for (int j = 0; j < items.size(); j++) {
@@ -345,14 +362,26 @@ public class Test extends Application {
                 moon.setTranslateZ((points[9][2] - ear.getZ()) * MOON_SCALAR / DISTANCE_SIZE + earth.getTranslateZ());
 
                 titan.setTranslateX(
-                    (points[10][0] - sat.getX()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateX());
+                        (points[10][0] - sat.getX()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateX());
                 titan.setTranslateY(
-                    (points[10][1] - sat.getY()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateY());
+                        (points[10][1] - sat.getY()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateY());
                 titan.setTranslateZ(
-                    (points[10][2] - sat.getZ()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
+                        (points[10][2] - sat.getZ()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
+
+                updatePlanet(points[11], rocket);
                 
-                if(days <= (15 * 365) + 3){
-                    System.out.println(points[10][0]);
+                if(Math.sqrt((points[11][0]-points[10][0])*(points[11][0]-points[10][0]) + (points[11][1]-points[10][1])*(points[11][1]-points[10][1])) < minDifference){
+                    minDifference = Math.sqrt((points[11][0]-points[10][0])*(points[11][0]-points[10][0]) + (points[11][1]-points[10][1])*(points[11][1]-points[10][1]));
+                    System.out.println(days +" "+ minDifference);
+                }
+                
+                
+                if(Math.abs(points[11][0]-initialTitanX) < Diameters.getdTitan() && Math.abs(points[11][1]-initialTitanY) < Diameters.getdTitan()){
+                    System.out.println("WE MADE IT");
+                    System.out.println(points[10][0] + " " + points[10][1]);
+                }
+                if (days <= (15 * 365) + 3) {
+                 //   System.out.println(points[10][1]);
                 } else {
                     System.exit(0);
                 }
@@ -376,24 +405,27 @@ public class Test extends Application {
         timeline.play();
         timer.start();
     }
+
     /**
      * initialises a planet
-     * @param planet Sphere that represents the planet
-     * @param planetBody CelestialBody that represents the planet
-     * @param m PhongMaterial that represents the texture of the planet
+     * 
+     * @param planet      Sphere that represents the planet
+     * @param planetBody  CelestialBody that represents the planet
+     * @param m           PhongMaterial that represents the texture of the planet
      * @param planetImage Image that represents the texture of the planet
      * @param planetTrail Trail that should be linked to the planet
      */
     private void initiatePlanet(Sphere planet, CelestialBody planetBody, PhongMaterial m, Image planetImage,
-    Sphere[] planetTrail) {
+            Sphere[] planetTrail) {
         initiatePlanetLocation(planet, planetBody);
         initiatePlanetSprite(planet, m, planetImage);
         initiatePlanetTrail(planet, planetTrail, m);
     }
-    
+
     /**
      * initialises the location of the Sphere in the scene
-     * @param planet Sphere that represents the planet
+     * 
+     * @param planet     Sphere that represents the planet
      * @param planetBody CelestialBody that represents the planet
      */
     private void initiatePlanetLocation(Sphere planet, CelestialBody planetBody) {
@@ -401,10 +433,12 @@ public class Test extends Application {
         planet.setTranslateY((planetBody.getY() / DISTANCE_SIZE));
         planet.setTranslateZ((planetBody.getZ() / DISTANCE_SIZE));
     }
+
     /**
      * initialises the appearance of the planet
-     * @param planet Sphere that represents the planet
-     * @param m PhongMaterial that should be applied to @param planet
+     * 
+     * @param planet      Sphere that represents the planet
+     * @param m           PhongMaterial that should be applied to @param planet
      * @param planetImage Image that should be applied to @param m
      */
     private void initiatePlanetSprite(Sphere planet, PhongMaterial m, Image planetImage) {
@@ -416,9 +450,11 @@ public class Test extends Application {
 
     /**
      * initialises the trail of the planet
-     * @param planet Sphere that represents the planet
+     * 
+     * @param planet      Sphere that represents the planet
      * @param planetTrail array of the Spheres that represent the trail
-     * @param m PhongMaterial that should be applied to the Spheres in @param planetTrail
+     * @param m           PhongMaterial that should be applied to the Spheres
+     *                    in @param planetTrail
      */
     private void initiatePlanetTrail(Sphere planet, Sphere[] planetTrail, PhongMaterial m) {
         for (int i = 0; i < 250; i++) {
@@ -429,30 +465,36 @@ public class Test extends Application {
             planetTrail[i].setMaterial(m);
         }
     }
-    
+
     /**
      * upates the planets
-     * @param points new location of the planet
-     * @param planet the Sphere that represents the planet
-     * @param planetIndex the index of the element that is needed in @param planetTrail
+     * 
+     * @param points      new location of the planet
+     * @param planet      the Sphere that represents the planet
+     * @param planetIndex the index of the element that is needed in @param
+     *                    planetTrail
      * @param planetTrail the array of spheres with the trail
      */
     private void updatePlanet(double[] points, Sphere planet, int[] planetIndex, Sphere[] planetTrail) {
         updatePlanetLocation(points, planet);
         updatePlanetTrail(planet, planetIndex, planetTrail);
     }
+
     /**
      * updates the planet (if no trail exists)
+     * 
      * @param points new position of the planet
      * @param planet the Sphere that represents the planet
      */
     private void updatePlanet(double[] points, Sphere planet) {
         updatePlanetLocation(points, planet);
     }
+
     /**
      * updates the trail of the planet
-     * @param planet Sphere that represents the planet
-     * @param trailIndex index of the element that should be accessed in @param planetTrail
+     * 
+     * @param planet      Sphere that represents the planet
+     * @param trailIndex  index of the element that should be accessed in @param planetTrail
      * @param planetTrail the trail of the planet
      */
     private void updatePlanetTrail(Sphere planet, int[] trailIndex, Sphere[] planetTrail) {
@@ -464,8 +506,10 @@ public class Test extends Application {
         planetTrail[trailIndex[0]].setTranslateZ(planet.getTranslateZ());
         trailIndex[0]++;
     }
+
     /**
      * updates the position of the planet
+     * 
      * @param points array of new postion of the planet
      * @param planet Sphere that represents the planet
      */
@@ -474,7 +518,7 @@ public class Test extends Application {
         planet.setTranslateY((points[1] / DISTANCE_SIZE));
         planet.setTranslateZ((points[2] / DISTANCE_SIZE));
     }
-    
+
     public static void main(String[] args) {
         Application.launch(args);
     }
