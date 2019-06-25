@@ -31,7 +31,7 @@ public class Test {
                             failure++;
                         }
                         if (iteration % 100 == 0) {
-                        //    System.out.println(iteration + " " + (success / (success + failure) * 100));
+                            System.out.println(iteration + " " + (success / (success + failure) * 100));
                         }
 
                         //lander.addLanding(getResult(newPosition, previousPosition));
