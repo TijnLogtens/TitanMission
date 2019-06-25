@@ -1,32 +1,27 @@
-import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
 import javafx.application.Application;
-import javafx.scene.image.Image;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.shape.Sphere;
-import javafx.scene.paint.PhongMaterial;
-import javafx.scene.layout.Pane;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.Camera;
-import javafx.scene.PerspectiveCamera;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.EventHandler;
+import javafx.scene.Camera;
+import javafx.scene.Group;
+import javafx.scene.PerspectiveCamera;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Transform;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundSize;
-import java.util.*;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.util.ArrayList;
 
 public class Test extends Application {
     //variables
@@ -242,7 +237,7 @@ public class Test extends Application {
 
         // Create Rocket
         Sphere rocket = new Sphere();
-        CelestialBody Rocket= new CelestialBody(Masses.getmRocket(),-1.490108621500159E+11, -2.126396301163715E+09, -6.271192280390987E+01, -1.960821228653749E+10);
+        CelestialBody Rocket= new CelestialBody(Masses.getmRocket(),-1.490108621500159E+11, -2.126396301163715E+09, -1.185429268224091E+04, 2.365168964595611E+04);
         rocket.setRadius(30);
         items.add(Rocket);
         /**
@@ -367,12 +362,10 @@ public class Test extends Application {
         // create a keyFrame, the keyValue is reached at time 2s
         Duration duration = Duration.millis(1);
         // one can add a specific action when the keyframe is reached
-        EventHandler<ActionEvent> onFinished = new EventHandler<>() {
-            public void handle(ActionEvent t) {
-                // stack.setTranslateX(100); //java.lang.Math.random()*200-100
-                // reset counter
-                // i = 0;
-            }
+        EventHandler onFinished = t -> {
+            // stack.setTranslateX(100); //java.lang.Math.random()*200-100
+            // reset counter
+            // i = 0;
         };
 
         KeyFrame keyFrame = new KeyFrame(duration, onFinished); // keyValueX, keyValueY
