@@ -1,11 +1,7 @@
-package solarSystemModel;
-
-/**
- * Class contains masses of all Celestial Bodies and the getters for them.
- */
+//package solarSystemModel;
 
 public abstract class Masses {
-	
+
 	private final static double mSun = 1.988500E30;
 	private final static double mMercury = 0.33011E24;
 	private final static double mVenus = 4.8675E24;
@@ -29,73 +25,100 @@ public abstract class Masses {
 	private final static double mRhea = 2.306518E21;
 	private final static double mTitan = 1.3452E23;
 	private final static double mIapetus = 1.805635E21;
+	private final static double mRocket = 100000;
 
 	public static double getmSun() {
 		return mSun;
 	}
+
+	public static double getmRocket() {
+		return mRocket;
+	}
+
 	public static double getmMercury() {
 		return mMercury;
 	}
+
 	public static double getmVenus() {
 		return mVenus;
 	}
+
 	public static double getmEarth() {
 		return mEarth;
 	}
+
 	public static double getmMars() {
 		return mMars;
 	}
+
 	public static double getmJupiter() {
 		return mJupiter;
 	}
+
 	public static double getmSaturn() {
 		return mSaturn;
 	}
+
 	public static double getmNeptune() {
 		return mNeptune;
 	}
+
 	public static double getmUranus() {
 		return mUranus;
 	}
+
 	public static double getmMoon() {
 		return mMoon;
 	}
+
 	public static double getmPhobos() {
 		return mPhobos;
 	}
+
 	public static double getmDeimos() {
 		return mDeimos;
 	}
+
 	public static double getmIo() {
 		return mIo;
 	}
+
 	public static double getmEuropa() {
 		return mEuropa;
 	}
+
 	public static double getmGanymede() {
 		return mGanymede;
 	}
+
 	public static double getmCallisto() {
 		return mCallisto;
 	}
+
 	public static double getmMimas() {
 		return mMimas;
 	}
+
 	public static double getmEnceladus() {
 		return mEnceladus;
 	}
+
 	public static double getmTethys() {
 		return mTethys;
 	}
+
 	public static double getmDione() {
 		return mDione;
 	}
+
 	public static double getmRhea() {
 		return mRhea;
 	}
+
 	public static double getmTitan() {
 		return mTitan;
 	}
+
 	public static double getmIapetus() {
 		return mIapetus;
 	}
