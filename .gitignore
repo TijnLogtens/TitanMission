@@ -1,7 +1,0 @@
-.idea
-*.class
-out
-.DS_Store
-.vscode
-launch.json
-*.iml
