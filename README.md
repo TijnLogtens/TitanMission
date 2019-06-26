@@ -11,6 +11,8 @@ Coordinates of bodies: https://ssd.jpl.nasa.gov/horizons.cgi
 Hohmann transfer orbit: https://www.instructables.com/id/Calculating-a-Hohmann-Transfer/
 http://plato.acadiau.ca/courses/phys/astro/homework/orbitrnf.htm https://ocw.mit.edu/courses/aeronautics-and-astronautics/16-07-dynamics-fall-2009/lecture-notes/MIT16_07F09_Lec17.pdf
 Coordinates: https://ssd.jpl.nasa.gov/horizons.cgi
+http://www.aerospacengineering.net/liquid-oxygen-kerosene/
+
 
 Trajectory calculator:
 Use files: main.m pIteration.m VelocityAngleCalc.m ShortWayCalc.m
