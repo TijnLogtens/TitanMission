@@ -3,7 +3,7 @@ function [p,atx,i,f,g,df,dg] = pIteration(rStart,rEnd,dTrueAnomaly,TOF,error)
 % the transfer orbit.
 
 % Define problem independent constant
-GM = 1.32684452150e+20/((149.597870e9)^3); %AU^3/s^2
+GM = 1.32684452150E20/((149.597870E9)^3); %AU^3/s^2
 r1 = norm(rStart);
 r2 = norm(rEnd);
 
