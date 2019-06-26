@@ -39,4 +39,10 @@ public class OpenController implements ControllerInterface {
         return -1;
     }
 
+    @Override
+    public double getSum_thrust_Titan(){return -1;}
+
+    @Override
+    public double getSum_thrust_Earth(){return -1;}
+
 }

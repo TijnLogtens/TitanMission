@@ -40,6 +40,8 @@ public class FeedbackController implements ControllerInterface {
     private double errorSumEarth;
     private final double set_point = 0;
     private final double ENGINE_POWER = 7257000; //Newton
+    private double sum_thrust_Titan = 0;
+    private double sum_thrust_Earth = 0;
 
     @Override
     public void controllerCenter(double windVelocityX, double windVelocityY, double posX, double posY, double dt) {
@@ -110,6 +112,9 @@ public class FeedbackController implements ControllerInterface {
 
         last_error_y = error;
 
+        //Sum the thrust
+        sum_thrust_Titan += output * mass;
+
         return output;
     }
     @Override
@@ -141,6 +146,9 @@ public class FeedbackController implements ControllerInterface {
 
         last_error_ye = error;
 
+        //Sum the thrust
+        sum_thrust_Earth += output * mass;
+
         double a = dt * ENGINE_POWER * kerosene / (mass + kerosene);
         double v = a*dt;
         if(output > v){
@@ -161,6 +169,14 @@ public class FeedbackController implements ControllerInterface {
 
     public void setSideThruster(double sideThruster) {
         this.sideThruster = sideThruster;
+    }
+
+    public double getSum_thrust_Titan(){
+        return sum_thrust_Titan;
+    }
+
+    public double getSum_thrust_Earth(){
+        return sum_thrust_Earth;
     }
 
 }

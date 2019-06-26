@@ -18,6 +18,7 @@ public class EarthLander extends Lander {
     private FeedbackController thrust;
     private Controller controller;
     private double kerosene;
+    private double counter = 0;
 
     private final static double g = 9.80665; //gravitational constant of Earth
     private final static double b = 0.75; //coefficient of drag of the rocket
@@ -37,6 +38,7 @@ public class EarthLander extends Lander {
     }
 
     public double[] update(double dt){
+         counter++;
         this.elapsedTime += dt;
         controller.updateEarthWind(dt);
         controller.controllerCenter(posX, posY, dt);
@@ -163,5 +165,15 @@ public class EarthLander extends Lander {
     }
     public void addLanding(int result){
         controller.writeToFile(result);
+    }
+
+    public double getTotalMass(){return dryMass + kerosene;}
+
+    public double getSum_Thrust_Earth(){
+        return controller.getSum_thrust_Earth();
+    }
+
+    public double getCounter(){
+        return counter;
     }
 }

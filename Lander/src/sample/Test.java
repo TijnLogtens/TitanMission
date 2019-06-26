@@ -1,6 +1,6 @@
 package sample;
 
-public class SolarSystemMain {
+public class Test {
 
     private static final double GEOSTATIONARY_HEIGHT = 42164000;//72997653.14;
 

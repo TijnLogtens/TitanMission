@@ -26,9 +26,12 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 
-public class Test extends Application {
+public class SolarSystemMain extends Application {
     // variables
     int i = 0;
+
+    private double initial_vx = -0.794796007452525E+04;
+    private double initial_vy = -1.595574212795757E+04;
     private final double SCALAR_SIZE = 5E4;
     private final double DISTANCE_SIZE = 9E7;
     private final double MOON_SCALAR = 7E1;
@@ -246,7 +249,7 @@ public class Test extends Application {
         // Create Rocket
         Sphere rocket = new Sphere();
         CelestialBody Rocket = new CelestialBody(Masses.getmRocket(), -1.48994114668E+11, -4.708050346E+09,
-            -0.794796007452525E+04, -1.595574212795757E+04);
+                initial_vx , initial_vy );
         rocket.setRadius(300);
         rocket.setMaterial(m10);
         items.add(Rocket);
@@ -520,6 +523,14 @@ public class Test extends Application {
         planet.setTranslateX((points[0] / DISTANCE_SIZE));
         planet.setTranslateY((points[1] / DISTANCE_SIZE));
         planet.setTranslateZ((points[2] / DISTANCE_SIZE));
+    }
+
+    public double getInitial_vx(){
+        return initial_vx;
+    }
+
+    public double getInitial_vy(){
+        return initial_vy;
     }
 
     public static void main(String[] args) {

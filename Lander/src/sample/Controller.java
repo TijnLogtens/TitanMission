@@ -186,4 +186,8 @@ public class Controller {
     public double getSideThruster() {
         return controller.getSideThruster();
     }
+
+    public double  getSum_thrust_Titan(){ return controller.getSum_thrust_Titan();}
+
+    public double getSum_thrust_Earth(){ return controller.getSum_thrust_Earth();}
 }

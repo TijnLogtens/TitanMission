@@ -18,6 +18,7 @@ public class TitanLander extends Lander {
     private FeedbackController thrust;
     private Controller controller;
     private double kerosene;
+    private double counter =0;
 
     private final static double g = 1.352; //gravitational constant of Titan
     private final static double b = 0.75; //coefficient of drag of the rocket
@@ -36,6 +37,7 @@ public class TitanLander extends Lander {
     }
 
     public double[] update(double dt){
+        counter++;
         this.elapsedTime += dt;
         controller.updateTitanWind(dt);
         controller.controllerCenter(posX, posY, dt);
@@ -162,4 +164,13 @@ public class TitanLander extends Lander {
     public void addLanding(int result){
         controller.writeToFile(result);
     }
+
+    public double getSum_Thrust_Titan(){
+        return controller.getSum_thrust_Titan();
+    }
+
+    public double getCounter(){
+        return counter;
+    }
 }
+

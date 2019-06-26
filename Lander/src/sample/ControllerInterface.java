@@ -9,5 +9,7 @@ public interface ControllerInterface {
     double PD_ControllerXEarth(double dt, double x_coord, double mass);
     double PD_ControllerYEarth(double dt, double y_coord, double mass, double kerosene);
     double getSideThruster();
+    double  getSum_thrust_Titan();
+    double  getSum_thrust_Earth();
 
 }
