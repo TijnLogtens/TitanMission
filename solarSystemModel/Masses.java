@@ -1,5 +1,9 @@
 package solarSystemModel;
 
+/**
+ * Class contains masses of all Celestial Bodies and the getters for them.
+ */
+
 public abstract class Masses {
 	
 	private final static double mSun = 1.988500E30;

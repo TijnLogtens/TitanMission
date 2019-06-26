@@ -6,11 +6,11 @@ public class Probe {
         double vE=29.8;
         //transfer transfers km to au
         double transfer = 6.6845871226706 * Math.pow(10, -9);
-        //d1 is the distance between Saturn and Titan
+        //d1 is the distance between Saturn and Titan in km
         double d1 = 1016860.465;
-        //d2 is the distance between Saturn and Sun
+        //d2 is the distance between Saturn and Sun in km
         double d2 = 1504376476;
-        //d3 is the distance between Earth and Sun
+        //d3 is the distance between Earth and Sun in km
         double d3 = 149010862.2;
         //rP is the distance between Earth and Sun
         double rP = d3;
@@ -37,24 +37,26 @@ public class Probe {
         double vP = vC * Math.pow(((1 + e )/( 1 - e)), 0.5);
         //v is the vP transferred to km/s
         double v = vP / transfer / (3600 * 24 * 365);
-        //v1 is the initial velocity
-        double v1 = Math.pow(2 * 0.5 * Math.pow(v-vE, 2) + g * R * Math.pow(10, -3), 0.5);
-
-        System.out.println(v1);
-        System.out.println(time);
-        System.out.println(aS);
-        System.out.println(aT);
-        System.out.println(v);
+        //v1 is the velocity after escaping Earth
+        double v1=v-vE;
+        //v2 is the initial velocity
+        double v2 = Math.pow(2 * 0.5 * Math.pow(v1, 2) + g * R * Math.pow(10, -3), 0.5);
 
 
-        double x1=d2*Math.sin(90-aS);
-        double x2=-x1;
-        double y1=d2*Math.cos(90-aS);
-        double y2=-y1;
-        System.out.println("("+x1+","+y1+")");
-        System.out.println("("+x1+","+y2+")");
-        System.out.println("("+x2+","+y1+")");
-        System.out.println("("+x2+","+y2+")");
+        System.out.println("The velocity after escaping Earth(km/s): "+v1);
+        System.out.println("The time from earth to Titan(years): "+time);
+        System.out.println("The angle that Saturn changed: "+aS);
+        System.out.println("The angle that Titan changed: "+aT);
+        System.out.println("The initial launching velocity(km/s): "+v2);
+
+
+        double c=d2*Math.sin(Math.toRadians(90-aS));
+        double b=d2*Math.cos(Math.toRadians(90-aS));
+        System.out.println("The possible positions of Saturn and Earth when launching the probe: ");
+        System.out.println("Saturn: ("+b+","+c+")  Earth:(0,"+(-d3)+")");
+        System.out.println("("+c+","+(-b)+")  Earth:("+(-d3)+",0)");
+        System.out.println("("+(-b)+","+(-c)+")  Earth:(0,"+(d3)+")");
+        System.out.println("("+(-c)+","+b+")  Earth:("+(d3)+",0)");
     }
     public static void main(String args[]) {
         calculate();
