@@ -31,7 +31,7 @@ public class Test extends Application {
     private final double DISTANCE_SIZE = 9E7;
     private final double MOON_SCALAR = 7E1;
     private final double TITAN_SCALAR = MOON_SCALAR * 1.75;
-    private final double dt = 0.5;
+    private final double dt = 10;
     private boolean canContinue = false;
 
     private int days = 0;
@@ -244,7 +244,7 @@ public class Test extends Application {
         // Create Rocket
         Sphere rocket = new Sphere();
         CelestialBody Rocket = new CelestialBody(Masses.getmRocket(), -1.48994114668E+11, -4.708050346E+09,
-            -1.979696135723772E+04, -3.103065827396854E+04);
+            -0.794796007452525E+04, -1.595574212795757E+04);
         rocket.setRadius(300);
         rocket.setMaterial(m10);
         items.add(Rocket);
@@ -330,7 +330,7 @@ public class Test extends Application {
                 points[11][0] = Rocket.getX();
                 points[11][1] = Rocket.getY();
                 points[11][2] = Rocket.getZ();
-                for (int i = 0; i < 24 * 60 * 60 * 2; i++) {
+                for (int i = 0; i < 24 * 60 * 60 * 0.1; i++) {
                     for (int j = 0; j < items.size(); j++) {
                         if(j != 11){
                             points[j] = items.get(j).update(items, dt);
@@ -369,19 +369,20 @@ public class Test extends Application {
                         (points[10][2] - sat.getZ()) * TITAN_SCALAR / DISTANCE_SIZE + saturn.getTranslateZ());
 
                 updatePlanet(points[11], rocket);
-                
+                /*
                 if(Math.sqrt((points[11][0]-points[10][0])*(points[11][0]-points[10][0]) + (points[11][1]-points[10][1])*(points[11][1]-points[10][1])) < minDifference){
                     minDifference = Math.sqrt((points[11][0]-points[10][0])*(points[11][0]-points[10][0]) + (points[11][1]-points[10][1])*(points[11][1]-points[10][1]));
                     System.out.println(days +" "+ minDifference);
                 }
-                
+                */
+                //System.out.println(Rocket.getVx());
                 
                 if(Math.abs(points[11][0]-initialTitanX) < Diameters.getdTitan() && Math.abs(points[11][1]-initialTitanY) < Diameters.getdTitan()){
                     System.out.println("WE MADE IT");
                     System.out.println(points[10][0] + " " + points[10][1]);
                 }
                 if (days <= (15 * 365) + 3) {
-                 //   System.out.println(points[10][1]);
+                //   System.out.println(points[10][1]);
                 } else {
                     System.exit(0);
                 }
